@@ -11,14 +11,14 @@ const OperaSwapRouter = artifacts.require("OperaSwapRouter");
 const wELA = "0x517E9e5d46C1EA8aB6f78677d6114Ef47F71f6c4"; //wrapped ELA token
 
 module.exports = async function(deployer) {
-   /* // deploy TestTokenOne contract and get address
+    // deploy TestTokenOne contract and get address
     await deployer.deploy(TestTokenOne);
 
     // deploy TestTokenTwo contract and get address
     await deployer.deploy(TestTokenTwo);
 
     // deploy OperaSwapPair contract
-    await deployer.deploy(OperaSwapPair);*/
+    await deployer.deploy(OperaSwapPair);
 
     // deploy OperaSwapFactory contract
     await deployer.deploy(OperaSwapFactory, feeToSetter);

@@ -54,11 +54,11 @@ module.exports = {
       network_id: '*', // Any network (default: none)
     },
     elaeth: {
-      host: 'https://escrpc.elaphant.app',
+      host: 'https://api.elastos.io/eth',
       port: 8545,
       network_id: '*',
       provider: () => new HDWalletProvider(
-        mnemonic, 'https://escrpc.elaphant.app'
+        mnemonic, 'https://api.elastos.io/eth'
       ),
       gasLimit: 8000000,
       gasPrice: 1000000000
