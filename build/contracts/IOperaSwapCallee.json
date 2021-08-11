@@ -30,7 +30,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount0\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount1\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"pancakeCall\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/D/Posao - Stefan/Stefan - razno/Blockchain/ElavateFinance/auto-swap/contracts/interfaces/IOperaSwapCallee.sol\":\"IOperaSwapCallee\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/D/Posao - Stefan/Stefan - razno/Blockchain/ElavateFinance/auto-swap/contracts/interfaces/IOperaSwapCallee.sol\":{\"keccak256\":\"0x2da2a9a349d364864ee5277a12bee1ec1dad0a5e7f70199c1cbca28ccd14398b\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://7d9b1c3910fa46f1a49add55b8d06646561cc78ae7f0fbbaee209f46c0c30b0d\",\"dweb:/ipfs/QmYtvGeGPPU1hWSKi6EmDVDJ9V3GRzj7WiXxKmStcQFx8Z\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount0\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount1\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"pancakeCall\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/D/Posao - Stefan/Stefan - razno/Blockchain/ElavateFinance/auto-swap/contracts/interfaces/IOperaSwapCallee.sol\":\"IOperaSwapCallee\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":1000},\"remappings\":[]},\"sources\":{\"/D/Posao - Stefan/Stefan - razno/Blockchain/ElavateFinance/auto-swap/contracts/interfaces/IOperaSwapCallee.sol\":{\"keccak256\":\"0x2da2a9a349d364864ee5277a12bee1ec1dad0a5e7f70199c1cbca28ccd14398b\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://7d9b1c3910fa46f1a49add55b8d06646561cc78ae7f0fbbaee209f46c0c30b0d\",\"dweb:/ipfs/QmYtvGeGPPU1hWSKi6EmDVDJ9V3GRzj7WiXxKmStcQFx8Z\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
@@ -42,15 +42,15 @@
     "absolutePath": "/D/Posao - Stefan/Stefan - razno/Blockchain/ElavateFinance/auto-swap/contracts/interfaces/IOperaSwapCallee.sol",
     "exportedSymbols": {
       "IOperaSwapCallee": [
-        4400
+        6917
       ]
     },
-    "id": 4401,
+    "id": 6918,
     "license": "UNLICENSED",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4388,
+        "id": 6905,
         "literals": [
           "solidity",
           ">=",
@@ -58,7 +58,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "40:24:6"
+        "src": "40:24:11"
       },
       {
         "abstract": false,
@@ -67,9 +67,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 4400,
+        "id": 6917,
         "linearizedBaseContracts": [
-          4400
+          6917
         ],
         "name": "IOperaSwapCallee",
         "nodeType": "ContractDefinition",
@@ -78,7 +78,7 @@
             "body": null,
             "documentation": null,
             "functionSelector": "84800812",
-            "id": 4399,
+            "id": 6916,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -86,18 +86,18 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 4397,
+              "id": 6914,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4390,
+                  "id": 6907,
                   "mutability": "mutable",
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 4399,
-                  "src": "123:14:6",
+                  "scope": 6916,
+                  "src": "123:14:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -105,10 +105,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 4389,
+                    "id": 6906,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "123:7:6",
+                    "src": "123:7:11",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -120,13 +120,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 4392,
+                  "id": 6909,
                   "mutability": "mutable",
                   "name": "amount0",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 4399,
-                  "src": "139:12:6",
+                  "scope": 6916,
+                  "src": "139:12:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -134,10 +134,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4391,
+                    "id": 6908,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "139:4:6",
+                    "src": "139:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -148,13 +148,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 4394,
+                  "id": 6911,
                   "mutability": "mutable",
                   "name": "amount1",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 4399,
-                  "src": "153:12:6",
+                  "scope": 6916,
+                  "src": "153:12:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -162,10 +162,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4393,
+                    "id": 6910,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "153:4:6",
+                    "src": "153:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -176,13 +176,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 4396,
+                  "id": 6913,
                   "mutability": "mutable",
                   "name": "data",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 4399,
-                  "src": "167:19:6",
+                  "scope": 6916,
+                  "src": "167:19:11",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -190,10 +190,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 4395,
+                    "id": 6912,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "167:5:6",
+                    "src": "167:5:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -203,33 +203,33 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "122:65:6"
+              "src": "122:65:11"
             },
             "returnParameters": {
-              "id": 4398,
+              "id": 6915,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "196:0:6"
+              "src": "196:0:11"
             },
-            "scope": 4400,
-            "src": "102:95:6",
+            "scope": 6917,
+            "src": "102:95:11",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 4401,
-        "src": "68:132:6"
+        "scope": 6918,
+        "src": "68:132:11"
       }
     ],
-    "src": "40:160:6"
+    "src": "40:160:11"
   },
   "legacyAST": {
     "attributes": {
       "absolutePath": "/D/Posao - Stefan/Stefan - razno/Blockchain/ElavateFinance/auto-swap/contracts/interfaces/IOperaSwapCallee.sol",
       "exportedSymbols": {
         "IOperaSwapCallee": [
-          4400
+          6917
         ]
       },
       "license": "UNLICENSED"
@@ -244,9 +244,9 @@
             ".0"
           ]
         },
-        "id": 4388,
+        "id": 6905,
         "name": "PragmaDirective",
-        "src": "40:24:6"
+        "src": "40:24:11"
       },
       {
         "attributes": {
@@ -261,10 +261,10 @@
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
-            4400
+            6917
           ],
           "name": "IOperaSwapCallee",
-          "scope": 4401
+          "scope": 6918
         },
         "children": [
           {
@@ -280,7 +280,7 @@
               ],
               "name": "pancakeCall",
               "overrides": null,
-              "scope": 4400,
+              "scope": 6917,
               "stateMutability": "nonpayable",
               "virtual": false,
               "visibility": "external"
@@ -294,7 +294,7 @@
                       "mutability": "mutable",
                       "name": "sender",
                       "overrides": null,
-                      "scope": 4399,
+                      "scope": 6916,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -308,14 +308,14 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 4389,
+                        "id": 6906,
                         "name": "ElementaryTypeName",
-                        "src": "123:7:6"
+                        "src": "123:7:11"
                       }
                     ],
-                    "id": 4390,
+                    "id": 6907,
                     "name": "VariableDeclaration",
-                    "src": "123:14:6"
+                    "src": "123:14:11"
                   },
                   {
                     "attributes": {
@@ -323,7 +323,7 @@
                       "mutability": "mutable",
                       "name": "amount0",
                       "overrides": null,
-                      "scope": 4399,
+                      "scope": 6916,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -336,14 +336,14 @@
                           "name": "uint",
                           "type": "uint256"
                         },
-                        "id": 4391,
+                        "id": 6908,
                         "name": "ElementaryTypeName",
-                        "src": "139:4:6"
+                        "src": "139:4:11"
                       }
                     ],
-                    "id": 4392,
+                    "id": 6909,
                     "name": "VariableDeclaration",
-                    "src": "139:12:6"
+                    "src": "139:12:11"
                   },
                   {
                     "attributes": {
@@ -351,7 +351,7 @@
                       "mutability": "mutable",
                       "name": "amount1",
                       "overrides": null,
-                      "scope": 4399,
+                      "scope": 6916,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -364,14 +364,14 @@
                           "name": "uint",
                           "type": "uint256"
                         },
-                        "id": 4393,
+                        "id": 6910,
                         "name": "ElementaryTypeName",
-                        "src": "153:4:6"
+                        "src": "153:4:11"
                       }
                     ],
-                    "id": 4394,
+                    "id": 6911,
                     "name": "VariableDeclaration",
-                    "src": "153:12:6"
+                    "src": "153:12:11"
                   },
                   {
                     "attributes": {
@@ -379,7 +379,7 @@
                       "mutability": "mutable",
                       "name": "data",
                       "overrides": null,
-                      "scope": 4399,
+                      "scope": 6916,
                       "stateVariable": false,
                       "storageLocation": "calldata",
                       "type": "bytes",
@@ -392,19 +392,19 @@
                           "name": "bytes",
                           "type": "bytes"
                         },
-                        "id": 4395,
+                        "id": 6912,
                         "name": "ElementaryTypeName",
-                        "src": "167:5:6"
+                        "src": "167:5:11"
                       }
                     ],
-                    "id": 4396,
+                    "id": 6913,
                     "name": "VariableDeclaration",
-                    "src": "167:19:6"
+                    "src": "167:19:11"
                   }
                 ],
-                "id": 4397,
+                "id": 6914,
                 "name": "ParameterList",
-                "src": "122:65:6"
+                "src": "122:65:11"
               },
               {
                 "attributes": {
@@ -413,24 +413,24 @@
                   ]
                 },
                 "children": [],
-                "id": 4398,
+                "id": 6915,
                 "name": "ParameterList",
-                "src": "196:0:6"
+                "src": "196:0:11"
               }
             ],
-            "id": 4399,
+            "id": 6916,
             "name": "FunctionDefinition",
-            "src": "102:95:6"
+            "src": "102:95:11"
           }
         ],
-        "id": 4400,
+        "id": 6917,
         "name": "ContractDefinition",
-        "src": "68:132:6"
+        "src": "68:132:11"
       }
     ],
-    "id": 4401,
+    "id": 6918,
     "name": "SourceUnit",
-    "src": "40:160:6"
+    "src": "40:160:11"
   },
   "compiler": {
     "name": "solc",
@@ -438,7 +438,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.1",
-  "updatedAt": "2021-08-05T18:10:58.030Z",
+  "updatedAt": "2021-08-11T08:19:57.628Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

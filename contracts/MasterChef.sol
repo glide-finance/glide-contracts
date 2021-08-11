@@ -8,7 +8,7 @@ import '@openzeppelin/contracts/token/ERC20/SafeERC20.sol';
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
-import "./OperaToken.sol";
+import "./tokens/OperaToken.sol";
 import "./RewardStorage.sol";
 
 contract MasterChef is Ownable, ReentrancyGuard {

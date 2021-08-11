@@ -6,6 +6,8 @@ interface IOperaSwapFactory {
 
     function feeTo() external view returns (address);
     function feeToSetter() external view returns (address);
+    function feeToRateDivArg() external view returns (uint256);
+    function feeToRateMulArg() external view returns (uint256);
 
     function getPair(address tokenA, address tokenB) external view returns (address pair);
     function allPairs(uint) external view returns (address pair);
@@ -15,6 +17,8 @@ interface IOperaSwapFactory {
 
     function setFeeTo(address) external;
     function setFeeToSetter(address) external;
+    function setFeeToRate(uint256 rateDivArg, uint256 rateMulArg) external;
+    
 
     function sortTokens(address tokenA, address tokenB) external pure returns (address token0, address token1);
 

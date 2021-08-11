@@ -10,6 +10,7 @@ const TestTokenOne = artifacts.require("TestTokenOne");
 const TestTokenTwo = artifacts.require("TestTokenTwo");
 const OperaSwapRouter = artifacts.require("OperaSwapRouter");
 const OperaSwapPair = artifacts.require("OperaSwapPair");
+const FeeDistributor = artifacts.require("FeeDistributor");
 
 const keccak256 = ethers.utils.keccak256;
 const defaultAbiCoder = ethers.utils.defaultAbiCoder;
@@ -17,7 +18,7 @@ const toUtf8Bytes = ethers.utils.toUtf8Bytes;
 const BigNumber = ethers.BigNumber;
 const PERMIT_TYPEHASH = keccak256(toUtf8Bytes('Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)'));
 const ecsign = ethereumjs_util.ecsign;
-const privateKey = "11e62b92d8bb7115f8e778494e4d7c5ef24fafeacfdb9990b47b877951289247";
+const privateKey = "8b0127bd871c8ce965692d835c94efa98f910bef1201a4394563edfa48c4aee9";
 //const hUSD = "0xf9ca2ea3b1024c0db31adb224b407441becc18bb";
 
 const MINIMUM_LIQUIDITY = 1000;
@@ -88,8 +89,9 @@ contract("Testing", accounts => {
     var testTokenTwoInstance;
     var operaSwapRouterInstance;
     var concretePairInstance;
+    var feeDistributorInstance;
 
-    //Liquidity amount (prices range) - in base of htHUSD, testTokenOne is price 15 htHUSD, testTokenTwo 5 htHUSD and testTokenOne is 3 testTokenTwo;
+    //Liquidity amount (prices range) - testTokenOne is 3 testTokenTwo;
     const valueForLiquidityTokenOne = ethers.utils.parseEther('15');
     const valueForLiquidityTokenTwo = ethers.utils.parseEther('5');
     const tstOneToTstTwoPrice = new BN(3);
@@ -112,6 +114,9 @@ contract("Testing", accounts => {
 
         const operaSwapPairInstance = await OperaSwapPair.deployed();
         assert.ok(operaSwapPairInstance);
+
+        feeDistributorInstance = await FeeDistributor.deployed();
+        assert.ok(feeDistributorInstance);
     });
 
     it("...should create pair", async () => {
@@ -181,7 +186,6 @@ contract("Testing", accounts => {
         const liquidityTokenTwoSet = await testTokenTwoInstance.balanceOf.call(concretePairInstance.address);
         assert.equal(valueForLiquidityTokenTwo.toString(), liquidityTokenTwoSet.toString(), "liquidityTokenTwoValue is not correct set to pairAddress");
 
-        //TODO add sqrt with BN.js library
         //check is liquidity token correct set to user account
         var liquidityValueCalculation = sqrt(new BN(liquidityTokenOneSet).mul(new BN(liquidityTokenTwoSet))).sub(new BN(MINIMUM_LIQUIDITY));
         const liquidityValueSet = await concretePairInstance.balanceOf.call(accounts[1]);
@@ -226,7 +230,62 @@ contract("Testing", accounts => {
         assert.equal(new BN(liquidityValueSet).sub(new BN(removeLiquidityValue.toString())), liquidityValueSetNew.toString(), "removeLiquidity is not created correct");
     });
 
-    it("...should removeLiquidityWithPermit", async() => {
+    it("...should swap testTokenOne to testTokenTwo", async() => {
+        const swapAmount = ethers.utils.parseEther('1');
+
+        // approve testTokenOne for operaSwapRouter using
+        await testTokenOneInstance.approve(operaSwapRouterInstance.address, swapAmount, {from: accounts[2]});
+
+        // amount / price minus 5% deviation
+        const onePercentSwapMiningAmount = new BN(swapAmount.toString()).div(new BN(100)).mul(new BN(5));
+        const swapAmountOutMin = new BN(swapAmount.toString()).div(tstOneToTstTwoPrice).sub(onePercentSwapMiningAmount);
+        await debug(operaSwapRouterInstance.swapExactTokensForTokens(swapAmount, 
+          swapAmountOutMin,
+          [testTokenOneInstance.address, testTokenTwoInstance.address],
+          accounts[2],
+          9000000000, 
+          {from: accounts[2]}));
+    }); 
+
+    it("...should addLiquidity to see mintFee", async() => {
+      // get feeDistributor balanace for testTokenOne - testTokenTwo pair (before add liquidity)
+      const feeDistributorBalanceBefore = await concretePairInstance.balanceOf.call(feeDistributorInstance.address);
+      console.log("feeDistributorBalance - before - " + feeDistributorBalanceBefore.toString());
+
+      //set approve for testTokenOne and testTokenTwo
+      await testTokenOneInstance.approve(operaSwapRouterInstance.address, valueForLiquidityTokenOne, {from: accounts[1]});
+      const approveValueTestTokenOneSet = await testTokenOneInstance.allowance.call(accounts[1], operaSwapRouterInstance.address);
+      assert.equal(valueForLiquidityTokenOne.toString(), approveValueTestTokenOneSet.toString(), "approve for testTokenOne is not set correct");
+
+      await testTokenTwoInstance.approve(operaSwapRouterInstance.address, valueForLiquidityTokenTwo, {from: accounts[1]});
+      const approveValueTestTokenTwoSet = await testTokenTwoInstance.allowance.call(accounts[1], operaSwapRouterInstance.address);
+      assert.equal(valueForLiquidityTokenTwo.toString(), approveValueTestTokenTwoSet.toString(), "approve for testTokenTwo is not set correct");
+      
+      // get liquidityTokenOne before addLiquidity
+      const liquidityTokenOneSetBefore = await testTokenOneInstance.balanceOf.call(concretePairInstance.address);
+
+      //add liquidity
+      await debug(operaSwapRouterInstance.addLiquidity(testTokenOneInstance.address, 
+          testTokenTwoInstance.address,
+          valueForLiquidityTokenOne.toString(),
+          valueForLiquidityTokenTwo.toString(),
+          0,
+          0,
+          accounts[1],
+          9000000000,
+          {from:accounts[1]}));
+      
+      const feeDistributorBalanceAfter = await concretePairInstance.balanceOf.call(feeDistributorInstance.address);
+      console.log("feeDistributorBalance - after - " + feeDistributorBalanceAfter.toString());
+      // TODO find a way to calculate exact feeDistributorBalance after addLiquidity
+      assert.equal(feeDistributorBalanceAfter > feeDistributorBalanceBefore, true, "feeDistributor balance is not larger after addLiquidity");
+
+      //check is liquidity correct set to pairValue for testTokenOne
+      const liquidityTokenOneSet = await testTokenOneInstance.balanceOf.call(concretePairInstance.address);
+      assert.equal(new BN(liquidityTokenOneSetBefore.toString()).add(new BN(valueForLiquidityTokenOne.toString())).toString(), liquidityTokenOneSet.toString(), "liquidityTokenOneValue is not correct set to pairAddress");
+  });
+
+  it("...should removeLiquidityWithPermit", async() => {
         //const values
         const removeLiquidityValue = ethers.utils.parseEther('0.05');
         
@@ -248,7 +307,7 @@ contract("Testing", accounts => {
         const digest = getApprovalDigest(DOMAIN_SEPARATOR, accounts[1], operaSwapRouterInstance.address, removeLiquidityValue, nonce.toNumber(), 9000000000);
         const { v, r, s } = ecsign(Buffer.from(digest.slice(2), 'hex'), Buffer.from(privateKey, 'hex'));
 
-        await operaSwapRouterInstance.removeLiquidityWithPermit(testTokenOneInstance.address, 
+        await debug(operaSwapRouterInstance.removeLiquidityWithPermit(testTokenOneInstance.address, 
             testTokenTwoInstance.address,
             removeLiquidityValue,
             0,
@@ -259,7 +318,7 @@ contract("Testing", accounts => {
             v,
             r,
             s,
-            {from: accounts[1]});
+            {from: accounts[1]}));
         
         //get liquidity token values after removeLiquidityWithPermit
         const removeLiquidityAmountTokenOne = new BN(removeLiquidityValue.toString()).mul(new BN(liquidityTokenOneSet)).div(new BN(liquidityTokenTotalSupply));
@@ -273,5 +332,5 @@ contract("Testing", accounts => {
         //check is removeLiquidity created correct
         const liquidityValueSetNew = await concretePairInstance.balanceOf.call(accounts[1]);
         assert.equal(new BN(liquidityValueSet).sub(new BN(removeLiquidityValue.toString())), liquidityValueSetNew.toString(), "removeLiquidityWithPermit is not created correct");
-    }); 
+    });
 });

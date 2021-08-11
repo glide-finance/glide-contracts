@@ -7,11 +7,13 @@ import './OperaSwapPair.sol';
 contract OperaSwapFactory is IOperaSwapFactory {
     using SafeMath for uint;
 
-    bytes32 public constant INIT_CODE_PAIR_HASH = keccak256(abi.encodePacked(type(OperaSwapPair).creationCode));
-
     address public override feeTo;
     address public override feeToSetter;
+    uint256 public override feeToRateDivArg;
+    uint256 public override feeToRateMulArg;
 
+    bytes32 public initCodeHash;
+ 
     mapping(address => mapping(address => address)) public override getPair;
     address[] public override allPairs;
 
@@ -21,6 +23,7 @@ contract OperaSwapFactory is IOperaSwapFactory {
 
     constructor(address _feeToSetter) public {
         feeToSetter = _feeToSetter;
+        initCodeHash = keccak256(abi.encodePacked(type(OperaSwapPair).creationCode));
     }
 
     function allPairsLength() external view override returns (uint) {
@@ -56,11 +59,18 @@ contract OperaSwapFactory is IOperaSwapFactory {
         emit SetAdminAddress(msg.sender, _feeToSetter);
     }
 
+    function setFeeToRate(uint256 _rateDivArg, uint256 _rateMulArg) external override {
+        require(msg.sender == feeToSetter, 'OperaSwap: FORBIDDEN');
+        require(_rateDivArg > 0, "OperaSwap: FEE_TO_RATE_DIV_OVERFLOW");
+        feeToRateDivArg = _rateDivArg;
+        feeToRateMulArg = _rateMulArg;
+    }
+
     // returns sorted token addresses, used to handle return values from pairs sorted in this order
     function sortTokens(address tokenA, address tokenB) public pure override returns (address token0, address token1) {
-        require(tokenA != tokenB, 'OperaSwapLibrary: IDENTICAL_ADDRESSES');
+        require(tokenA != tokenB, 'MdexSwapFactory: IDENTICAL_ADDRESSES');
         (token0, token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
-        require(token0 != address(0), 'OperaSwapLibrary: ZERO_ADDRESS');
+        require(token0 != address(0), 'MdexSwapFactory: ZERO_ADDRESS');
     }
 
     // calculates the CREATE2 address for a pair without making any external calls
@@ -70,7 +80,7 @@ contract OperaSwapFactory is IOperaSwapFactory {
                 hex'ff',
                 address(this),
                 keccak256(abi.encodePacked(token0, token1)),
-                INIT_CODE_PAIR_HASH // init code hash
+                initCodeHash
             ))));
     }
 
@@ -93,7 +103,7 @@ contract OperaSwapFactory is IOperaSwapFactory {
     function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) public view override returns (uint amountOut) {
         require(amountIn > 0, 'OperaSwapLibrary: INSUFFICIENT_INPUT_AMOUNT');
         require(reserveIn > 0 && reserveOut > 0, 'OperaSwapLibrary: INSUFFICIENT_LIQUIDITY');
-        uint amountInWithFee = amountIn.mul(998);
+        uint amountInWithFee = amountIn.mul(997);
         uint numerator = amountInWithFee.mul(reserveOut);
         uint denominator = reserveIn.mul(1000).add(amountInWithFee);
         amountOut = numerator / denominator;
@@ -104,7 +114,7 @@ contract OperaSwapFactory is IOperaSwapFactory {
         require(amountOut > 0, 'OperaSwapLibrary: INSUFFICIENT_OUTPUT_AMOUNT');
         require(reserveIn > 0 && reserveOut > 0, 'OperaSwapLibrary: INSUFFICIENT_LIQUIDITY');
         uint numerator = reserveIn.mul(amountOut).mul(1000);
-        uint denominator = reserveOut.sub(amountOut).mul(998);
+        uint denominator = reserveOut.sub(amountOut).mul(997);
         amountIn = (numerator / denominator).add(1);
     }
 

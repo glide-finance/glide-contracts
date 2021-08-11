@@ -97,9 +97,9 @@ contract OperaSwapPair is OperaSwapERC20{
                 uint rootKLast = Math.sqrt(_kLast);
                 if (rootK > rootKLast) {
                     uint numerator = totalSupply.mul(rootK.sub(rootKLast));
-                    //0 is used because all the fees are captured and redistributed separately
-                    //We kept the useless mul operation for consistency with legacy uniswap code
-                    uint denominator = rootK.mul(0).add(rootKLast);
+                    //If we want to set 0.25% of 0.3% to go to feeTo, then div arg will be 5 and mul will be 1
+                    //If we want to set 0.05% of 0.3% to go to feeTo, then div arg will be 1 and mull will be 5 - UniswapV2Pair.sol default value https://github.com/Uniswap/uniswap-v2-core/blob/master/contracts/UniswapV2Pair.sol
+                    uint denominator = (rootK / IOperaSwapFactory(factory).feeToRateDivArg()).mul(IOperaSwapFactory(factory).feeToRateMulArg()).add(rootKLast);
                     uint liquidity = numerator / denominator;
                     if (liquidity > 0) _mint(feeTo, liquidity);
                 }
@@ -180,8 +180,8 @@ contract OperaSwapPair is OperaSwapERC20{
         uint amount1In = balance1 > _reserve1 - amount1Out ? balance1 - (_reserve1 - amount1Out) : 0;
         require(amount0In > 0 || amount1In > 0, 'OperaSwap: INSUFFICIENT_INPUT_AMOUNT');
         { // scope for reserve{0,1}Adjusted, avoids stack too deep errors
-        uint balance0Adjusted = balance0.mul(1000).sub(amount0In.mul(2));
-        uint balance1Adjusted = balance1.mul(1000).sub(amount1In.mul(2));
+        uint balance0Adjusted = balance0.mul(1000).sub(amount0In.mul(3));
+        uint balance1Adjusted = balance1.mul(1000).sub(amount1In.mul(3));
         require(balance0Adjusted.mul(balance1Adjusted) >= uint(_reserve0).mul(_reserve1).mul(1000**2), 'OperaSwap: K');
         }
 

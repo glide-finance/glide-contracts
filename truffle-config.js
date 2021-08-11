@@ -49,8 +49,8 @@ module.exports = {
     development: {
       host: '127.0.0.1', // Localhost (default: none)
       port: 8545, // Standard Ethereum port (default: none)
-      gasLimit: 8000000,
-      gasPrice: 1000000000,
+      gas: 0xfffffffffff,	// <-- Use this high gas value
+      gasPrice: 0x01,	// <-- Use this low gas price
       network_id: '*', // Any network (default: none)
     },
     elaeth: {
@@ -83,8 +83,8 @@ module.exports = {
       docker: false,        // Use "0.5.1" you've installed locally with docker (default: false)
       settings: {          // See the solidity docs for advice about optimization and evmVersion
        optimizer: {
-        enabled: true, //TODO for deployment - change from true to false
-        runs: 200 //TODO for deployment - change from 200 to 1000
+        enabled: false, //TODO for deployment - change from true to false
+        runs: 1000 //TODO for deployment - change from 200 to 1000
        },
         evmVersion: "constantinople"
       }

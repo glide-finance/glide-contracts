@@ -6,8 +6,8 @@ import '@openzeppelin/contracts/math/SafeMath.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/token/ERC20/SafeERC20.sol';
 
-import '../interfaces/ISwapRouter02.sol';
-import '../interfaces/ISwapPair.sol';
+import '../interfaces/IOperaSwapRouter.sol';
+import '../interfaces/IOperaSwapPair.sol';
 
 library RouterHelper {
     using SafeMath for uint256;
@@ -33,7 +33,7 @@ library RouterHelper {
         uint256 outputTokenBal = IERC20(outputToken).balanceOf(address(this));
 
         IERC20(inputToken).safeIncreaseAllowance(router, amount);
-        ISwapRouter02(router).swapExactTokensForTokensSupportingFeeOnTransferTokens(
+        IOperaSwapRouter(router).swapExactTokensForTokensSupportingFeeOnTransferTokens(
             amount,
             0,
             path,
@@ -54,7 +54,7 @@ library RouterHelper {
     ) internal returns (uint256, uint256, uint256) {
         IERC20(token0Address).safeIncreaseAllowance(router, token0Amt);
         IERC20(token1Address).safeIncreaseAllowance(router, token1Amt);
-        (uint amount0, uint amount1, uint liquidity) = ISwapRouter02(router).addLiquidity(
+        (uint amount0, uint amount1, uint liquidity) = IOperaSwapRouter(router).addLiquidity(
             token0Address,
             token1Address,
             token0Amt,
@@ -72,11 +72,11 @@ library RouterHelper {
         address pairAddress,
         uint256 pairAmount
     ) internal returns (uint256, uint256){
-        address token0Address = ISwapPair(pairAddress).token0();
-        address token1Address = ISwapPair(pairAddress).token1();
+        address token0Address = IOperaSwapPair(pairAddress).token0();
+        address token1Address = IOperaSwapPair(pairAddress).token1();
 
         IERC20(pairAddress).safeIncreaseAllowance(router, pairAmount);
-        (uint256 amount0, uint256 amount1) = ISwapRouter02(router).removeLiquidity(
+        (uint256 amount0, uint256 amount1) = IOperaSwapRouter(router).removeLiquidity(
             token0Address,
             token1Address,
             pairAmount,
