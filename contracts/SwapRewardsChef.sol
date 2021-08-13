@@ -29,7 +29,7 @@ contract SwapRewardsChef is Ownable, ReentrancyGuard {
         uint256 currentDepositAmount;   // Current total deposit amount in this pool
     }
 
-    address constant public wrappedNativeAddress = address(0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83);
+    address public wrappedNativeAddress;
 
     // The reward token
     IERC20 public rewardToken;
@@ -58,7 +58,7 @@ contract SwapRewardsChef is Ownable, ReentrancyGuard {
     event EmergencyWithdraw(address indexed user, uint256 amount);
     event UpdateEmissionSettings(address indexed user, uint256 denomination, uint256 minimum, uint256 maximum, uint256 rewardsPerBlock);
 
-    constructor(IERC20 _stakeToken, IERC20 _rewardToken) public {
+    constructor(IERC20 _stakeToken, IERC20 _rewardToken, address _wrappedNativeAddress) public {
         rewardToken = _rewardToken;
 
         poolInfo.push(PoolInfo({
@@ -69,6 +69,8 @@ contract SwapRewardsChef is Ownable, ReentrancyGuard {
         currentDepositAmount : 0
         }));
 
+        wrappedNativeAddress = _wrappedNativeAddress;
+        
         totalAllocPoint = 100;
     }
 

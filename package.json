@@ -1,10 +1,8 @@
 {
-  "devDependencies": {
-    "truffle": "^5.4.3"
-  },
   "dependencies": {
     "@openzeppelin/contracts": "^3.3.0",
     "@truffle/hdwallet-provider": "^1.4.2",
-    "ethers": "^5.4.4"
+    "ethers": "^5.4.4",
+    "truffle": "^5.4.6"
   }
 }

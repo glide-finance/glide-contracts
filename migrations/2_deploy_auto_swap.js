@@ -5,7 +5,7 @@ const OperaSwapPair = artifacts.require("OperaSwapPair");
 
 const OperaSwapFactory = artifacts.require("OperaSwapFactory");
 
-const feeToSetter = "0xCCfA5CddF4B8269e42709E725Ca8EC4c068795ff"; //"0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
+const feeToSetter = "0x2573c8190324C558d5Db0853B988589D720179Cd"; //"0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
 
 const OperaSwapRouter = artifacts.require("OperaSwapRouter");
 const wELA = "0x517E9e5d46C1EA8aB6f78677d6114Ef47F71f6c4"; //wrapped ELA token
@@ -14,8 +14,8 @@ const OperaToken = artifacts.require("OperaToken");
 
 const SwapRewardsChef = artifacts.require("SwapRewardsChef");
 
-const feeHolder = "0xCCfA5CddF4B8269e42709E725Ca8EC4c068795ff";
-const schedulerAddress = "0xCCfA5CddF4B8269e42709E725Ca8EC4c068795ff";
+const feeHolder = "0x2573c8190324C558d5Db0853B988589D720179Cd";
+const schedulerAddress = "0x2573c8190324C558d5Db0853B988589D720179Cd";
 const FeeDistributor = artifacts.require("FeeDistributor");
 
 module.exports = async function(deployer) {
@@ -49,13 +49,13 @@ module.exports = async function(deployer) {
     const operaTokenAddress = operaTokenInstance.address;
     
     // deploy swapRewardsChef
-    await deployer.deploy(SwapRewardsChef, operaTokenAddress, wELA);
+    await deployer.deploy(SwapRewardsChef, operaTokenAddress, wELA, wELA);
     //access information about deployed contract instance
     const swapRewardsChefInstance = await SwapRewardsChef.deployed();
     const swapRewardsChefAddress = swapRewardsChefInstance.address;
 
     // deploy feeDistributor contract
-    await deployer.deploy(FeeDistributor, swapRewardsChefAddress, feeHolder, schedulerAddress);
+    await deployer.deploy(FeeDistributor, swapRewardsChefAddress, feeHolder, schedulerAddress, wELA);
     const feeDistributorInstance = await FeeDistributor.deployed();
     const feeDistributorAddress = feeDistributorInstance.address;
 

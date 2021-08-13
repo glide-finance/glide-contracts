@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: UNLICENSED
-
 pragma solidity 0.6.12;
 
 import '@openzeppelin/contracts/math/SafeMath.sol';
@@ -21,7 +20,7 @@ contract FeeDistributor is Ownable {
 
     address public schedulerAddress;
 
-    address constant public wftmAddress = address(0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83);
+    address public wElaAddress;
 
     event RescueTokens(address indexed user, address indexed token, uint256 amount);
     event UpdateFeeSettings(address indexed user, uint platformShareBP);
@@ -31,11 +30,13 @@ contract FeeDistributor is Ownable {
     constructor(
         address _rewardsReceiver,
         address _feeHolder,
-        address _schedulerAddress
+        address _schedulerAddress,
+        address _wElaAddress
     ) public {
         rewardsReceiver = _rewardsReceiver;
         feeHolder = _feeHolder;
         schedulerAddress = _schedulerAddress;
+        wElaAddress = _wElaAddress;
     }
 
     modifier onlyAdmins(){
@@ -55,23 +56,23 @@ contract FeeDistributor is Ownable {
 
     function distributeFees() external onlyAdmins {
 
-        uint256 balance = IERC20(wftmAddress).balanceOf(address(this));
+        uint256 balance = IERC20(wElaAddress).balanceOf(address(this));
 
         uint256 platformAmount = balance.mul(platformShareBP).div(10000);
         uint256 receiverAmount = balance.sub(platformAmount);
 
-        IERC20(wftmAddress).safeIncreaseAllowance(rewardsReceiver, receiverAmount);
+        IERC20(wElaAddress).safeIncreaseAllowance(rewardsReceiver, receiverAmount);
         IFeeReceiver(rewardsReceiver).income(receiverAmount);
 
         safeTokenTransfer(feeHolder, platformAmount);
     }
 
     function safeTokenTransfer(address to, uint256 amount) internal {
-        uint256 balance = IERC20(wftmAddress).balanceOf(address(this));
+        uint256 balance = IERC20(wElaAddress).balanceOf(address(this));
         if (amount > balance) {
-            IERC20(wftmAddress).safeTransfer(to, balance);
+            IERC20(wElaAddress).safeTransfer(to, balance);
         } else {
-            IERC20(wftmAddress).safeTransfer(to, amount);
+            IERC20(wElaAddress).safeTransfer(to, amount);
         }
     }
 
