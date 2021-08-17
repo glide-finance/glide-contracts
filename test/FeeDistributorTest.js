@@ -5,24 +5,25 @@ const BN = require('bn.js');
 const FeeDistributor = artifacts.require("FeeDistributor");
 const TestTokenOne = artifacts.require("TestTokenOne");
 const TestTokenTwo = artifacts.require("TestTokenTwo");
-const OperaToken = artifacts.require("OperaToken");
+const GlideToken = artifacts.require("GlideToken");
 const OperaSwapRouter = artifacts.require("OperaSwapRouter");
 const OperaSwapFactory = artifacts.require("OperaSwapFactory");
 const OperaSwapPair = artifacts.require("OperaSwapPair");
 const IERC20 = artifacts.require("IERC20");
 const SwapRewardsChef = artifacts.require("SwapRewardsChef");
+const MasterChef = artifacts.require("MasterChef");
 
 contract("FeeDistributor test", accounts => {
     var feeDistributorInstance;
     var testTokenOneInstance;
     var testTokenTwoInstance;
-    var operaTokenInstance;
+    var glideTokenInstance;
     var wETHInstance;
     var operaSwapRouterInstance;
     var concretePairInstance;
     var swapRewardsChefInstance;
 
-    var stakeOperaToken;
+    var stakeGlideTokenValue;
 
     //set contract instances
     before(async () => {
@@ -38,8 +39,8 @@ contract("FeeDistributor test", accounts => {
         testTokenTwoInstance = await TestTokenTwo.deployed();
         assert.ok(testTokenTwoInstance);
 
-        operaTokenInstance = await OperaToken.deployed();
-        assert.ok(operaTokenInstance);
+        glideTokenInstance = await GlideToken.deployed();
+        assert.ok(glideTokenInstance);
 
         operaSwapRouterInstance = await OperaSwapRouter.deployed();
         assert.ok(operaSwapRouterInstance);
@@ -47,6 +48,9 @@ contract("FeeDistributor test", accounts => {
         swapRewardsChefInstance = await SwapRewardsChef.deployed();
         assert.ok(swapRewardsChefInstance);
 
+        const masterChefInstance = await MasterChef.deployed();
+        assert.ok(masterChefInstance);
+        
         wETHAddress = await operaSwapRouterInstance.WETH();
         wETHInstance = await IERC20.at(wETHAddress);
 
@@ -62,7 +66,7 @@ contract("FeeDistributor test", accounts => {
 
         const approveValue = ethers.utils.parseEther('300');
         const valueForSent = ethers.utils.parseEther('100');
-        stakeOperaToken = ethers.utils.parseEther('50');
+        stakeGlideTokenValue = ethers.utils.parseEther('50');
       
         // transfer testTokenOne to account[1],account[2], account[3];
         await testTokenOneInstance.approve(accounts[0], approveValue);
@@ -76,8 +80,9 @@ contract("FeeDistributor test", accounts => {
         await testTokenTwoInstance.transferFrom(accounts[0], accounts[2], valueForSent);
         await testTokenTwoInstance.transferFrom(accounts[0], accounts[3], valueForSent);
 
-        // transfer operaToken to account[3] for deposit
-        await operaTokenInstance.mint(accounts[3], ethers.utils.parseEther('50'));
+        // transfer glideToken to account[3] for deposit 
+        // TODO because ownership for glideToken is set to MasterChef, must to see how to mint this token (for now, when I want to test this contract, comment line in deploy script for transferOwnership)
+        await glideTokenInstance.mint(accounts[3], ethers.utils.parseEther('50'));
 
         //add liquidity
         await testTokenOneInstance.approve(operaSwapRouterInstance.address, valueForLiquidityTokenOne, {from: accounts[1]});
@@ -204,19 +209,19 @@ contract("FeeDistributor test", accounts => {
     });
 
     it("...should stake(deposit) Opera token to swapRewardsChef", async () => {        
-        // approve operaToken to swapRewardsChef and get balance before deposit
-        await operaTokenInstance.approve(swapRewardsChefInstance.address, stakeOperaToken, {from: accounts[3]});
-        const operaTokenBalanceBefore = await operaTokenInstance.balanceOf.call(swapRewardsChefInstance.address);
-        //console.log("operaTokenBalanceBefore-"+operaTokenBalanceBefore.toString());
+        // approve glideToken to swapRewardsChef and get balance before deposit
+        await glideTokenInstance.approve(swapRewardsChefInstance.address, stakeGlideTokenValue, {from: accounts[3]});
+        const glideTokenBalanceBefore = await glideTokenInstance.balanceOf.call(swapRewardsChefInstance.address);
+        //console.log("glideTokenBalanceBefore-"+glideTokenBalanceBefore.toString());
 
         // stake (deposit) Opera token
-        swapRewardsChefInstance.deposit(stakeOperaToken, {from: accounts[3]});
+        swapRewardsChefInstance.deposit(stakeGlideTokenValue, {from: accounts[3]});
 
         // get balance after deposit
-        const operaTokenBalanceAfter = await operaTokenInstance.balanceOf.call(swapRewardsChefInstance.address);
-        //console.log("operaTokenBalanceAfter-"+operaTokenBalanceAfter.toString());
+        const glideTokenBalanceAfter = await glideTokenInstance.balanceOf.call(swapRewardsChefInstance.address);
+        //console.log("glideTokenBalanceAfter-"+glideTokenBalanceAfter.toString());
 
-        assert.equal(new BN(operaTokenBalanceBefore.toString()).add(new BN(stakeOperaToken.toString())).toString(), operaTokenBalanceAfter.toString(), "deposit Opera token to swapRewardsChef is not correct");
+        assert.equal(new BN(glideTokenBalanceBefore.toString()).add(new BN(stakeGlideTokenValue.toString())).toString(), glideTokenBalanceAfter.toString(), "deposit Opera token to swapRewardsChef is not correct");
         
     });
 
@@ -251,7 +256,7 @@ contract("FeeDistributor test", accounts => {
         const accRewardPerShare = poolInfo.accRewardPerShare;
 
         // calculate harvested ETH
-        const harvestedETH = new BN(stakeOperaToken.toString()).mul(new BN(accRewardPerShare.toString())).div(new BN("1000000000000"));
+        const harvestedETH = new BN(stakeGlideTokenValue.toString()).mul(new BN(accRewardPerShare.toString())).div(new BN("1000000000000"));
         //console.log(harvestedETH.toString());
         const ETHBalanceAfter = await web3.eth.getBalance(accounts[3]);
         //console.log("wETHBalanceAfter-" + ETHBalanceAfter);
