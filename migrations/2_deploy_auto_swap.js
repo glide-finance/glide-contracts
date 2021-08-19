@@ -7,7 +7,7 @@ const OperaSwapPair = artifacts.require("OperaSwapPair");
 
 const OperaSwapFactory = artifacts.require("OperaSwapFactory");
 
-const feeToSetter = "0x68AFC18c0bdf8B7519bB726072A0Dc224Ea9e55E"; //"0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
+const feeToSetter = "0x6d25D7d56c8ea578ED81BbAF6e1f334e53A037Da"; //"0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
 
 const OperaSwapRouter = artifacts.require("OperaSwapRouter");
 const wELA = "0x517E9e5d46C1EA8aB6f78677d6114Ef47F71f6c4"; //wrapped ELA token
@@ -16,15 +16,15 @@ const GlideToken = artifacts.require("GlideToken");
 
 const SwapRewardsChef = artifacts.require("SwapRewardsChef");
 
-const feeHolder = "0x68AFC18c0bdf8B7519bB726072A0Dc224Ea9e55E";
-const schedulerAddress = "0x68AFC18c0bdf8B7519bB726072A0Dc224Ea9e55E";
+const feeHolder = "0x6d25D7d56c8ea578ED81BbAF6e1f334e53A037Da";
+const schedulerAddress = "0x6d25D7d56c8ea578ED81BbAF6e1f334e53A037Da";
 const FeeDistributor = artifacts.require("FeeDistributor");
 
 const SugarToken = artifacts.require("Sugar");
 
-const devAddr = "0xaF4136205a306E563139d732Eb2d6Aff7Bf6A27E";
-const treasuryAddr = "0xC554f273177E538A107fded3478E7Ef149E4B066";
-const glidePerBlock = ethers.utils.parseEther('1.95');//1950000000000000000;
+const devAddr = "0x10Dfb9032E0449B9FCE41cd0A4c2F93C5463E913";
+const treasuryAddr = "0xB3C73649B59Ee2c91BA64DaAE0CEd24a2F62f670";
+const glidePerBlock = ethers.utils.parseEther('3');//3000000000000000000;
 const startBlock = 7892020;
 const MasterChef = artifacts.require("MasterChef");
 

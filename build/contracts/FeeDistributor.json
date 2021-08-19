@@ -145,8 +145,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -159,8 +158,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -173,8 +171,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -194,8 +191,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -208,8 +204,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -235,8 +230,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -428,7 +422,7 @@
         "id": 1485,
         "nodeType": "ImportDirective",
         "scope": 1840,
-        "sourceUnit": 9761,
+        "sourceUnit": 9984,
         "src": "295:38:9",
         "symbolAliases": [],
         "unitAlias": ""
@@ -439,7 +433,7 @@
         "id": 1486,
         "nodeType": "ImportDirective",
         "scope": 1840,
-        "sourceUnit": 8443,
+        "sourceUnit": 8666,
         "src": "335:39:9",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1894,10 +1888,10 @@
                         "name": "RouterHelper",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 9760,
+                        "referencedDeclaration": 9983,
                         "src": "1643:12:9",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_RouterHelper_$9760_$",
+                          "typeIdentifier": "t_type$_t_contract$_RouterHelper_$9983_$",
                           "typeString": "type(library RouterHelper)"
                         }
                       },
@@ -1908,7 +1902,7 @@
                       "lValueRequested": false,
                       "memberName": "removeLiquidity",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 9759,
+                      "referencedDeclaration": 9982,
                       "src": "1643:28:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$_t_uint256_$_t_uint256_$",
@@ -2336,10 +2330,10 @@
                         "name": "RouterHelper",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 9760,
+                        "referencedDeclaration": 9983,
                         "src": "1914:12:9",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_RouterHelper_$9760_$",
+                          "typeIdentifier": "t_type$_t_contract$_RouterHelper_$9983_$",
                           "typeString": "type(library RouterHelper)"
                         }
                       },
@@ -2350,7 +2344,7 @@
                       "lValueRequested": false,
                       "memberName": "swapTokens",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 9631,
+                      "referencedDeclaration": 9854,
                       "src": "1914:23:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$_t_address_$_t_address_$_t_array$_t_address_$dyn_memory_ptr_$returns$_t_uint256_$",
@@ -3191,10 +3185,10 @@
                           "name": "IFeeReceiver",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 8442,
+                          "referencedDeclaration": 8665,
                           "src": "2359:12:9",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_IFeeReceiver_$8442_$",
+                            "typeIdentifier": "t_type$_t_contract$_IFeeReceiver_$8665_$",
                             "typeString": "type(contract IFeeReceiver)"
                           }
                         },
@@ -3209,7 +3203,7 @@
                         "src": "2359:29:9",
                         "tryCall": false,
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IFeeReceiver_$8442",
+                          "typeIdentifier": "t_contract$_IFeeReceiver_$8665",
                           "typeString": "contract IFeeReceiver"
                         }
                       },
@@ -3220,7 +3214,7 @@
                       "lValueRequested": false,
                       "memberName": "income",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 8441,
+                      "referencedDeclaration": 8664,
                       "src": "2359:36:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$__$",
@@ -5306,7 +5300,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 9761,
+          "SourceUnit": 9984,
           "absolutePath": "project:/contracts/libraries/RouterHelper.sol",
           "file": "./libraries/RouterHelper.sol",
           "scope": 1840,
@@ -5321,7 +5315,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 8443,
+          "SourceUnit": 8666,
           "absolutePath": "project:/contracts/interfaces/IFeeReceiver.sol",
           "file": "./interfaces/IFeeReceiver.sol",
           "scope": 1840,
@@ -6959,7 +6953,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "removeLiquidity",
-                              "referencedDeclaration": 9759,
+                              "referencedDeclaration": 9982,
                               "type": "function (address,address,uint256) returns (uint256,uint256)"
                             },
                             "children": [
@@ -6969,7 +6963,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 9760,
+                                  "referencedDeclaration": 9983,
                                   "type": "type(library RouterHelper)",
                                   "value": "RouterHelper"
                                 },
@@ -7478,7 +7472,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "swapTokens",
-                              "referencedDeclaration": 9631,
+                              "referencedDeclaration": 9854,
                               "type": "function (address,uint256,address,address,address[] memory) returns (uint256)"
                             },
                             "children": [
@@ -7488,7 +7482,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 9760,
+                                  "referencedDeclaration": 9983,
                                   "type": "type(library RouterHelper)",
                                   "value": "RouterHelper"
                                 },
@@ -8304,7 +8298,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "income",
-                              "referencedDeclaration": 8441,
+                              "referencedDeclaration": 8664,
                               "type": "function (uint256) external"
                             },
                             "children": [
@@ -8335,7 +8329,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 8442,
+                                      "referencedDeclaration": 8665,
                                       "type": "type(contract IFeeReceiver)",
                                       "value": "IFeeReceiver"
                                     },
@@ -10633,8 +10627,8 @@
         }
       },
       "links": {},
-      "address": "0x8dB0E62Fc6FF13Ef5c2D05F0b1A6aD1555dc479F",
-      "transactionHash": "0x8c05ca7ed654cc966914d54cf57204a4e8ff1f516a032128229feb7cab9fa066"
+      "address": "0xB7Dd19f19374645d21450eE37250803190Fc5741",
+      "transactionHash": "0x81f71d1323457b1cfed8364602884c88a8029e299bbd94b6862848f7cc17f7a9"
     },
     "1628607919385": {
       "events": {},
@@ -10674,8 +10668,7 @@
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-08-17T08:21:05.310Z",
-  "networkType": "ethereum",
+  "updatedAt": "2021-08-19T08:23:20.836Z",
   "devdoc": {
     "kind": "dev",
     "methods": {

@@ -9,7 +9,6 @@ const SugarToken = artifacts.require("Sugar");
 const OperaSwapRouter = artifacts.require("OperaSwapRouter");
 const OperaSwapFactory = artifacts.require("OperaSwapFactory");
 const OperaSwapPair = artifacts.require("OperaSwapPair");
-const IERC20 = artifacts.require("IERC20");
 const SwapRewardsChef = artifacts.require("SwapRewardsChef");
 const MasterChef = artifacts.require("MasterChef");
 
@@ -147,7 +146,7 @@ contract("MasterChef test", accounts => {
         // get pair length
         const pairLength = await masterChefInstance.poolLength.call();
 
-        // pair length equal to 2, because, in constructor is add pair for cake
+        // pair length equal to 2, because, in constructor is add pair for glide
         assert.equal(pairLength, 2, "add pair is not correct");
     });
 
@@ -190,18 +189,19 @@ contract("MasterChef test", accounts => {
         await concretePairInstance.approve(masterChefInstance.address, liquidityTokenAmountAccounts2Before, {from: accounts[2]});
 
         // deposit to pool with index 1
-        await debug(masterChefInstance.deposit(1, liquidityTokenAmountAccounts2Before, {from: accounts[2]}));
+        await masterChefInstance.deposit(1, liquidityTokenAmountAccounts2Before, {from: accounts[2]});
        
         // get glidePerBlock
-        const glidePerBlock = await masterChefInstance.cakePerBlock.call();
+        const glidePerBlock = await masterChefInstance.glidePerBlock.call();
         // get totalAllocPoint
         const totalAllocPoint = await masterChefInstance.totalAllocPoint.call();
         // get poolInfo about 1 index
         const poolInfoIndexOne = await masterChefInstance.poolInfo.call(1);
-        // calculate cakeReward (2 is fixed because 2 block minted from last deposit)
+        // calculate glideReward (2 is fixed because 2 block minted from last deposit)
         const glideReward = new BN("2").mul(glidePerBlock).mul(poolInfoIndexOne.allocPoint).div(totalAllocPoint);
-        const glideRewardDevAddress = glideReward.mul(new BN("10")).div(new BN("52"));
-        const glideRewardTreasuryAddress = glideReward.mul(new BN("100")).div(new BN("288"));
+        const glideRewardSugar = glideReward.mul(new BN("650")).div(new BN("1000"));
+        const glideRewardDevAddress = glideReward.mul(new BN("125")).div(new BN("1000"));
+        const glideRewardTreasuryAddress = glideReward.mul(new BN("225")).div(new BN("1000"));
         //console.log("glideReward-"+glideReward.toString());
 
         // get liquidity token amounts for pairAddress for accounts[2] after deposit
@@ -212,23 +212,78 @@ contract("MasterChef test", accounts => {
         // get glideReward for sugar address
         const glideRewardRealAmount = await glideTokenInstance.balanceOf.call(sugarTokenInstance.address);
         // assert sugar token reward
-        assert.equal(glideRewardRealAmount.toString(), glideReward.toString(), "glide reward mint for sugar token is not correct");
+        assert.equal(glideRewardRealAmount.toString(), glideRewardSugar.toString(), "glide reward mint for sugar token is not correct");
+        //console.log("glideRewardSugar-"+glideRewardSugar.toString());
 
         // get glideReward for dev address (in this test, accounts[8] is dev address)
         const glideRewardDevAddressRealAmount = await glideTokenInstance.balanceOf.call(accounts[8]);
         // assert reward for dev address
         assert.equal(glideRewardDevAddressRealAmount.toString(), glideRewardDevAddress.toString(), "glide reward mint for dev address is not correct");
+        //console.log("glideRewardDevAddress-"+glideRewardDevAddress.toString());
 
         // get glideReward for treasury address (in this test, accounts[9] is treasury address)
         const glideRewardTreasuryAddressRealAmount = await glideTokenInstance.balanceOf.call(accounts[9]);
         // assert reward for treasuryAddress
         assert.equal(glideRewardTreasuryAddressRealAmount.toString(), glideRewardTreasuryAddress.toString(), "glide reward mint for treasury address is not correct");
+        //console.log("glideRewardTreasuryAddress-"+glideRewardTreasuryAddress.toString());
 
         // reward sum for two blocks and for 1000/1333 
         const rewardSum = new BN(glideRewardRealAmount.toString()).add(new BN(glideRewardDevAddressRealAmount.toString())).add(new BN(glideRewardTreasuryAddressRealAmount.toString()));
         // sum without 1000/1333
         const rewardSumWithoutPercent = rewardSum.mul(new BN("1333")).div(new BN("1000"));
         // that should be similar to 6, because reward for one block is similar 3 glide token
-        assert.equal(rewardSumWithoutPercent > ethers.utils.parseEther('6') && rewardSumWithoutPercent < ethers.utils.parseEther('6.01'), true, "glide is not correct minted for two blocks")
+        assert.equal(rewardSumWithoutPercent > ethers.utils.parseEther('5.99') && rewardSumWithoutPercent < ethers.utils.parseEther('6.01'), true, "glide is not correct minted for two blocks")
+        //console.log("rewardSumWithoutPercent-"+rewardSumWithoutPercent.toString());
+    });
+
+    it("...should check reward per block", async () => {
+        // Get default values from contract
+        const bonusReductionPeriod = await masterChefInstance.bonusReductionPeriod.call();
+        const reductionPeriod = await masterChefInstance.reductionPeriod.call();
+        const startBlock = await masterChefInstance.startBlock.call();
+    
+        // Setup for testing
+        await masterChefInstance.setBonusReductionPeriod(3);
+        await masterChefInstance.setReductionPeriod(6);
+        await masterChefInstance.setStartBlock(2);
+
+        var glideRewards = await masterChefInstance.getGlideRewardPerBlock(2, 4); // should be 6
+        assert.equal(new BN(glideRewards.toString()).toString(), ethers.utils.parseEther('6').toString(), "reward for 2 - 4 combination is not correct");
+        //console.log("glideRewards-"+glideRewards.toString());
+
+        var glideRewards = await masterChefInstance.getGlideRewardPerBlock(2, 5); //should be 9
+        assert.equal(new BN(glideRewards.toString()).toString(), ethers.utils.parseEther('9').toString(), "reward for 2 - 5 combination is not correct");
+
+        var glideRewards = await masterChefInstance.getGlideRewardPerBlock(2, 6); //should be 11.25
+        assert.equal(new BN(glideRewards.toString()).toString(), ethers.utils.parseEther('11.25').toString(), "reward for 2 - 6 combination is not correct");
+
+        var glideRewards = await masterChefInstance.getGlideRewardPerBlock(2, 12); //should be 3 * 3 + 6 * 2.25 + 1 * 1.9125 =  9 + 13.5 + 1.9125 = 24.4125
+        assert.equal(new BN(glideRewards.toString()).toString(), ethers.utils.parseEther('24.4125').toString(), "reward for 2 - 12 combination is not correct");
+
+        var glideRewards = await masterChefInstance.getGlideRewardPerBlock(11, 12); // should be 1.9125
+        assert.equal(new BN(glideRewards.toString()).toString(), ethers.utils.parseEther('1.9125').toString(), "reward for 11 - 12 combination is not correct");
+
+        var glideRewards = await masterChefInstance.getGlideRewardPerBlock(11, 13); // should be 3.825
+        assert.equal(new BN(glideRewards.toString()).toString(), ethers.utils.parseEther('3.825').toString(), "reward for 11 - 13 combination is not correct");
+
+        var glideRewards = await masterChefInstance.getGlideRewardPerBlock(12, 13); // should be 1.9125
+        assert.equal(new BN(glideRewards.toString()).toString(), ethers.utils.parseEther('1.9125').toString(), "reward for 12 - 13 combination is not correct");
+
+        var glideRewards = await masterChefInstance.getGlideRewardPerBlock(19, 20); // should be 1.625625
+        assert.equal(new BN(glideRewards.toString()).toString(), ethers.utils.parseEther('1.625625').toString(), "reward for 19 - 20 combination is not correct");
+
+        var glideRewards = await masterChefInstance.getGlideRewardPerBlock(12, 20); // should be 5 * 1.9125 + 3 * 1.625625 = 9.5625 + 4.876875 = 14.439375
+        assert.equal(new BN(glideRewards.toString()).toString(), ethers.utils.parseEther('14.439375').toString(), "reward for 12 - 20 combination is not correct");
+
+        var glideRewards = await masterChefInstance.getGlideRewardPerBlock(1000, 1500); // should be 0
+        assert.equal(new BN(glideRewards.toString()).toString(), "0", "reward for 1000 - 1500 combination is not correct");
+
+        var glideRewards = await masterChefInstance.getGlideRewardPerBlock(130, 131); // should be 0.872089449401573 (phase 22)
+        assert.equal(new BN(glideRewards.toString()).toString(), ethers.utils.parseEther('0.0872089449401573').toString(), "reward for 130 - 131 combination is not correct");
+
+        // Reset setup to default
+        await masterChefInstance.setBonusReductionPeriod(bonusReductionPeriod);
+        await masterChefInstance.setReductionPeriod(reductionPeriod);
+        await masterChefInstance.setStartBlock(startBlock);
     });
 });

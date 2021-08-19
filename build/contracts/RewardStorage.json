@@ -108,15 +108,15 @@
     "absolutePath": "project:/contracts/RewardStorage.sol",
     "exportedSymbols": {
       "RewardStorage": [
-        7380
+        7603
       ]
     },
-    "id": 7381,
+    "id": 7604,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 7319,
+        "id": 7542,
         "literals": [
           "solidity",
           "0.6",
@@ -128,9 +128,9 @@
       {
         "absolutePath": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
         "file": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-        "id": 7320,
+        "id": 7543,
         "nodeType": "ImportDirective",
-        "scope": 7381,
+        "scope": 7604,
         "sourceUnit": 982,
         "src": "62:56:15",
         "symbolAliases": [],
@@ -139,9 +139,9 @@
       {
         "absolutePath": "@openzeppelin/contracts/token/ERC20/SafeERC20.sol",
         "file": "@openzeppelin/contracts/token/ERC20/SafeERC20.sol",
-        "id": 7321,
+        "id": 7544,
         "nodeType": "ImportDirective",
-        "scope": 7381,
+        "scope": 7604,
         "sourceUnit": 1195,
         "src": "120:59:15",
         "symbolAliases": [],
@@ -150,9 +150,9 @@
       {
         "absolutePath": "@openzeppelin/contracts/access/Ownable.sol",
         "file": "@openzeppelin/contracts/access/Ownable.sol",
-        "id": 7322,
+        "id": 7545,
         "nodeType": "ImportDirective",
-        "scope": 7381,
+        "scope": 7604,
         "sourceUnit": 132,
         "src": "181:52:15",
         "symbolAliases": [],
@@ -165,7 +165,7 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 7323,
+              "id": 7546,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 131,
@@ -175,7 +175,7 @@
                 "typeString": "contract Ownable"
               }
             },
-            "id": 7324,
+            "id": 7547,
             "nodeType": "InheritanceSpecifier",
             "src": "263:7:15"
           }
@@ -187,9 +187,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 7380,
+        "id": 7603,
         "linearizedBaseContracts": [
-          7380,
+          7603,
           131,
           22
         ],
@@ -197,10 +197,10 @@
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "id": 7327,
+            "id": 7550,
             "libraryName": {
               "contractScope": null,
-              "id": 7325,
+              "id": 7548,
               "name": "SafeERC20",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 1194,
@@ -214,7 +214,7 @@
             "src": "278:27:15",
             "typeName": {
               "contractScope": null,
-              "id": 7326,
+              "id": 7549,
               "name": "IERC20",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 981,
@@ -228,12 +228,12 @@
           {
             "constant": false,
             "functionSelector": "1b4bc102",
-            "id": 7329,
+            "id": 7552,
             "mutability": "mutable",
             "name": "opera",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 7380,
+            "scope": 7603,
             "src": "338:19:15",
             "stateVariable": true,
             "storageLocation": "default",
@@ -243,7 +243,7 @@
             },
             "typeName": {
               "contractScope": null,
-              "id": 7328,
+              "id": 7551,
               "name": "IERC20",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 981,
@@ -258,25 +258,25 @@
           },
           {
             "body": {
-              "id": 7338,
+              "id": 7561,
               "nodeType": "Block",
               "src": "416:33:15",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 7336,
+                    "id": 7559,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 7334,
+                      "id": 7557,
                       "name": "opera",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 7329,
+                      "referencedDeclaration": 7552,
                       "src": "427:5:15",
                       "typeDescriptions": {
                         "typeIdentifier": "t_contract$_IERC20_$981",
@@ -287,11 +287,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 7335,
+                      "id": 7558,
                       "name": "_opera",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 7331,
+                      "referencedDeclaration": 7554,
                       "src": "435:6:15",
                       "typeDescriptions": {
                         "typeIdentifier": "t_contract$_IERC20_$981",
@@ -304,14 +304,14 @@
                       "typeString": "contract IERC20"
                     }
                   },
-                  "id": 7337,
+                  "id": 7560,
                   "nodeType": "ExpressionStatement",
                   "src": "427:14:15"
                 }
               ]
             },
             "documentation": null,
-            "id": 7339,
+            "id": 7562,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
@@ -319,17 +319,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 7332,
+              "id": 7555,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 7331,
+                  "id": 7554,
                   "mutability": "mutable",
                   "name": "_opera",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 7339,
+                  "scope": 7562,
                   "src": "388:13:15",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -339,7 +339,7 @@
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 7330,
+                    "id": 7553,
                     "name": "IERC20",
                     "nodeType": "UserDefinedTypeName",
                     "referencedDeclaration": 981,
@@ -356,12 +356,12 @@
               "src": "377:31:15"
             },
             "returnParameters": {
-              "id": 7333,
+              "id": 7556,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "416:0:15"
             },
-            "scope": 7380,
+            "scope": 7603,
             "src": "366:83:15",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -369,23 +369,23 @@
           },
           {
             "body": {
-              "id": 7378,
+              "id": 7601,
               "nodeType": "Block",
               "src": "641:227:15",
               "statements": [
                 {
                   "assignments": [
-                    7349
+                    7572
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 7349,
+                      "id": 7572,
                       "mutability": "mutable",
                       "name": "operaBal",
                       "nodeType": "VariableDeclaration",
                       "overrides": null,
-                      "scope": 7378,
+                      "scope": 7601,
                       "src": "652:16:15",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -394,7 +394,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 7348,
+                        "id": 7571,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
                         "src": "652:7:15",
@@ -407,7 +407,7 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 7357,
+                  "id": 7580,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
@@ -416,14 +416,14 @@
                         "arguments": [
                           {
                             "argumentTypes": null,
-                            "id": 7354,
+                            "id": 7577,
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": -28,
                             "src": "695:4:15",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_RewardStorage_$7380",
+                              "typeIdentifier": "t_contract$_RewardStorage_$7603",
                               "typeString": "contract RewardStorage"
                             }
                           }
@@ -431,11 +431,11 @@
                         "expression": {
                           "argumentTypes": [
                             {
-                              "typeIdentifier": "t_contract$_RewardStorage_$7380",
+                              "typeIdentifier": "t_contract$_RewardStorage_$7603",
                               "typeString": "contract RewardStorage"
                             }
                           ],
-                          "id": 7353,
+                          "id": 7576,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -447,7 +447,7 @@
                             "typeString": "type(address)"
                           },
                           "typeName": {
-                            "id": 7352,
+                            "id": 7575,
                             "name": "address",
                             "nodeType": "ElementaryTypeName",
                             "src": "687:7:15",
@@ -457,7 +457,7 @@
                             }
                           }
                         },
-                        "id": 7355,
+                        "id": 7578,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -482,18 +482,18 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 7350,
+                        "id": 7573,
                         "name": "opera",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 7329,
+                        "referencedDeclaration": 7552,
                         "src": "671:5:15",
                         "typeDescriptions": {
                           "typeIdentifier": "t_contract$_IERC20_$981",
                           "typeString": "contract IERC20"
                         }
                       },
-                      "id": 7351,
+                      "id": 7574,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -507,7 +507,7 @@
                         "typeString": "function (address) view external returns (uint256)"
                       }
                     },
-                    "id": 7356,
+                    "id": 7579,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -532,18 +532,18 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 7360,
+                    "id": 7583,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
                       "argumentTypes": null,
-                      "id": 7358,
+                      "id": 7581,
                       "name": "_amount",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 7343,
+                      "referencedDeclaration": 7566,
                       "src": "716:7:15",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -554,11 +554,11 @@
                     "operator": ">",
                     "rightExpression": {
                       "argumentTypes": null,
-                      "id": 7359,
+                      "id": 7582,
                       "name": "operaBal",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 7349,
+                      "referencedDeclaration": 7572,
                       "src": "726:8:15",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -572,7 +572,7 @@
                     }
                   },
                   "falseBody": {
-                    "id": 7376,
+                    "id": 7599,
                     "nodeType": "Block",
                     "src": "802:59:15",
                     "statements": [
@@ -582,11 +582,11 @@
                           "arguments": [
                             {
                               "argumentTypes": null,
-                              "id": 7372,
+                              "id": 7595,
                               "name": "_to",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 7341,
+                              "referencedDeclaration": 7564,
                               "src": "836:3:15",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_address",
@@ -595,11 +595,11 @@
                             },
                             {
                               "argumentTypes": null,
-                              "id": 7373,
+                              "id": 7596,
                               "name": "_amount",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 7343,
+                              "referencedDeclaration": 7566,
                               "src": "841:7:15",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -620,18 +620,18 @@
                             ],
                             "expression": {
                               "argumentTypes": null,
-                              "id": 7369,
+                              "id": 7592,
                               "name": "opera",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 7329,
+                              "referencedDeclaration": 7552,
                               "src": "817:5:15",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_IERC20_$981",
                                 "typeString": "contract IERC20"
                               }
                             },
-                            "id": 7371,
+                            "id": 7594,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -645,7 +645,7 @@
                               "typeString": "function (contract IERC20,address,uint256)"
                             }
                           },
-                          "id": 7374,
+                          "id": 7597,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -660,17 +660,17 @@
                             "typeString": "tuple()"
                           }
                         },
-                        "id": 7375,
+                        "id": 7598,
                         "nodeType": "ExpressionStatement",
                         "src": "817:32:15"
                       }
                     ]
                   },
-                  "id": 7377,
+                  "id": 7600,
                   "nodeType": "IfStatement",
                   "src": "712:149:15",
                   "trueBody": {
-                    "id": 7368,
+                    "id": 7591,
                     "nodeType": "Block",
                     "src": "736:60:15",
                     "statements": [
@@ -680,11 +680,11 @@
                           "arguments": [
                             {
                               "argumentTypes": null,
-                              "id": 7364,
+                              "id": 7587,
                               "name": "_to",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 7341,
+                              "referencedDeclaration": 7564,
                               "src": "770:3:15",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_address",
@@ -693,11 +693,11 @@
                             },
                             {
                               "argumentTypes": null,
-                              "id": 7365,
+                              "id": 7588,
                               "name": "operaBal",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 7349,
+                              "referencedDeclaration": 7572,
                               "src": "775:8:15",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -718,18 +718,18 @@
                             ],
                             "expression": {
                               "argumentTypes": null,
-                              "id": 7361,
+                              "id": 7584,
                               "name": "opera",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 7329,
+                              "referencedDeclaration": 7552,
                               "src": "751:5:15",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_IERC20_$981",
                                 "typeString": "contract IERC20"
                               }
                             },
-                            "id": 7363,
+                            "id": 7586,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -743,7 +743,7 @@
                               "typeString": "function (contract IERC20,address,uint256)"
                             }
                           },
-                          "id": 7366,
+                          "id": 7589,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -758,7 +758,7 @@
                             "typeString": "tuple()"
                           }
                         },
-                        "id": 7367,
+                        "id": 7590,
                         "nodeType": "ExpressionStatement",
                         "src": "751:33:15"
                       }
@@ -769,16 +769,16 @@
             },
             "documentation": null,
             "functionSelector": "7a240b29",
-            "id": 7379,
+            "id": 7602,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 7346,
+                "id": 7569,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 7345,
+                  "id": 7568,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
@@ -797,17 +797,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 7344,
+              "id": 7567,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 7341,
+                  "id": 7564,
                   "mutability": "mutable",
                   "name": "_to",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 7379,
+                  "scope": 7602,
                   "src": "592:11:15",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -816,7 +816,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 7340,
+                    "id": 7563,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "592:7:15",
@@ -831,12 +831,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 7343,
+                  "id": 7566,
                   "mutability": "mutable",
                   "name": "_amount",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 7379,
+                  "scope": 7602,
                   "src": "605:15:15",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -845,7 +845,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 7342,
+                    "id": 7565,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "605:7:15",
@@ -861,19 +861,19 @@
               "src": "591:30:15"
             },
             "returnParameters": {
-              "id": 7347,
+              "id": 7570,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "641:0:15"
             },
-            "scope": 7380,
+            "scope": 7603,
             "src": "565:303:15",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 7381,
+        "scope": 7604,
         "src": "237:634:15"
       }
     ],
@@ -884,7 +884,7 @@
       "absolutePath": "project:/contracts/RewardStorage.sol",
       "exportedSymbols": {
         "RewardStorage": [
-          7380
+          7603
         ]
       },
       "license": "MIT"
@@ -898,7 +898,7 @@
             ".12"
           ]
         },
-        "id": 7319,
+        "id": 7542,
         "name": "PragmaDirective",
         "src": "35:23:15"
       },
@@ -907,13 +907,13 @@
           "SourceUnit": 982,
           "absolutePath": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
           "file": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-          "scope": 7381,
+          "scope": 7604,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 7320,
+        "id": 7543,
         "name": "ImportDirective",
         "src": "62:56:15"
       },
@@ -922,13 +922,13 @@
           "SourceUnit": 1195,
           "absolutePath": "@openzeppelin/contracts/token/ERC20/SafeERC20.sol",
           "file": "@openzeppelin/contracts/token/ERC20/SafeERC20.sol",
-          "scope": 7381,
+          "scope": 7604,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 7321,
+        "id": 7544,
         "name": "ImportDirective",
         "src": "120:59:15"
       },
@@ -937,13 +937,13 @@
           "SourceUnit": 132,
           "absolutePath": "@openzeppelin/contracts/access/Ownable.sol",
           "file": "@openzeppelin/contracts/access/Ownable.sol",
-          "scope": 7381,
+          "scope": 7604,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 7322,
+        "id": 7545,
         "name": "ImportDirective",
         "src": "181:52:15"
       },
@@ -958,12 +958,12 @@
           "documentation": null,
           "fullyImplemented": true,
           "linearizedBaseContracts": [
-            7380,
+            7603,
             131,
             22
           ],
           "name": "RewardStorage",
-          "scope": 7381
+          "scope": 7604
         },
         "children": [
           {
@@ -978,12 +978,12 @@
                   "referencedDeclaration": 131,
                   "type": "contract Ownable"
                 },
-                "id": 7323,
+                "id": 7546,
                 "name": "UserDefinedTypeName",
                 "src": "263:7:15"
               }
             ],
-            "id": 7324,
+            "id": 7547,
             "name": "InheritanceSpecifier",
             "src": "263:7:15"
           },
@@ -996,7 +996,7 @@
                   "referencedDeclaration": 1194,
                   "type": "library SafeERC20"
                 },
-                "id": 7325,
+                "id": 7548,
                 "name": "UserDefinedTypeName",
                 "src": "284:9:15"
               },
@@ -1007,12 +1007,12 @@
                   "referencedDeclaration": 981,
                   "type": "contract IERC20"
                 },
-                "id": 7326,
+                "id": 7549,
                 "name": "UserDefinedTypeName",
                 "src": "298:6:15"
               }
             ],
-            "id": 7327,
+            "id": 7550,
             "name": "UsingForDirective",
             "src": "278:27:15"
           },
@@ -1023,7 +1023,7 @@
               "mutability": "mutable",
               "name": "opera",
               "overrides": null,
-              "scope": 7380,
+              "scope": 7603,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "contract IERC20",
@@ -1038,12 +1038,12 @@
                   "referencedDeclaration": 981,
                   "type": "contract IERC20"
                 },
-                "id": 7328,
+                "id": 7551,
                 "name": "UserDefinedTypeName",
                 "src": "338:6:15"
               }
             ],
-            "id": 7329,
+            "id": 7552,
             "name": "VariableDeclaration",
             "src": "338:19:15"
           },
@@ -1058,7 +1058,7 @@
               ],
               "name": "",
               "overrides": null,
-              "scope": 7380,
+              "scope": 7603,
               "stateMutability": "nonpayable",
               "virtual": false,
               "visibility": "public"
@@ -1072,7 +1072,7 @@
                       "mutability": "mutable",
                       "name": "_opera",
                       "overrides": null,
-                      "scope": 7339,
+                      "scope": 7562,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "contract IERC20",
@@ -1087,17 +1087,17 @@
                           "referencedDeclaration": 981,
                           "type": "contract IERC20"
                         },
-                        "id": 7330,
+                        "id": 7553,
                         "name": "UserDefinedTypeName",
                         "src": "388:6:15"
                       }
                     ],
-                    "id": 7331,
+                    "id": 7554,
                     "name": "VariableDeclaration",
                     "src": "388:13:15"
                   }
                 ],
-                "id": 7332,
+                "id": 7555,
                 "name": "ParameterList",
                 "src": "377:31:15"
               },
@@ -1108,7 +1108,7 @@
                   ]
                 },
                 "children": [],
-                "id": 7333,
+                "id": 7556,
                 "name": "ParameterList",
                 "src": "416:0:15"
               },
@@ -1133,11 +1133,11 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 7329,
+                              "referencedDeclaration": 7552,
                               "type": "contract IERC20",
                               "value": "opera"
                             },
-                            "id": 7334,
+                            "id": 7557,
                             "name": "Identifier",
                             "src": "427:5:15"
                           },
@@ -1147,31 +1147,31 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 7331,
+                              "referencedDeclaration": 7554,
                               "type": "contract IERC20",
                               "value": "_opera"
                             },
-                            "id": 7335,
+                            "id": 7558,
                             "name": "Identifier",
                             "src": "435:6:15"
                           }
                         ],
-                        "id": 7336,
+                        "id": 7559,
                         "name": "Assignment",
                         "src": "427:14:15"
                       }
                     ],
-                    "id": 7337,
+                    "id": 7560,
                     "name": "ExpressionStatement",
                     "src": "427:14:15"
                   }
                 ],
-                "id": 7338,
+                "id": 7561,
                 "name": "Block",
                 "src": "416:33:15"
               }
             ],
-            "id": 7339,
+            "id": 7562,
             "name": "FunctionDefinition",
             "src": "366:83:15"
           },
@@ -1184,7 +1184,7 @@
               "kind": "function",
               "name": "safeOperaTransfer",
               "overrides": null,
-              "scope": 7380,
+              "scope": 7603,
               "stateMutability": "nonpayable",
               "virtual": false,
               "visibility": "external"
@@ -1198,7 +1198,7 @@
                       "mutability": "mutable",
                       "name": "_to",
                       "overrides": null,
-                      "scope": 7379,
+                      "scope": 7602,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -1212,12 +1212,12 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 7340,
+                        "id": 7563,
                         "name": "ElementaryTypeName",
                         "src": "592:7:15"
                       }
                     ],
-                    "id": 7341,
+                    "id": 7564,
                     "name": "VariableDeclaration",
                     "src": "592:11:15"
                   },
@@ -1227,7 +1227,7 @@
                       "mutability": "mutable",
                       "name": "_amount",
                       "overrides": null,
-                      "scope": 7379,
+                      "scope": 7602,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -1240,17 +1240,17 @@
                           "name": "uint256",
                           "type": "uint256"
                         },
-                        "id": 7342,
+                        "id": 7565,
                         "name": "ElementaryTypeName",
                         "src": "605:7:15"
                       }
                     ],
-                    "id": 7343,
+                    "id": 7566,
                     "name": "VariableDeclaration",
                     "src": "605:15:15"
                   }
                 ],
-                "id": 7344,
+                "id": 7567,
                 "name": "ParameterList",
                 "src": "591:30:15"
               },
@@ -1261,7 +1261,7 @@
                   ]
                 },
                 "children": [],
-                "id": 7347,
+                "id": 7570,
                 "name": "ParameterList",
                 "src": "641:0:15"
               },
@@ -1280,12 +1280,12 @@
                       "type": "modifier ()",
                       "value": "onlyOwner"
                     },
-                    "id": 7345,
+                    "id": 7568,
                     "name": "Identifier",
                     "src": "631:9:15"
                   }
                 ],
-                "id": 7346,
+                "id": 7569,
                 "name": "ModifierInvocation",
                 "src": "631:9:15"
               },
@@ -1294,7 +1294,7 @@
                   {
                     "attributes": {
                       "assignments": [
-                        7349
+                        7572
                       ]
                     },
                     "children": [
@@ -1304,7 +1304,7 @@
                           "mutability": "mutable",
                           "name": "operaBal",
                           "overrides": null,
-                          "scope": 7378,
+                          "scope": 7601,
                           "stateVariable": false,
                           "storageLocation": "default",
                           "type": "uint256",
@@ -1317,12 +1317,12 @@
                               "name": "uint256",
                               "type": "uint256"
                             },
-                            "id": 7348,
+                            "id": 7571,
                             "name": "ElementaryTypeName",
                             "src": "652:7:15"
                           }
                         ],
-                        "id": 7349,
+                        "id": 7572,
                         "name": "VariableDeclaration",
                         "src": "652:16:15"
                       },
@@ -1365,16 +1365,16 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 7329,
+                                  "referencedDeclaration": 7552,
                                   "type": "contract IERC20",
                                   "value": "opera"
                                 },
-                                "id": 7350,
+                                "id": 7573,
                                 "name": "Identifier",
                                 "src": "671:5:15"
                               }
                             ],
-                            "id": 7351,
+                            "id": 7574,
                             "name": "MemberAccess",
                             "src": "671:15:15"
                           },
@@ -1398,7 +1398,7 @@
                                 "attributes": {
                                   "argumentTypes": [
                                     {
-                                      "typeIdentifier": "t_contract$_RewardStorage_$7380",
+                                      "typeIdentifier": "t_contract$_RewardStorage_$7603",
                                       "typeString": "contract RewardStorage"
                                     }
                                   ],
@@ -1414,12 +1414,12 @@
                                       "name": "address",
                                       "type": null
                                     },
-                                    "id": 7352,
+                                    "id": 7575,
                                     "name": "ElementaryTypeName",
                                     "src": "687:7:15"
                                   }
                                 ],
-                                "id": 7353,
+                                "id": 7576,
                                 "name": "ElementaryTypeNameExpression",
                                 "src": "687:7:15"
                               },
@@ -1433,22 +1433,22 @@
                                   "type": "contract RewardStorage",
                                   "value": "this"
                                 },
-                                "id": 7354,
+                                "id": 7577,
                                 "name": "Identifier",
                                 "src": "695:4:15"
                               }
                             ],
-                            "id": 7355,
+                            "id": 7578,
                             "name": "FunctionCall",
                             "src": "687:13:15"
                           }
                         ],
-                        "id": 7356,
+                        "id": 7579,
                         "name": "FunctionCall",
                         "src": "671:30:15"
                       }
                     ],
-                    "id": 7357,
+                    "id": 7580,
                     "name": "VariableDeclarationStatement",
                     "src": "652:49:15"
                   },
@@ -1475,11 +1475,11 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 7343,
+                              "referencedDeclaration": 7566,
                               "type": "uint256",
                               "value": "_amount"
                             },
-                            "id": 7358,
+                            "id": 7581,
                             "name": "Identifier",
                             "src": "716:7:15"
                           },
@@ -1489,16 +1489,16 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 7349,
+                              "referencedDeclaration": 7572,
                               "type": "uint256",
                               "value": "operaBal"
                             },
-                            "id": 7359,
+                            "id": 7582,
                             "name": "Identifier",
                             "src": "726:8:15"
                           }
                         ],
-                        "id": 7360,
+                        "id": 7583,
                         "name": "BinaryOperation",
                         "src": "716:18:15"
                       },
@@ -1549,16 +1549,16 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 7329,
+                                          "referencedDeclaration": 7552,
                                           "type": "contract IERC20",
                                           "value": "opera"
                                         },
-                                        "id": 7361,
+                                        "id": 7584,
                                         "name": "Identifier",
                                         "src": "751:5:15"
                                       }
                                     ],
-                                    "id": 7363,
+                                    "id": 7586,
                                     "name": "MemberAccess",
                                     "src": "751:18:15"
                                   },
@@ -1568,11 +1568,11 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 7341,
+                                      "referencedDeclaration": 7564,
                                       "type": "address",
                                       "value": "_to"
                                     },
-                                    "id": 7364,
+                                    "id": 7587,
                                     "name": "Identifier",
                                     "src": "770:3:15"
                                   },
@@ -1582,26 +1582,26 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 7349,
+                                      "referencedDeclaration": 7572,
                                       "type": "uint256",
                                       "value": "operaBal"
                                     },
-                                    "id": 7365,
+                                    "id": 7588,
                                     "name": "Identifier",
                                     "src": "775:8:15"
                                   }
                                 ],
-                                "id": 7366,
+                                "id": 7589,
                                 "name": "FunctionCall",
                                 "src": "751:33:15"
                               }
                             ],
-                            "id": 7367,
+                            "id": 7590,
                             "name": "ExpressionStatement",
                             "src": "751:33:15"
                           }
                         ],
-                        "id": 7368,
+                        "id": 7591,
                         "name": "Block",
                         "src": "736:60:15"
                       },
@@ -1652,16 +1652,16 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 7329,
+                                          "referencedDeclaration": 7552,
                                           "type": "contract IERC20",
                                           "value": "opera"
                                         },
-                                        "id": 7369,
+                                        "id": 7592,
                                         "name": "Identifier",
                                         "src": "817:5:15"
                                       }
                                     ],
-                                    "id": 7371,
+                                    "id": 7594,
                                     "name": "MemberAccess",
                                     "src": "817:18:15"
                                   },
@@ -1671,11 +1671,11 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 7341,
+                                      "referencedDeclaration": 7564,
                                       "type": "address",
                                       "value": "_to"
                                     },
-                                    "id": 7372,
+                                    "id": 7595,
                                     "name": "Identifier",
                                     "src": "836:3:15"
                                   },
@@ -1685,51 +1685,51 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 7343,
+                                      "referencedDeclaration": 7566,
                                       "type": "uint256",
                                       "value": "_amount"
                                     },
-                                    "id": 7373,
+                                    "id": 7596,
                                     "name": "Identifier",
                                     "src": "841:7:15"
                                   }
                                 ],
-                                "id": 7374,
+                                "id": 7597,
                                 "name": "FunctionCall",
                                 "src": "817:32:15"
                               }
                             ],
-                            "id": 7375,
+                            "id": 7598,
                             "name": "ExpressionStatement",
                             "src": "817:32:15"
                           }
                         ],
-                        "id": 7376,
+                        "id": 7599,
                         "name": "Block",
                         "src": "802:59:15"
                       }
                     ],
-                    "id": 7377,
+                    "id": 7600,
                     "name": "IfStatement",
                     "src": "712:149:15"
                   }
                 ],
-                "id": 7378,
+                "id": 7601,
                 "name": "Block",
                 "src": "641:227:15"
               }
             ],
-            "id": 7379,
+            "id": 7602,
             "name": "FunctionDefinition",
             "src": "565:303:15"
           }
         ],
-        "id": 7380,
+        "id": 7603,
         "name": "ContractDefinition",
         "src": "237:634:15"
       }
     ],
-    "id": 7381,
+    "id": 7604,
     "name": "SourceUnit",
     "src": "35:836:15"
   },
@@ -1739,7 +1739,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-08-17T08:20:34.432Z",
+  "updatedAt": "2021-08-19T08:23:21.075Z",
   "devdoc": {
     "kind": "dev",
     "methods": {

@@ -20,22 +20,22 @@ contract Sugar is ERC20('Sugar Token', 'SUGAR'), Ownable {
     }
 
     // The GLIDE TOKEN!
-    GlideToken public cake;
+    GlideToken public glide;
 
 
     constructor(
         GlideToken _glide
     ) public {
-        cake = _glide;
+        glide = _glide;
     }
 
-    // Safe cake transfer function, just in case if rounding error causes pool to not have enough CAKEs.
-    function safeCakeTransfer(address _to, uint256 _amount) public onlyOwner {
-        uint256 cakeBal = cake.balanceOf(address(this));
-        if (_amount > cakeBal) {
-            cake.transfer(_to, cakeBal);
+    // Safe glide transfer function, just in case if rounding error causes pool to not have enough GLIDEs.
+    function safeGlideTransfer(address _to, uint256 _amount) public onlyOwner {
+        uint256 glideBal = glide.balanceOf(address(this));
+        if (_amount > glideBal) {
+            glide.transfer(_to, glideBal);
         } else {
-            cake.transfer(_to, _amount);
+            glide.transfer(_to, _amount);
         }
     }
 
@@ -141,9 +141,9 @@ contract Sugar is ERC20('Sugar Token', 'SUGAR'), Ownable {
         );
 
         address signatory = ecrecover(digest, v, r, s);
-        require(signatory != address(0), "CAKE::delegateBySig: invalid signature");
-        require(nonce == nonces[signatory]++, "CAKE::delegateBySig: invalid nonce");
-        require(now <= expiry, "CAKE::delegateBySig: signature expired");
+        require(signatory != address(0), "GLIDE::delegateBySig: invalid signature");
+        require(nonce == nonces[signatory]++, "GLIDE::delegateBySig: invalid nonce");
+        require(now <= expiry, "GLIDE::delegateBySig: signature expired");
         return _delegate(signatory, delegatee);
     }
 
@@ -173,7 +173,7 @@ contract Sugar is ERC20('Sugar Token', 'SUGAR'), Ownable {
         view
         returns (uint256)
     {
-        require(blockNumber < block.number, "CAKE::getPriorVotes: not yet determined");
+        require(blockNumber < block.number, "GLIDE::getPriorVotes: not yet determined");
 
         uint32 nCheckpoints = numCheckpoints[account];
         if (nCheckpoints == 0) {
@@ -210,7 +210,7 @@ contract Sugar is ERC20('Sugar Token', 'SUGAR'), Ownable {
         internal
     {
         address currentDelegate = _delegates[delegator];
-        uint256 delegatorBalance = balanceOf(delegator); // balance of underlying CAKEs (not scaled);
+        uint256 delegatorBalance = balanceOf(delegator); // balance of underlying GLIDEs (not scaled);
         _delegates[delegator] = delegatee;
 
         emit DelegateChanged(delegator, currentDelegate, delegatee);
@@ -246,7 +246,7 @@ contract Sugar is ERC20('Sugar Token', 'SUGAR'), Ownable {
     )
         internal
     {
-        uint32 blockNumber = safe32(block.number, "CAKE::_writeCheckpoint: block number exceeds 32 bits");
+        uint32 blockNumber = safe32(block.number, "GLIDE::_writeCheckpoint: block number exceeds 32 bits");
 
         if (nCheckpoints > 0 && checkpoints[delegatee][nCheckpoints - 1].fromBlock == blockNumber) {
             checkpoints[delegatee][nCheckpoints - 1].votes = newVotes;

@@ -7,11 +7,21 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 // CakeToken with Governance.
 contract GlideToken is ERC20('Glide Finance', 'GLIDE'), Ownable  {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
+
+    uint256 constant private _maxTotalSupply = 50000000e18; // 50,000,000 max supply
+
     function mint(address _to, uint256 _amount) public onlyOwner {
+        require(totalSupply() + _amount <= _maxTotalSupply, "ERC20: minting more then MaxTotalSupply");
+
         _mint(_to, _amount);
         _moveDelegates(address(0), _delegates[_to], _amount);
     }
 
+    // Returns maximum total supply of the token
+    function getMaxTotalSupply() external pure returns (uint256) {
+        return _maxTotalSupply;
+    }
+    
     // Copied and modified from YAM code:
     // https://github.com/yam-finance/yam-protocol/blob/master/contracts/token/YAMGovernanceStorage.sol
     // https://github.com/yam-finance/yam-protocol/blob/master/contracts/token/YAMGovernance.sol
