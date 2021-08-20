@@ -136,6 +136,7 @@ contract("MasterChef test", accounts => {
             {from:accounts[1]});
     });
 
+    
     it("...should add pair to MasterChef", async () => {
         // get pair address from factory
         const pairAddress = await operaSwapFactoryInstance.getPair(testTokenOneInstance.address, testTokenTwoInstance.address);
@@ -286,4 +287,59 @@ contract("MasterChef test", accounts => {
         await masterChefInstance.setReductionPeriod(reductionPeriod);
         await masterChefInstance.setStartBlock(startBlock);
     });
+
+    it("...should withdraw Glide token", async() => {
+        const glideBalanceAccounts2BeforeWithdraw = await glideTokenInstance.balanceOf.call(accounts[2]);
+        //console.log("glideBalanceAccounts2BeforeWithdraw-"+glideBalanceAccounts2BeforeWithdraw.toString());
+
+        // withdraw amount
+        const withdrawLPAmount = ethers.utils.parseEther('3');
+
+        // withdraw
+        await masterChefInstance.withdraw(1, withdrawLPAmount, {from: accounts[2]});
+
+        const glideBalanceAccounts2AfterWithdraw = await glideTokenInstance.balanceOf.call(accounts[2]);
+        //console.log("glideBalanceAccounts2AfterWithdraw-"+glideBalanceAccounts2AfterWithdraw.toString());
+
+        //NOTE - it's hard to calculate exact amount that withdraw Glide token, because, for withdraw function used LP amount
+        assert.equal(glideBalanceAccounts2AfterWithdraw > glideBalanceAccounts2BeforeWithdraw, true, "withdraw is not correct");
+    });
+
+    it("...should enter staking Glide token", async() => {
+        // set staking amount
+        const stakingAmount = ethers.utils.parseEther('1');
+
+        // get sugar token balance before enterStaking
+        const sugarTokenInstanceBefore = await sugarTokenInstance.balanceOf.call(accounts[2]);
+        //console.log("sugarTokenInstanceBefore-"+sugarTokenInstanceBefore.toString());
+
+        // approve to masterChef instance for enterStaking
+        await glideTokenInstance.approve(masterChefInstance.address, stakingAmount, {from: accounts[2]});
+
+        await masterChefInstance.enterStaking(stakingAmount, {from: accounts[2]});
+
+        // get sugar token balance after enterStaking
+        const sugarTokenInstanceAfter = await sugarTokenInstance.balanceOf.call(accounts[2]);
+        //console.log("sugarTokenInstanceAfter-"+sugarTokenInstanceAfter.toString());
+
+        assert.equal(new BN(sugarTokenInstanceAfter.toString()).sub(new BN(sugarTokenInstanceBefore.toString())).toString(), stakingAmount.toString(), "enterStaking to sugar token is not correct");
+    });
+
+    it("...should leaveStaking Glide token", async() => {
+        const glideBalanceAccounts2BeforeWithdraw = await glideTokenInstance.balanceOf.call(accounts[2]);
+        console.log("glideBalanceAccounts2BeforeWithdraw-"+glideBalanceAccounts2BeforeWithdraw.toString());
+
+        // withdraw amount
+        const withdrawLPAmount = ethers.utils.parseEther('0.5');
+
+        // withdraw
+        await masterChefInstance.leaveStaking(withdrawLPAmount, {from: accounts[2]});
+
+        const glideBalanceAccounts2AfterWithdraw = await glideTokenInstance.balanceOf.call(accounts[2]);
+        console.log("glideBalanceAccounts2AfterWithdraw-"+glideBalanceAccounts2AfterWithdraw.toString());
+
+        //NOTE - it's hard to calculate exact amount that withdraw Glide token, because, for withdraw function used LP amount
+        assert.equal(glideBalanceAccounts2AfterWithdraw > glideBalanceAccounts2BeforeWithdraw, true, "leaveStaking is not correct");
+    });
+
 });

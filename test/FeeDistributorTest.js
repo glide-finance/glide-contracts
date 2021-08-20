@@ -22,6 +22,7 @@ contract("FeeDistributor test", accounts => {
     var operaSwapRouterInstance;
     var concretePairInstance;
     var swapRewardsChefInstance;
+    var masterChefInstance;
 
     var stakeGlideTokenValue;
 
@@ -48,7 +49,7 @@ contract("FeeDistributor test", accounts => {
         swapRewardsChefInstance = await SwapRewardsChef.deployed();
         assert.ok(swapRewardsChefInstance);
 
-        const masterChefInstance = await MasterChef.deployed();
+        masterChefInstance = await MasterChef.deployed();
         assert.ok(masterChefInstance);
         
         wETHAddress = await operaSwapRouterInstance.WETH();
@@ -79,10 +80,6 @@ contract("FeeDistributor test", accounts => {
         await testTokenTwoInstance.transferFrom(accounts[0], accounts[1], valueForSent);
         await testTokenTwoInstance.transferFrom(accounts[0], accounts[2], valueForSent);
         await testTokenTwoInstance.transferFrom(accounts[0], accounts[3], valueForSent);
-
-        // transfer glideToken to account[3] for deposit 
-        // TODO because ownership for glideToken is set to MasterChef, must to see how to mint this token (for now, when I want to test this contract, comment line in deploy script for transferOwnership)
-        await glideTokenInstance.mint(accounts[3], ethers.utils.parseEther('50'));
 
         //add liquidity
         await testTokenOneInstance.approve(operaSwapRouterInstance.address, valueForLiquidityTokenOne, {from: accounts[1]});
@@ -133,6 +130,19 @@ contract("FeeDistributor test", accounts => {
             accounts[1],
             9000000000,
             {from:accounts[1]});
+    });
+
+    it("...should transfer ownership for Glide token and mint tokens", async () => {
+        await masterChefInstance.transferGlideOwnership(accounts[0]);
+
+        const ownerAfterTransfer = await glideTokenInstance.owner();
+        assert.equal(ownerAfterTransfer, accounts[0], "Transfer ownership for Glide token is not good");
+
+        // transfer glideToken to account[3] for deposit 
+        const tokensForMint = ethers.utils.parseEther('50');
+        await glideTokenInstance.mint(accounts[3], tokensForMint);
+        const balanceGlideToken = await glideTokenInstance.balanceOf.call(accounts[3]);
+        assert.equal(tokensForMint.toString(), new BN(balanceGlideToken.toString()).toString(), "Mint for Glide token is not correct");
     });
 
     it("...should remove liquidity from feeDistributor", async () => {

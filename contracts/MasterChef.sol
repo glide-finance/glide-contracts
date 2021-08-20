@@ -49,6 +49,9 @@ contract MasterChef is Ownable {
 
     // The GLIDE TOKEN!
     GlideToken public glide;
+    // GLIDE TOKEN transfer owner
+    address public glideTransferOwner;
+
     // The SUGAR TOKEN!
     Sugar public sugar;
     // Dev address.
@@ -57,6 +60,9 @@ contract MasterChef is Ownable {
     address public treasuryaddr;
     // GLIDE tokens created per block.
     uint256 public glidePerBlock;
+    // GLIDE max rate (max perBlock setup)
+    uint256 public constant MAX_EMISSION_RATE = 1000 ether; // Safety check
+
     // Bounus reduction period
     uint256 public bonusReductionPeriod = 1572480; //12 * 60 * 24 * 91 (91 is 3 months in days)
     // Reduction period
@@ -68,12 +74,17 @@ contract MasterChef is Ownable {
     mapping (uint256 => mapping (address => UserInfo)) public userInfo;
     // Total allocation points. Must be the sum of all allocation points in all pools.
     uint256 public totalAllocPoint = 0;
+    // Max allocation points safety check
+    uint256 public constant MAX_ALLOC_POINT = 100000;
     // The block number when GLIDE mining starts.
     uint256 public startBlock;
 
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
     event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
     event EmergencyWithdraw(address indexed user, uint256 indexed pid, uint256 amount);
+    event UpdateEmissionRate(address indexed user, uint256 glidePerBlock);
+    event SetGlideTransferOwner(address indexed user, address indexed glideTransferOwner);
+    event TransferGlideOwnership(address indexed user, address indexed newOwner);
     event Log(uint256 message);
 
     constructor(
@@ -82,7 +93,8 @@ contract MasterChef is Ownable {
         address _devaddr,
         address _treasuryaddr,
         uint256 _glidePerBlock,
-        uint256 _startBlock
+        uint256 _startBlock,
+        address _glideTransferOwner
     ) public {
         glide = _glide;
         sugar = _sugar;
@@ -90,6 +102,7 @@ contract MasterChef is Ownable {
         treasuryaddr = _treasuryaddr;
         glidePerBlock = _glidePerBlock;
         startBlock = _startBlock;
+        glideTransferOwner = _glideTransferOwner;
 
         // staking pool
         poolInfo.push(PoolInfo({
@@ -181,6 +194,7 @@ contract MasterChef is Ownable {
     // Add a new lp to the pool. Can only be called by the owner.
     // XXX DO NOT add the same LP token more than once. Rewards will be messed up if you do.
     function add(uint256 _allocPoint, IERC20 _lpToken, bool _withUpdate) public onlyOwner {
+        require(_allocPoint <= MAX_ALLOC_POINT, "!overmax");
         if (_withUpdate) {
             massUpdatePools();
         }
@@ -197,6 +211,7 @@ contract MasterChef is Ownable {
 
     // Update the given pool's GLIDE allocation point. Can only be called by the owner.
     function set(uint256 _pid, uint256 _allocPoint, bool _withUpdate) public onlyOwner {
+        require(_allocPoint <= MAX_ALLOC_POINT, "!overmax");
         if (_withUpdate) {
             massUpdatePools();
         }
@@ -393,5 +408,31 @@ contract MasterChef is Ownable {
     // Update start block
     function setStartBlock(uint256 _startBlock) public onlyOwner {
         startBlock = _startBlock;
+    }
+
+    // Should never fail as long as massUpdatePools is called during add
+    function updateEmissionRate(uint256 _glidePerBlock) external onlyOwner {
+        require(_glidePerBlock <= MAX_EMISSION_RATE, "!overmax");
+        massUpdatePools();
+        glidePerBlock = _glidePerBlock;
+        emit UpdateEmissionRate(msg.sender, _glidePerBlock);
+    }
+
+    // Update Glide transfer owner. Can only be called by existing glideTransferOwner
+    function setGlideTransferOwner(address _glideTransferOwner) external {
+        require(msg.sender == glideTransferOwner);
+        glideTransferOwner = _glideTransferOwner;
+        emit SetGlideTransferOwner(msg.sender, _glideTransferOwner);
+    }
+
+    /**
+     * @dev DUE TO THIS CODE THIS CONTRACT MUST BE BEHIND A TIMELOCK (Ideally 7)
+     * THIS FUNCTION EXISTS ONLY IF THERE IS AN ISSUE WITH THIS CONTRACT 
+     * AND TOKEN MIGRATION MUST HAPPEN
+     */
+    function transferGlideOwnership(address _newOwner) external {
+        require(msg.sender == glideTransferOwner);
+        glide.transferOwnership(_newOwner);
+        emit TransferGlideOwnership(msg.sender, _newOwner);
     }
 }

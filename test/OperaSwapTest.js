@@ -18,7 +18,7 @@ const toUtf8Bytes = ethers.utils.toUtf8Bytes;
 const BigNumber = ethers.BigNumber;
 const PERMIT_TYPEHASH = keccak256(toUtf8Bytes('Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)'));
 const ecsign = ethereumjs_util.ecsign;
-const privateKey = "ca85cfe377595b39a22701a27b2c09ca472c3d2680a0d0a78cbbde6748690544";
+const privateKey = "1fb6dee6da201b5f8b1203a5484c84583aae0bae51adafa070844160686590e9";
 
 const MINIMUM_LIQUIDITY = 1000;
 

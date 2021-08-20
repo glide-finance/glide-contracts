@@ -7,7 +7,7 @@ const OperaSwapPair = artifacts.require("OperaSwapPair");
 
 const OperaSwapFactory = artifacts.require("OperaSwapFactory");
 
-const feeToSetter = "0x6d25D7d56c8ea578ED81BbAF6e1f334e53A037Da"; //"0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
+const feeToSetter = "0x7F5243ACBFb22b61345F5dA158c6FFfF70F234a0"; //"0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
 
 const OperaSwapRouter = artifacts.require("OperaSwapRouter");
 const wELA = "0x517E9e5d46C1EA8aB6f78677d6114Ef47F71f6c4"; //wrapped ELA token
@@ -16,15 +16,16 @@ const GlideToken = artifacts.require("GlideToken");
 
 const SwapRewardsChef = artifacts.require("SwapRewardsChef");
 
-const feeHolder = "0x6d25D7d56c8ea578ED81BbAF6e1f334e53A037Da";
-const schedulerAddress = "0x6d25D7d56c8ea578ED81BbAF6e1f334e53A037Da";
+const feeHolder = "0x7F5243ACBFb22b61345F5dA158c6FFfF70F234a0";
+const schedulerAddress = "0x7F5243ACBFb22b61345F5dA158c6FFfF70F234a0";
 const FeeDistributor = artifacts.require("FeeDistributor");
 
 const SugarToken = artifacts.require("Sugar");
 
-const devAddr = "0x10Dfb9032E0449B9FCE41cd0A4c2F93C5463E913";
-const treasuryAddr = "0xB3C73649B59Ee2c91BA64DaAE0CEd24a2F62f670";
-const glidePerBlock = ethers.utils.parseEther('3');//3000000000000000000;
+const devAddr = "0x6d61Aa2709816e1c61B3cEC00876F608830175C6";
+const treasuryAddr = "0x22084ef93b98FF538801368Fe503916414f9fFE6";
+const glideTransferOwner = "0x7F5243ACBFb22b61345F5dA158c6FFfF70F234a0";
+const glidePerBlock = ethers.utils.parseEther('3');
 const startBlock = 7892020;
 const MasterChef = artifacts.require("MasterChef");
 
@@ -80,7 +81,7 @@ module.exports = async function(deployer) {
     const sugarTokenAddress = sugarTokenInstance.address;
 
     // deploy masterChef
-    await deployer.deploy(MasterChef, glideTokenAddress, sugarTokenAddress, devAddr, treasuryAddr, glidePerBlock, startBlock); 
+    await deployer.deploy(MasterChef, glideTokenAddress, sugarTokenAddress, devAddr, treasuryAddr, glidePerBlock, startBlock, glideTransferOwner); 
     const masterChefInstance = await MasterChef.deployed();
     const masterChefAddress = masterChefInstance.address;
 
