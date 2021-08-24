@@ -7,7 +7,7 @@ const OperaSwapPair = artifacts.require("OperaSwapPair");
 
 const OperaSwapFactory = artifacts.require("OperaSwapFactory");
 
-const feeToSetter = "0x7F5243ACBFb22b61345F5dA158c6FFfF70F234a0"; //"0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
+const feeToSetter = "0x3aCAE0243DFA39fE13863832ECaB79f34AF4Db47"; //"0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
 
 const OperaSwapRouter = artifacts.require("OperaSwapRouter");
 const wELA = "0x517E9e5d46C1EA8aB6f78677d6114Ef47F71f6c4"; //wrapped ELA token
@@ -16,18 +16,22 @@ const GlideToken = artifacts.require("GlideToken");
 
 const SwapRewardsChef = artifacts.require("SwapRewardsChef");
 
-const feeHolder = "0x7F5243ACBFb22b61345F5dA158c6FFfF70F234a0";
-const schedulerAddress = "0x7F5243ACBFb22b61345F5dA158c6FFfF70F234a0";
+const feeHolder = "0x3aCAE0243DFA39fE13863832ECaB79f34AF4Db47";
+const schedulerAddress = "0x3aCAE0243DFA39fE13863832ECaB79f34AF4Db47";
 const FeeDistributor = artifacts.require("FeeDistributor");
 
 const SugarToken = artifacts.require("Sugar");
 
-const devAddr = "0x6d61Aa2709816e1c61B3cEC00876F608830175C6";
-const treasuryAddr = "0x22084ef93b98FF538801368Fe503916414f9fFE6";
-const glideTransferOwner = "0x7F5243ACBFb22b61345F5dA158c6FFfF70F234a0";
+const devAddr = "0x461e7B06d9659c0E5A473335Cddf21A0fc73D308"; //accounts[7] on truffle
+const treasuryAddr = "0x2ee2d3270F0E645Fe5C75FfD8480616C032b0B07"; //accounts[8] on truffle
+const glideTransferOwner = "0x3aCAE0243DFA39fE13863832ECaB79f34AF4Db47";
 const glidePerBlock = ethers.utils.parseEther('3');
 const startBlock = 7892020;
 const MasterChef = artifacts.require("MasterChef");
+
+const glideVaultAdmin = "0x3aCAE0243DFA39fE13863832ECaB79f34AF4Db47";
+const treasuryAddrGlideVault = "0xe7CaeeECeB9C88677b459027563cE93f81a6C4b8"; //accounts[9] on truffle
+const GlideVault = artifacts.require("GlideVault");
 
 module.exports = async function(deployer) {
     // deploy TestTokenOne contract and get address
@@ -88,4 +92,7 @@ module.exports = async function(deployer) {
     // change owner for GlideToken and SugarToken to masterChef
     glideTokenInstance.transferOwnership(masterChefAddress);
     sugarTokenInstance.transferOwnership(masterChefAddress);
+
+    // depoloy Glide vault
+    await deployer.deploy(GlideVault, glideTokenAddress, sugarTokenAddress, masterChefAddress, glideVaultAdmin, treasuryAddrGlideVault);
 }

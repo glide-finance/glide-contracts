@@ -27,22 +27,22 @@
     "absolutePath": "project:/contracts/interfaces/IFeeReceiver.sol",
     "exportedSymbols": {
       "IFeeReceiver": [
-        8665
+        9942
       ]
     },
-    "id": 8666,
+    "id": 9943,
     "license": "UNLICENSED",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8659,
+        "id": 9936,
         "literals": [
           "solidity",
           "0.6",
           ".12"
         ],
         "nodeType": "PragmaDirective",
-        "src": "40:23:18"
+        "src": "40:23:20"
       },
       {
         "abstract": false,
@@ -51,9 +51,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 8665,
+        "id": 9942,
         "linearizedBaseContracts": [
-          8665
+          9942
         ],
         "name": "IFeeReceiver",
         "nodeType": "ContractDefinition",
@@ -62,7 +62,7 @@
             "body": null,
             "documentation": null,
             "functionSelector": "84ed8c56",
-            "id": 8664,
+            "id": 9941,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -70,18 +70,18 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 8662,
+              "id": 9939,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8661,
+                  "id": 9938,
                   "mutability": "mutable",
                   "name": "dollarAmount",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 8664,
-                  "src": "113:20:18",
+                  "scope": 9941,
+                  "src": "113:20:20",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -89,10 +89,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8660,
+                    "id": 9937,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "113:7:18",
+                    "src": "113:7:20",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -102,33 +102,33 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "112:22:18"
+              "src": "112:22:20"
             },
             "returnParameters": {
-              "id": 8663,
+              "id": 9940,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "143:0:18"
+              "src": "143:0:20"
             },
-            "scope": 8665,
-            "src": "97:47:18",
+            "scope": 9942,
+            "src": "97:47:20",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 8666,
-        "src": "67:80:18"
+        "scope": 9943,
+        "src": "67:80:20"
       }
     ],
-    "src": "40:107:18"
+    "src": "40:107:20"
   },
   "legacyAST": {
     "attributes": {
       "absolutePath": "project:/contracts/interfaces/IFeeReceiver.sol",
       "exportedSymbols": {
         "IFeeReceiver": [
-          8665
+          9942
         ]
       },
       "license": "UNLICENSED"
@@ -142,9 +142,9 @@
             ".12"
           ]
         },
-        "id": 8659,
+        "id": 9936,
         "name": "PragmaDirective",
-        "src": "40:23:18"
+        "src": "40:23:20"
       },
       {
         "attributes": {
@@ -159,10 +159,10 @@
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
-            8665
+            9942
           ],
           "name": "IFeeReceiver",
-          "scope": 8666
+          "scope": 9943
         },
         "children": [
           {
@@ -178,7 +178,7 @@
               ],
               "name": "income",
               "overrides": null,
-              "scope": 8665,
+              "scope": 9942,
               "stateMutability": "nonpayable",
               "virtual": false,
               "visibility": "external"
@@ -192,7 +192,7 @@
                       "mutability": "mutable",
                       "name": "dollarAmount",
                       "overrides": null,
-                      "scope": 8664,
+                      "scope": 9941,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -205,19 +205,19 @@
                           "name": "uint256",
                           "type": "uint256"
                         },
-                        "id": 8660,
+                        "id": 9937,
                         "name": "ElementaryTypeName",
-                        "src": "113:7:18"
+                        "src": "113:7:20"
                       }
                     ],
-                    "id": 8661,
+                    "id": 9938,
                     "name": "VariableDeclaration",
-                    "src": "113:20:18"
+                    "src": "113:20:20"
                   }
                 ],
-                "id": 8662,
+                "id": 9939,
                 "name": "ParameterList",
-                "src": "112:22:18"
+                "src": "112:22:20"
               },
               {
                 "attributes": {
@@ -226,24 +226,24 @@
                   ]
                 },
                 "children": [],
-                "id": 8663,
+                "id": 9940,
                 "name": "ParameterList",
-                "src": "143:0:18"
+                "src": "143:0:20"
               }
             ],
-            "id": 8664,
+            "id": 9941,
             "name": "FunctionDefinition",
-            "src": "97:47:18"
+            "src": "97:47:20"
           }
         ],
-        "id": 8665,
+        "id": 9942,
         "name": "ContractDefinition",
-        "src": "67:80:18"
+        "src": "67:80:20"
       }
     ],
-    "id": 8666,
+    "id": 9943,
     "name": "SourceUnit",
-    "src": "40:107:18"
+    "src": "40:107:20"
   },
   "compiler": {
     "name": "solc",
@@ -251,7 +251,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-08-19T08:23:21.117Z",
+  "updatedAt": "2021-08-23T11:18:36.799Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
