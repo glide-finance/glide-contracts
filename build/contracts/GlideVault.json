@@ -859,7 +859,7 @@
         "id": 1937,
         "nodeType": "ImportDirective",
         "scope": 2913,
-        "sourceUnit": 9995,
+        "sourceUnit": 10482,
         "src": "349:38:11",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1176,7 +1176,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_IMasterChef_$9994",
+              "typeIdentifier": "t_contract$_IMasterChef_$10481",
               "typeString": "contract IMasterChef"
             },
             "typeName": {
@@ -1184,10 +1184,10 @@
               "id": 1961,
               "name": "IMasterChef",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 9994,
+              "referencedDeclaration": 10481,
               "src": "976:11:11",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                "typeIdentifier": "t_contract$_IMasterChef_$10481",
                 "typeString": "contract IMasterChef"
               }
             },
@@ -2211,7 +2211,7 @@
                       "referencedDeclaration": 1962,
                       "src": "2511:10:11",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                        "typeIdentifier": "t_contract$_IMasterChef_$10481",
                         "typeString": "contract IMasterChef"
                       }
                     },
@@ -2226,13 +2226,13 @@
                       "referencedDeclaration": 2035,
                       "src": "2524:11:11",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                        "typeIdentifier": "t_contract$_IMasterChef_$10481",
                         "typeString": "contract IMasterChef"
                       }
                     },
                     "src": "2511:24:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                      "typeIdentifier": "t_contract$_IMasterChef_$10481",
                       "typeString": "contract IMasterChef"
                     }
                   },
@@ -2348,7 +2348,7 @@
                             "referencedDeclaration": 2035,
                             "src": "2668:11:11",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                              "typeIdentifier": "t_contract$_IMasterChef_$10481",
                               "typeString": "contract IMasterChef"
                             }
                           }
@@ -2356,7 +2356,7 @@
                         "expression": {
                           "argumentTypes": [
                             {
-                              "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                              "typeIdentifier": "t_contract$_IMasterChef_$10481",
                               "typeString": "contract IMasterChef"
                             }
                           ],
@@ -2665,7 +2665,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                    "typeIdentifier": "t_contract$_IMasterChef_$10481",
                     "typeString": "contract IMasterChef"
                   },
                   "typeName": {
@@ -2673,10 +2673,10 @@
                     "id": 2034,
                     "name": "IMasterChef",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 9994,
+                    "referencedDeclaration": 10481,
                     "src": "2345:11:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                      "typeIdentifier": "t_contract$_IMasterChef_$10481",
                       "typeString": "contract IMasterChef"
                     }
                   },
@@ -5126,7 +5126,7 @@
                             "referencedDeclaration": 1962,
                             "src": "4637:10:11",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                              "typeIdentifier": "t_contract$_IMasterChef_$10481",
                               "typeString": "contract IMasterChef"
                             }
                           }
@@ -5134,7 +5134,7 @@
                         "expression": {
                           "argumentTypes": [
                             {
-                              "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                              "typeIdentifier": "t_contract$_IMasterChef_$10481",
                               "typeString": "contract IMasterChef"
                             }
                           ],
@@ -5142,10 +5142,10 @@
                           "name": "IMasterChef",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 9994,
+                          "referencedDeclaration": 10481,
                           "src": "4625:11:11",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_IMasterChef_$9994_$",
+                            "typeIdentifier": "t_type$_t_contract$_IMasterChef_$10481_$",
                             "typeString": "type(contract IMasterChef)"
                           }
                         },
@@ -5160,7 +5160,7 @@
                         "src": "4625:23:11",
                         "tryCall": false,
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                          "typeIdentifier": "t_contract$_IMasterChef_$10481",
                           "typeString": "contract IMasterChef"
                         }
                       },
@@ -5171,7 +5171,7 @@
                       "lValueRequested": false,
                       "memberName": "leaveStaking",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 9968,
+                      "referencedDeclaration": 10455,
                       "src": "4625:36:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$__$",
@@ -7696,7 +7696,7 @@
                             "referencedDeclaration": 1962,
                             "src": "7284:10:11",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                              "typeIdentifier": "t_contract$_IMasterChef_$10481",
                               "typeString": "contract IMasterChef"
                             }
                           }
@@ -7704,7 +7704,7 @@
                         "expression": {
                           "argumentTypes": [
                             {
-                              "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                              "typeIdentifier": "t_contract$_IMasterChef_$10481",
                               "typeString": "contract IMasterChef"
                             }
                           ],
@@ -7712,10 +7712,10 @@
                           "name": "IMasterChef",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 9994,
+                          "referencedDeclaration": 10481,
                           "src": "7272:11:11",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_IMasterChef_$9994_$",
+                            "typeIdentifier": "t_type$_t_contract$_IMasterChef_$10481_$",
                             "typeString": "type(contract IMasterChef)"
                           }
                         },
@@ -7730,7 +7730,7 @@
                         "src": "7272:23:11",
                         "tryCall": false,
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                          "typeIdentifier": "t_contract$_IMasterChef_$10481",
                           "typeString": "contract IMasterChef"
                         }
                       },
@@ -7741,7 +7741,7 @@
                       "lValueRequested": false,
                       "memberName": "emergencyWithdraw",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 9993,
+                      "referencedDeclaration": 10480,
                       "src": "7272:41:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$__$",
@@ -9010,7 +9010,7 @@
                             "referencedDeclaration": 1962,
                             "src": "8495:10:11",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                              "typeIdentifier": "t_contract$_IMasterChef_$10481",
                               "typeString": "contract IMasterChef"
                             }
                           }
@@ -9018,7 +9018,7 @@
                         "expression": {
                           "argumentTypes": [
                             {
-                              "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                              "typeIdentifier": "t_contract$_IMasterChef_$10481",
                               "typeString": "contract IMasterChef"
                             }
                           ],
@@ -9026,10 +9026,10 @@
                           "name": "IMasterChef",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 9994,
+                          "referencedDeclaration": 10481,
                           "src": "8483:11:11",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_IMasterChef_$9994_$",
+                            "typeIdentifier": "t_type$_t_contract$_IMasterChef_$10481_$",
                             "typeString": "type(contract IMasterChef)"
                           }
                         },
@@ -9044,7 +9044,7 @@
                         "src": "8483:23:11",
                         "tryCall": false,
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                          "typeIdentifier": "t_contract$_IMasterChef_$10481",
                           "typeString": "contract IMasterChef"
                         }
                       },
@@ -9055,7 +9055,7 @@
                       "lValueRequested": false,
                       "memberName": "pendingGlide",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 9977,
+                      "referencedDeclaration": 10464,
                       "src": "8483:36:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_view$_t_uint256_$_t_address_$returns$_t_uint256_$",
@@ -9588,7 +9588,7 @@
                             "referencedDeclaration": 1962,
                             "src": "8957:10:11",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                              "typeIdentifier": "t_contract$_IMasterChef_$10481",
                               "typeString": "contract IMasterChef"
                             }
                           }
@@ -9596,7 +9596,7 @@
                         "expression": {
                           "argumentTypes": [
                             {
-                              "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                              "typeIdentifier": "t_contract$_IMasterChef_$10481",
                               "typeString": "contract IMasterChef"
                             }
                           ],
@@ -9604,10 +9604,10 @@
                           "name": "IMasterChef",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 9994,
+                          "referencedDeclaration": 10481,
                           "src": "8945:11:11",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_IMasterChef_$9994_$",
+                            "typeIdentifier": "t_type$_t_contract$_IMasterChef_$10481_$",
                             "typeString": "type(contract IMasterChef)"
                           }
                         },
@@ -9622,7 +9622,7 @@
                         "src": "8945:23:11",
                         "tryCall": false,
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                          "typeIdentifier": "t_contract$_IMasterChef_$10481",
                           "typeString": "contract IMasterChef"
                         }
                       },
@@ -9633,7 +9633,7 @@
                       "lValueRequested": false,
                       "memberName": "pendingGlide",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 9977,
+                      "referencedDeclaration": 10464,
                       "src": "8945:36:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_view$_t_uint256_$_t_address_$returns$_t_uint256_$",
@@ -11190,7 +11190,7 @@
                                   "referencedDeclaration": 1962,
                                   "src": "10018:10:11",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                                    "typeIdentifier": "t_contract$_IMasterChef_$10481",
                                     "typeString": "contract IMasterChef"
                                   }
                                 }
@@ -11198,7 +11198,7 @@
                               "expression": {
                                 "argumentTypes": [
                                   {
-                                    "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                                    "typeIdentifier": "t_contract$_IMasterChef_$10481",
                                     "typeString": "contract IMasterChef"
                                   }
                                 ],
@@ -11206,10 +11206,10 @@
                                 "name": "IMasterChef",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 9994,
+                                "referencedDeclaration": 10481,
                                 "src": "10006:11:11",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_type$_t_contract$_IMasterChef_$9994_$",
+                                  "typeIdentifier": "t_type$_t_contract$_IMasterChef_$10481_$",
                                   "typeString": "type(contract IMasterChef)"
                                 }
                               },
@@ -11224,7 +11224,7 @@
                               "src": "10006:23:11",
                               "tryCall": false,
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                                "typeIdentifier": "t_contract$_IMasterChef_$10481",
                                 "typeString": "contract IMasterChef"
                               }
                             },
@@ -11235,7 +11235,7 @@
                             "lValueRequested": false,
                             "memberName": "leaveStaking",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 9968,
+                            "referencedDeclaration": 10455,
                             "src": "10006:36:11",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$__$",
@@ -13148,7 +13148,7 @@
                             "referencedDeclaration": 1962,
                             "src": "11466:10:11",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                              "typeIdentifier": "t_contract$_IMasterChef_$10481",
                               "typeString": "contract IMasterChef"
                             }
                           }
@@ -13156,7 +13156,7 @@
                         "expression": {
                           "argumentTypes": [
                             {
-                              "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                              "typeIdentifier": "t_contract$_IMasterChef_$10481",
                               "typeString": "contract IMasterChef"
                             }
                           ],
@@ -13164,10 +13164,10 @@
                           "name": "IMasterChef",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 9994,
+                          "referencedDeclaration": 10481,
                           "src": "11454:11:11",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_IMasterChef_$9994_$",
+                            "typeIdentifier": "t_type$_t_contract$_IMasterChef_$10481_$",
                             "typeString": "type(contract IMasterChef)"
                           }
                         },
@@ -13182,7 +13182,7 @@
                         "src": "11454:23:11",
                         "tryCall": false,
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                          "typeIdentifier": "t_contract$_IMasterChef_$10481",
                           "typeString": "contract IMasterChef"
                         }
                       },
@@ -13193,7 +13193,7 @@
                       "lValueRequested": false,
                       "memberName": "userInfo",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 9988,
+                      "referencedDeclaration": 10475,
                       "src": "11454:32:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_view$_t_uint256_$_t_address_$returns$_t_uint256_$_t_uint256_$",
@@ -13626,7 +13626,7 @@
                                   "referencedDeclaration": 1962,
                                   "src": "11783:10:11",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                                    "typeIdentifier": "t_contract$_IMasterChef_$10481",
                                     "typeString": "contract IMasterChef"
                                   }
                                 }
@@ -13634,7 +13634,7 @@
                               "expression": {
                                 "argumentTypes": [
                                   {
-                                    "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                                    "typeIdentifier": "t_contract$_IMasterChef_$10481",
                                     "typeString": "contract IMasterChef"
                                   }
                                 ],
@@ -13642,10 +13642,10 @@
                                 "name": "IMasterChef",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 9994,
+                                "referencedDeclaration": 10481,
                                 "src": "11771:11:11",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_type$_t_contract$_IMasterChef_$9994_$",
+                                  "typeIdentifier": "t_type$_t_contract$_IMasterChef_$10481_$",
                                   "typeString": "type(contract IMasterChef)"
                                 }
                               },
@@ -13660,7 +13660,7 @@
                               "src": "11771:23:11",
                               "tryCall": false,
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                                "typeIdentifier": "t_contract$_IMasterChef_$10481",
                                 "typeString": "contract IMasterChef"
                               }
                             },
@@ -13671,7 +13671,7 @@
                             "lValueRequested": false,
                             "memberName": "enterStaking",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 9963,
+                            "referencedDeclaration": 10450,
                             "src": "11771:36:11",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$__$",
@@ -14088,7 +14088,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 9995,
+          "SourceUnit": 10482,
           "absolutePath": "project:/contracts/interfaces/IMasterChef.sol",
           "file": "./interfaces/IMasterChef.sol",
           "scope": 2913,
@@ -14426,7 +14426,7 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "IMasterChef",
-                  "referencedDeclaration": 9994,
+                  "referencedDeclaration": 10481,
                   "type": "contract IMasterChef"
                 },
                 "id": 1961,
@@ -15466,7 +15466,7 @@
                         "attributes": {
                           "contractScope": null,
                           "name": "IMasterChef",
-                          "referencedDeclaration": 9994,
+                          "referencedDeclaration": 10481,
                           "type": "contract IMasterChef"
                         },
                         "id": 2034,
@@ -15927,7 +15927,7 @@
                                 "attributes": {
                                   "argumentTypes": [
                                     {
-                                      "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                                      "typeIdentifier": "t_contract$_IMasterChef_$10481",
                                       "typeString": "contract IMasterChef"
                                     }
                                   ],
@@ -18747,7 +18747,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "leaveStaking",
-                              "referencedDeclaration": 9968,
+                              "referencedDeclaration": 10455,
                               "type": "function (uint256) external"
                             },
                             "children": [
@@ -18771,14 +18771,14 @@
                                     "attributes": {
                                       "argumentTypes": [
                                         {
-                                          "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                                          "typeIdentifier": "t_contract$_IMasterChef_$10481",
                                           "typeString": "contract IMasterChef"
                                         }
                                       ],
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 9994,
+                                      "referencedDeclaration": 10481,
                                       "type": "type(contract IMasterChef)",
                                       "value": "IMasterChef"
                                     },
@@ -21548,7 +21548,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "emergencyWithdraw",
-                              "referencedDeclaration": 9993,
+                              "referencedDeclaration": 10480,
                               "type": "function (uint256) external"
                             },
                             "children": [
@@ -21572,14 +21572,14 @@
                                     "attributes": {
                                       "argumentTypes": [
                                         {
-                                          "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                                          "typeIdentifier": "t_contract$_IMasterChef_$10481",
                                           "typeString": "contract IMasterChef"
                                         }
                                       ],
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 9994,
+                                      "referencedDeclaration": 10481,
                                       "type": "type(contract IMasterChef)",
                                       "value": "IMasterChef"
                                     },
@@ -22978,7 +22978,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "pendingGlide",
-                              "referencedDeclaration": 9977,
+                              "referencedDeclaration": 10464,
                               "type": "function (uint256,address) view external returns (uint256)"
                             },
                             "children": [
@@ -23002,14 +23002,14 @@
                                     "attributes": {
                                       "argumentTypes": [
                                         {
-                                          "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                                          "typeIdentifier": "t_contract$_IMasterChef_$10481",
                                           "typeString": "contract IMasterChef"
                                         }
                                       ],
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 9994,
+                                      "referencedDeclaration": 10481,
                                       "type": "type(contract IMasterChef)",
                                       "value": "IMasterChef"
                                     },
@@ -23612,7 +23612,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "pendingGlide",
-                              "referencedDeclaration": 9977,
+                              "referencedDeclaration": 10464,
                               "type": "function (uint256,address) view external returns (uint256)"
                             },
                             "children": [
@@ -23636,14 +23636,14 @@
                                     "attributes": {
                                       "argumentTypes": [
                                         {
-                                          "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                                          "typeIdentifier": "t_contract$_IMasterChef_$10481",
                                           "typeString": "contract IMasterChef"
                                         }
                                       ],
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 9994,
+                                      "referencedDeclaration": 10481,
                                       "type": "type(contract IMasterChef)",
                                       "value": "IMasterChef"
                                     },
@@ -25454,7 +25454,7 @@
                                       "isPure": false,
                                       "lValueRequested": false,
                                       "member_name": "leaveStaking",
-                                      "referencedDeclaration": 9968,
+                                      "referencedDeclaration": 10455,
                                       "type": "function (uint256) external"
                                     },
                                     "children": [
@@ -25478,14 +25478,14 @@
                                             "attributes": {
                                               "argumentTypes": [
                                                 {
-                                                  "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                                                  "typeIdentifier": "t_contract$_IMasterChef_$10481",
                                                   "typeString": "contract IMasterChef"
                                                 }
                                               ],
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 9994,
+                                              "referencedDeclaration": 10481,
                                               "type": "type(contract IMasterChef)",
                                               "value": "IMasterChef"
                                             },
@@ -27509,7 +27509,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "userInfo",
-                              "referencedDeclaration": 9988,
+                              "referencedDeclaration": 10475,
                               "type": "function (uint256,address) view external returns (uint256,uint256)"
                             },
                             "children": [
@@ -27533,14 +27533,14 @@
                                     "attributes": {
                                       "argumentTypes": [
                                         {
-                                          "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                                          "typeIdentifier": "t_contract$_IMasterChef_$10481",
                                           "typeString": "contract IMasterChef"
                                         }
                                       ],
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 9994,
+                                      "referencedDeclaration": 10481,
                                       "type": "type(contract IMasterChef)",
                                       "value": "IMasterChef"
                                     },
@@ -28078,7 +28078,7 @@
                                       "isPure": false,
                                       "lValueRequested": false,
                                       "member_name": "enterStaking",
-                                      "referencedDeclaration": 9963,
+                                      "referencedDeclaration": 10450,
                                       "type": "function (uint256) external"
                                     },
                                     "children": [
@@ -28102,14 +28102,14 @@
                                             "attributes": {
                                               "argumentTypes": [
                                                 {
-                                                  "typeIdentifier": "t_contract$_IMasterChef_$9994",
+                                                  "typeIdentifier": "t_contract$_IMasterChef_$10481",
                                                   "typeString": "contract IMasterChef"
                                                 }
                                               ],
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 9994,
+                                              "referencedDeclaration": 10481,
                                               "type": "type(contract IMasterChef)",
                                               "value": "IMasterChef"
                                             },
@@ -28436,14 +28436,153 @@
   },
   "networks": {
     "20": {
-      "events": {},
+      "events": {
+        "0x36af321ec8d3c75236829c5317affd40ddb308863a1236d2d277a4025cccee1e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "shares",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "lastDepositedTime",
+              "type": "uint256"
+            }
+          ],
+          "name": "Deposit",
+          "type": "event"
+        },
+        "0x71bab65ced2e5750775a0613be067df48ef06cf92a496ebf7663ae0660924954": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "performanceFee",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "callFee",
+              "type": "uint256"
+            }
+          ],
+          "name": "Harvest",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0x6985a02210a168e66602d3235cb6db0e70f92b3ba4d376a33c0f3d9434bff625": {
+          "anonymous": false,
+          "inputs": [],
+          "name": "Pause",
+          "type": "event"
+        },
+        "0x62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a258": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "Paused",
+          "type": "event"
+        },
+        "0x7805862f689e2f13df9f062ff482ad3ad112aca9e0847911ed832e158c525b33": {
+          "anonymous": false,
+          "inputs": [],
+          "name": "Unpause",
+          "type": "event"
+        },
+        "0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "Unpaused",
+          "type": "event"
+        },
+        "0xf279e6a1f5e320cca91135676d9cb6e44ca8a08c0b88342bcdb1144f6511b568": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "shares",
+              "type": "uint256"
+            }
+          ],
+          "name": "Withdraw",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0xA42694Cd9C6C4aFce883d340A07892a00D2Fd57b",
-      "transactionHash": "0x6adf767ada8fccfe8b148030e166da52f04bbb76e0a05b7a0752d8ed30d81b5d"
+      "address": "0xCD35c936680aF1A1493B2211887eEd292eBCf19b",
+      "transactionHash": "0x9eaef58ab14a72245e2ff27b2eefc74117dbb6faf86fd62a4e499f339a00d3d6"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-08-23T11:19:40.280Z",
+  "updatedAt": "2021-08-25T19:21:43.361Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
