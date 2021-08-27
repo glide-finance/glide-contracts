@@ -15,7 +15,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"dollarAmount\",\"type\":\"uint256\"}],\"name\":\"income\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/IFeeReceiver.sol\":\"IFeeReceiver\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":1000},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/IFeeReceiver.sol\":{\"keccak256\":\"0x40174696bc4a25b13657cf49f80296b30a3833f4cdf9424f5d389799286e1044\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://b4ef8cf1444456bac05346a9eed610a2d3e0f5e4c196db68c15cf5cf17ad6479\",\"dweb:/ipfs/QmWBRLazyAR6h8T6R1szzHEpQZZHoYLkpRFpKqEsJKVsMP\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"dollarAmount\",\"type\":\"uint256\"}],\"name\":\"income\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/IFeeReceiver.sol\":\"IFeeReceiver\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/IFeeReceiver.sol\":{\"keccak256\":\"0x40174696bc4a25b13657cf49f80296b30a3833f4cdf9424f5d389799286e1044\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://b4ef8cf1444456bac05346a9eed610a2d3e0f5e4c196db68c15cf5cf17ad6479\",\"dweb:/ipfs/QmWBRLazyAR6h8T6R1szzHEpQZZHoYLkpRFpKqEsJKVsMP\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
@@ -27,22 +27,22 @@
     "absolutePath": "project:/contracts/interfaces/IFeeReceiver.sol",
     "exportedSymbols": {
       "IFeeReceiver": [
-        10429
+        10462
       ]
     },
-    "id": 10430,
+    "id": 10463,
     "license": "UNLICENSED",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 10423,
+        "id": 10456,
         "literals": [
           "solidity",
           "0.6",
           ".12"
         ],
         "nodeType": "PragmaDirective",
-        "src": "40:23:21"
+        "src": "40:23:22"
       },
       {
         "abstract": false,
@@ -51,9 +51,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 10429,
+        "id": 10462,
         "linearizedBaseContracts": [
-          10429
+          10462
         ],
         "name": "IFeeReceiver",
         "nodeType": "ContractDefinition",
@@ -62,7 +62,7 @@
             "body": null,
             "documentation": null,
             "functionSelector": "84ed8c56",
-            "id": 10428,
+            "id": 10461,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -70,18 +70,18 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 10426,
+              "id": 10459,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10425,
+                  "id": 10458,
                   "mutability": "mutable",
                   "name": "dollarAmount",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 10428,
-                  "src": "113:20:21",
+                  "scope": 10461,
+                  "src": "113:20:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -89,10 +89,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 10424,
+                    "id": 10457,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "113:7:21",
+                    "src": "113:7:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -102,33 +102,33 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "112:22:21"
+              "src": "112:22:22"
             },
             "returnParameters": {
-              "id": 10427,
+              "id": 10460,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "143:0:21"
+              "src": "143:0:22"
             },
-            "scope": 10429,
-            "src": "97:47:21",
+            "scope": 10462,
+            "src": "97:47:22",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 10430,
-        "src": "67:80:21"
+        "scope": 10463,
+        "src": "67:80:22"
       }
     ],
-    "src": "40:107:21"
+    "src": "40:107:22"
   },
   "legacyAST": {
     "attributes": {
       "absolutePath": "project:/contracts/interfaces/IFeeReceiver.sol",
       "exportedSymbols": {
         "IFeeReceiver": [
-          10429
+          10462
         ]
       },
       "license": "UNLICENSED"
@@ -142,9 +142,9 @@
             ".12"
           ]
         },
-        "id": 10423,
+        "id": 10456,
         "name": "PragmaDirective",
-        "src": "40:23:21"
+        "src": "40:23:22"
       },
       {
         "attributes": {
@@ -159,10 +159,10 @@
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
-            10429
+            10462
           ],
           "name": "IFeeReceiver",
-          "scope": 10430
+          "scope": 10463
         },
         "children": [
           {
@@ -178,7 +178,7 @@
               ],
               "name": "income",
               "overrides": null,
-              "scope": 10429,
+              "scope": 10462,
               "stateMutability": "nonpayable",
               "virtual": false,
               "visibility": "external"
@@ -192,7 +192,7 @@
                       "mutability": "mutable",
                       "name": "dollarAmount",
                       "overrides": null,
-                      "scope": 10428,
+                      "scope": 10461,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -205,19 +205,19 @@
                           "name": "uint256",
                           "type": "uint256"
                         },
-                        "id": 10424,
+                        "id": 10457,
                         "name": "ElementaryTypeName",
-                        "src": "113:7:21"
+                        "src": "113:7:22"
                       }
                     ],
-                    "id": 10425,
+                    "id": 10458,
                     "name": "VariableDeclaration",
-                    "src": "113:20:21"
+                    "src": "113:20:22"
                   }
                 ],
-                "id": 10426,
+                "id": 10459,
                 "name": "ParameterList",
-                "src": "112:22:21"
+                "src": "112:22:22"
               },
               {
                 "attributes": {
@@ -226,24 +226,24 @@
                   ]
                 },
                 "children": [],
-                "id": 10427,
+                "id": 10460,
                 "name": "ParameterList",
-                "src": "143:0:21"
+                "src": "143:0:22"
               }
             ],
-            "id": 10428,
+            "id": 10461,
             "name": "FunctionDefinition",
-            "src": "97:47:21"
+            "src": "97:47:22"
           }
         ],
-        "id": 10429,
+        "id": 10462,
         "name": "ContractDefinition",
-        "src": "67:80:21"
+        "src": "67:80:22"
       }
     ],
-    "id": 10430,
+    "id": 10463,
     "name": "SourceUnit",
-    "src": "40:107:21"
+    "src": "40:107:22"
   },
   "compiler": {
     "name": "solc",
@@ -251,7 +251,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-08-25T19:20:31.718Z",
+  "updatedAt": "2021-08-27T10:52:13.356Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

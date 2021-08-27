@@ -83,8 +83,8 @@ module.exports = {
       docker: false,        // Use "0.5.1" you've installed locally with docker (default: false)
       settings: {          // See the solidity docs for advice about optimization and evmVersion
        optimizer: {
-        enabled: false, //TODO for deployment - change from true to false
-        runs: 1000 //TODO for deployment - change from 200 to 1000
+        enabled: true, //TODO for deployment - change from true to false
+        runs: 200 //TODO for deployment - change from 200 to 1000
        },
         evmVersion: "constantinople"
       }

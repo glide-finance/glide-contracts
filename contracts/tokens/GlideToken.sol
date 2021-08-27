@@ -4,7 +4,7 @@ pragma solidity 0.6.12;
 import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 
-// CakeToken with Governance.
+// GlideToken with Governance.
 contract GlideToken is ERC20('Glide Finance', 'GLIDE'), Ownable  {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
 
@@ -124,9 +124,9 @@ contract GlideToken is ERC20('Glide Finance', 'GLIDE'), Ownable  {
         );
 
         address signatory = ecrecover(digest, v, r, s);
-        require(signatory != address(0), "CAKE::delegateBySig: invalid signature");
-        require(nonce == nonces[signatory]++, "CAKE::delegateBySig: invalid nonce");
-        require(now <= expiry, "CAKE::delegateBySig: signature expired");
+        require(signatory != address(0), "GLIDE::delegateBySig: invalid signature");
+        require(nonce == nonces[signatory]++, "GLIDE::delegateBySig: invalid nonce");
+        require(now <= expiry, "GLIDE::delegateBySig: signature expired");
         return _delegate(signatory, delegatee);
     }
 
@@ -156,7 +156,7 @@ contract GlideToken is ERC20('Glide Finance', 'GLIDE'), Ownable  {
         view
         returns (uint256)
     {
-        require(blockNumber < block.number, "CAKE::getPriorVotes: not yet determined");
+        require(blockNumber < block.number, "GLIDE::getPriorVotes: not yet determined");
 
         uint32 nCheckpoints = numCheckpoints[account];
         if (nCheckpoints == 0) {
@@ -193,7 +193,7 @@ contract GlideToken is ERC20('Glide Finance', 'GLIDE'), Ownable  {
         internal
     {
         address currentDelegate = _delegates[delegator];
-        uint256 delegatorBalance = balanceOf(delegator); // balance of underlying CAKEs (not scaled);
+        uint256 delegatorBalance = balanceOf(delegator); // balance of underlying GLIDEs (not scaled);
         _delegates[delegator] = delegatee;
 
         emit DelegateChanged(delegator, currentDelegate, delegatee);
@@ -229,7 +229,7 @@ contract GlideToken is ERC20('Glide Finance', 'GLIDE'), Ownable  {
     )
         internal
     {
-        uint32 blockNumber = safe32(block.number, "CAKE::_writeCheckpoint: block number exceeds 32 bits");
+        uint32 blockNumber = safe32(block.number, "GLIDE::_writeCheckpoint: block number exceeds 32 bits");
 
         if (nCheckpoints > 0 && checkpoints[delegatee][nCheckpoints - 1].fromBlock == blockNumber) {
             checkpoints[delegatee][nCheckpoints - 1].votes = newVotes;
