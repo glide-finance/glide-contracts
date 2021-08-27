@@ -323,7 +323,7 @@
   "immutableReferences": {},
   "sourceMap": "150:3571:13:-:0;;;1072:486;;;;;;;;;;1104:12;1162:2;1151:13;;1290:95;1420:4;;;;;;;;;;;;;;;;;1404:22;;;;;;1455:10;;;;;;;;;;;;;;;;;1445:21;;;;;;1485:7;1519:4;1261:278;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1237:313;;;;;;1218:16;:332;;;;1072:486;150:3571;;;;;;",
   "deployedSourceMap": "150:3571:13:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;232:54;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2397:156;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;406:33;;;:::i;:::-;;;;;;;;;;;;;;;;;;;2717:310;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;734:117;;;:::i;:::-;;;;;;;;;;;;;;;;;;;355:44;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;582:40;;;:::i;:::-;;;;;;;;;;;;;;;;;;;446:50;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;858:47;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;293:55;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2561:148;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;3035:683;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;503:70;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;232:54;;;;;;;;;;;;;;;;;;;:::o;2397:156::-;2470:4;2487:36;2496:10;2508:7;2517:5;2487:8;:36::i;:::-;2541:4;2534:11;;2397:156;;;;:::o;406:33::-;;;;:::o;2717:310::-;2804:4;2861:2;2825:9;:15;2835:4;2825:15;;;;;;;;;;;;;;;:27;2841:10;2825:27;;;;;;;;;;;;;;;;:39;2821:140;;2911:38;2943:5;2911:9;:15;2921:4;2911:15;;;;;;;;;;;;;;;:27;2927:10;2911:27;;;;;;;;;;;;;;;;:31;;:38;;;;:::i;:::-;2881:9;:15;2891:4;2881:15;;;;;;;;;;;;;;;:27;2897:10;2881:27;;;;;;;;;;;;;;;:68;;;;2821:140;2971:26;2981:4;2987:2;2991:5;2971:9;:26::i;:::-;3015:4;3008:11;;2717:310;;;;;:::o;734:117::-;785:66;734:117;;;:::o;355:44::-;397:2;355:44;:::o;582:40::-;;;;:::o;446:50::-;;;;;;;;;;;;;;;;;:::o;858:47::-;;;;;;;;;;;;;;;;;:::o;293:55::-;;;;;;;;;;;;;;;;;;;:::o;2561:148::-;2630:4;2647:32;2657:10;2669:2;2673:5;2647:9;:32::i;:::-;2697:4;2690:11;;2561:148;;;;:::o;3035:683::-;3190:15;3178:8;:27;;3170:58;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;3239:14;3344:16;;785:66;3400:15;;3417:5;3424:7;3433:5;3440:6;:13;3447:5;3440:13;;;;;;;;;;;;;;;;:15;;;;;;;;;;;;3457:8;3389:77;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;3379:88;;;;;;3280:202;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;3256:237;;;;;;3239:254;;3504:24;3531:26;3541:6;3549:1;3552;3555;3531:26;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;3504:53;;3604:1;3576:30;;:16;:30;;;;:59;;;;;3630:5;3610:25;;:16;:25;;;3576:59;3568:100;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;3679:31;3688:5;3695:7;3704:5;3679:8;:31::i;:::-;3035:683;;;;;;;;;:::o;503:70::-;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;1992:169::-;2101:5;2073:9;:16;2083:5;2073:16;;;;;;;;;;;;;;;:25;2090:7;2073:25;;;;;;;;;;;;;;;:33;;;;2138:7;2122:31;;2131:5;2122:31;;;2147:5;2122:31;;;;;;;;;;;;;;;;;;1992:169;;;:::o;336:129:32:-;388:6;430:1;424;420;:5;416:9;;;415:16;;407:50;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;336:129;;;;:::o;2169:220:13:-;2263:26;2283:5;2263:9;:15;2273:4;2263:15;;;;;;;;;;;;;;;;:19;;:26;;;;:::i;:::-;2245:9;:15;2255:4;2245:15;;;;;;;;;;;;;;;:44;;;;2316:24;2334:5;2316:9;:13;2326:2;2316:13;;;;;;;;;;;;;;;;:17;;:24;;;;:::i;:::-;2300:9;:13;2310:2;2300:13;;;;;;;;;;;;;;;:40;;;;2371:2;2356:25;;2365:4;2356:25;;;2375:5;2356:25;;;;;;;;;;;;;;;;;;2169:220;;;:::o;200:128:32:-;252:6;294:1;288;284;:5;280:9;;;279:16;;271:49;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;200:128;;;;:::o",
-  "source": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity =0.6.12;\r\n\r\nimport './interfaces/IGlideSwapERC20.sol';\r\nimport './libraries/SafeMath.sol';\r\n\r\ncontract GlideSwapERC20 is IGlideSwapERC20 {\r\n    using SafeMath for uint;\r\n\r\n    string public override constant name = 'GlideSwap LPs';\r\n    string public override constant symbol = 'GlideSwap-LP';\r\n    uint8 public override constant decimals = 18;\r\n    uint  public override totalSupply;\r\n    mapping(address => uint) public override balanceOf;\r\n    mapping(address => mapping(address => uint)) public override allowance;\r\n\r\n    bytes32 public override DOMAIN_SEPARATOR;\r\n    // keccak256(\"Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)\");\r\n    bytes32 public override constant PERMIT_TYPEHASH = 0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9;\r\n    mapping(address => uint) public override nonces;\r\n\r\n    event Approval(address indexed owner, address indexed spender, uint value);\r\n    event Transfer(address indexed from, address indexed to, uint value);\r\n\r\n    constructor() public {\r\n        uint chainId;\r\n        assembly {\r\n            chainId := 20 //FIXED value for ElaEth network\r\n        }\r\n        DOMAIN_SEPARATOR = keccak256(\r\n            abi.encode(\r\n                keccak256('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'),\r\n                keccak256(bytes(name)),\r\n                keccak256(bytes('1')),\r\n                chainId,\r\n                address(this)\r\n            )\r\n        );\r\n    }\r\n\r\n    function _mint(address to, uint value) internal {\r\n        totalSupply = totalSupply.add(value);\r\n        balanceOf[to] = balanceOf[to].add(value);\r\n        emit Transfer(address(0), to, value);\r\n    }\r\n\r\n    function _burn(address from, uint value) internal {\r\n        balanceOf[from] = balanceOf[from].sub(value);\r\n        totalSupply = totalSupply.sub(value);\r\n        emit Transfer(from, address(0), value);\r\n    }\r\n\r\n    function _approve(address owner, address spender, uint value) private {\r\n        allowance[owner][spender] = value;\r\n        emit Approval(owner, spender, value);\r\n    }\r\n\r\n    function _transfer(address from, address to, uint value) private {\r\n        balanceOf[from] = balanceOf[from].sub(value);\r\n        balanceOf[to] = balanceOf[to].add(value);\r\n        emit Transfer(from, to, value);\r\n    }\r\n\r\n    function approve(address spender, uint value) external override returns (bool) {\r\n        _approve(msg.sender, spender, value);\r\n        return true;\r\n    }\r\n\r\n    function transfer(address to, uint value) external override returns (bool) {\r\n        _transfer(msg.sender, to, value);\r\n        return true;\r\n    }\r\n\r\n    function transferFrom(address from, address to, uint value) external override returns (bool) {\r\n        if (allowance[from][msg.sender] != uint(-1)) {\r\n            allowance[from][msg.sender] = allowance[from][msg.sender].sub(value);\r\n        }\r\n        _transfer(from, to, value);\r\n        return true;\r\n    }\r\n\r\n    function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external override {\r\n        require(deadline >= block.timestamp, 'GlideSwap: EXPIRED');\r\n        bytes32 digest = keccak256(\r\n            abi.encodePacked(\r\n                '\\x19\\x01',\r\n                DOMAIN_SEPARATOR,\r\n                keccak256(abi.encode(PERMIT_TYPEHASH, owner, spender, value, nonces[owner]++, deadline))\r\n            )\r\n        );\r\n        address recoveredAddress = ecrecover(digest, v, r, s);\r\n        require(recoveredAddress != address(0) && recoveredAddress == owner, 'GlideSwap: INVALID_SIGNATURE');\r\n        _approve(owner, spender, value);\r\n    }\r\n}",
+  "source": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity =0.6.12;\r\n\r\nimport './interfaces/IGlideSwapERC20.sol';\r\nimport './libraries/SafeMath.sol';\r\n\r\ncontract GlideSwapERC20 is IGlideSwapERC20 {\r\n    using SafeMath for uint;\r\n\r\n    string public override constant name = 'Glide LPs';\r\n    string public override constant symbol = 'Glide-LP';\r\n    uint8 public override constant decimals = 18;\r\n    uint  public override totalSupply;\r\n    mapping(address => uint) public override balanceOf;\r\n    mapping(address => mapping(address => uint)) public override allowance;\r\n\r\n    bytes32 public override DOMAIN_SEPARATOR;\r\n    // keccak256(\"Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)\");\r\n    bytes32 public override constant PERMIT_TYPEHASH = 0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9;\r\n    mapping(address => uint) public override nonces;\r\n\r\n    event Approval(address indexed owner, address indexed spender, uint value);\r\n    event Transfer(address indexed from, address indexed to, uint value);\r\n\r\n    constructor() public {\r\n        uint chainId;\r\n        assembly {\r\n            chainId := 20 //FIXED value for ElaEth network\r\n        }\r\n        DOMAIN_SEPARATOR = keccak256(\r\n            abi.encode(\r\n                keccak256('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)'),\r\n                keccak256(bytes(name)),\r\n                keccak256(bytes('1')),\r\n                chainId,\r\n                address(this)\r\n            )\r\n        );\r\n    }\r\n\r\n    function _mint(address to, uint value) internal {\r\n        totalSupply = totalSupply.add(value);\r\n        balanceOf[to] = balanceOf[to].add(value);\r\n        emit Transfer(address(0), to, value);\r\n    }\r\n\r\n    function _burn(address from, uint value) internal {\r\n        balanceOf[from] = balanceOf[from].sub(value);\r\n        totalSupply = totalSupply.sub(value);\r\n        emit Transfer(from, address(0), value);\r\n    }\r\n\r\n    function _approve(address owner, address spender, uint value) private {\r\n        allowance[owner][spender] = value;\r\n        emit Approval(owner, spender, value);\r\n    }\r\n\r\n    function _transfer(address from, address to, uint value) private {\r\n        balanceOf[from] = balanceOf[from].sub(value);\r\n        balanceOf[to] = balanceOf[to].add(value);\r\n        emit Transfer(from, to, value);\r\n    }\r\n\r\n    function approve(address spender, uint value) external override returns (bool) {\r\n        _approve(msg.sender, spender, value);\r\n        return true;\r\n    }\r\n\r\n    function transfer(address to, uint value) external override returns (bool) {\r\n        _transfer(msg.sender, to, value);\r\n        return true;\r\n    }\r\n\r\n    function transferFrom(address from, address to, uint value) external override returns (bool) {\r\n        if (allowance[from][msg.sender] != uint(-1)) {\r\n            allowance[from][msg.sender] = allowance[from][msg.sender].sub(value);\r\n        }\r\n        _transfer(from, to, value);\r\n        return true;\r\n    }\r\n\r\n    function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external override {\r\n        require(deadline >= block.timestamp, 'Glide: EXPIRED');\r\n        bytes32 digest = keccak256(\r\n            abi.encodePacked(\r\n                '\\x19\\x01',\r\n                DOMAIN_SEPARATOR,\r\n                keccak256(abi.encode(PERMIT_TYPEHASH, owner, spender, value, nonces[owner]++, deadline))\r\n            )\r\n        );\r\n        address recoveredAddress = ecrecover(digest, v, r, s);\r\n        require(recoveredAddress != address(0) && recoveredAddress == owner, 'Glide: INVALID_SIGNATURE');\r\n        _approve(owner, spender, value);\r\n    }\r\n}",
   "sourcePath": "D:\\Posao - Stefan\\Stefan - razno\\Blockchain\\ElavateFinance\\auto-swap\\contracts\\GlideSwapERC20.sol",
   "ast": {
     "absolutePath": "project:/contracts/GlideSwapERC20.sol",
@@ -480,9 +480,9 @@
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_stringliteral_15f40a41308c3a5458b3e5c94d09647d7ac64d9f9c65135f18513b33a19523e6",
-                "typeString": "literal_string \"GlideSwap LPs\""
+                "typeString": "literal_string \"Glide LPs\""
               },
-              "value": "GlideSwap LPs"
+              "value": "Glide LPs"
             },
             "visibility": "public"
           },
@@ -534,9 +534,9 @@
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_stringliteral_09c4bb508b6590cca07ec92ed8df80baef2c7f3e9d281e0b82131221c517c602",
-                "typeString": "literal_string \"GlideSwap-LP\""
+                "typeString": "literal_string \"Glide-LP\""
               },
-              "value": "GlideSwap-LP"
+              "value": "Glide-LP"
             },
             "visibility": "public"
           },
@@ -4818,9 +4818,9 @@
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_3fe636638bbb976a0195beb0481dbeb5c7c4fa1935414fe2066c786067bf1a54",
-                          "typeString": "literal_string \"GlideSwap: EXPIRED\""
+                          "typeString": "literal_string \"Glide: EXPIRED\""
                         },
-                        "value": "GlideSwap: EXPIRED"
+                        "value": "Glide: EXPIRED"
                       }
                     ],
                     "expression": {
@@ -4831,7 +4831,7 @@
                         },
                         {
                           "typeIdentifier": "t_stringliteral_3fe636638bbb976a0195beb0481dbeb5c7c4fa1935414fe2066c786067bf1a54",
-                          "typeString": "literal_string \"GlideSwap: EXPIRED\""
+                          "typeString": "literal_string \"Glide: EXPIRED\""
                         }
                       ],
                       "id": 4837,
@@ -5585,9 +5585,9 @@
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_e395465569650777ca8ba9a46285b902abf396b553c202c1fa11117bab502019",
-                          "typeString": "literal_string \"GlideSwap: INVALID_SIGNATURE\""
+                          "typeString": "literal_string \"Glide: INVALID_SIGNATURE\""
                         },
-                        "value": "GlideSwap: INVALID_SIGNATURE"
+                        "value": "Glide: INVALID_SIGNATURE"
                       }
                     ],
                     "expression": {
@@ -5598,7 +5598,7 @@
                         },
                         {
                           "typeIdentifier": "t_stringliteral_e395465569650777ca8ba9a46285b902abf396b553c202c1fa11117bab502019",
-                          "typeString": "literal_string \"GlideSwap: INVALID_SIGNATURE\""
+                          "typeString": "literal_string \"Glide: INVALID_SIGNATURE\""
                         }
                       ],
                       "id": 4878,
@@ -6127,8 +6127,8 @@
                   "lValueRequested": false,
                   "subdenomination": null,
                   "token": "string",
-                  "type": "literal_string \"GlideSwap LPs\"",
-                  "value": "GlideSwap LPs"
+                  "type": "literal_string \"Glide LPs\"",
+                  "value": "Glide LPs"
                 },
                 "id": 4507,
                 "name": "Literal",
@@ -6184,8 +6184,8 @@
                   "lValueRequested": false,
                   "subdenomination": null,
                   "token": "string",
-                  "type": "literal_string \"GlideSwap-LP\"",
-                  "value": "GlideSwap-LP"
+                  "type": "literal_string \"Glide-LP\"",
+                  "value": "Glide-LP"
                 },
                 "id": 4511,
                 "name": "Literal",
@@ -10972,7 +10972,7 @@
                                 },
                                 {
                                   "typeIdentifier": "t_stringliteral_3fe636638bbb976a0195beb0481dbeb5c7c4fa1935414fe2066c786067bf1a54",
-                                  "typeString": "literal_string \"GlideSwap: EXPIRED\""
+                                  "typeString": "literal_string \"Glide: EXPIRED\""
                                 }
                               ],
                               "overloadedDeclarations": [
@@ -11062,8 +11062,8 @@
                               "lValueRequested": false,
                               "subdenomination": null,
                               "token": "string",
-                              "type": "literal_string \"GlideSwap: EXPIRED\"",
-                              "value": "GlideSwap: EXPIRED"
+                              "type": "literal_string \"Glide: EXPIRED\"",
+                              "value": "Glide: EXPIRED"
                             },
                             "id": 4842,
                             "name": "Literal",
@@ -11678,7 +11678,7 @@
                                 },
                                 {
                                   "typeIdentifier": "t_stringliteral_e395465569650777ca8ba9a46285b902abf396b553c202c1fa11117bab502019",
-                                  "typeString": "literal_string \"GlideSwap: INVALID_SIGNATURE\""
+                                  "typeString": "literal_string \"Glide: INVALID_SIGNATURE\""
                                 }
                               ],
                               "overloadedDeclarations": [
@@ -11872,8 +11872,8 @@
                               "lValueRequested": false,
                               "subdenomination": null,
                               "token": "string",
-                              "type": "literal_string \"GlideSwap: INVALID_SIGNATURE\"",
-                              "value": "GlideSwap: INVALID_SIGNATURE"
+                              "type": "literal_string \"Glide: INVALID_SIGNATURE\"",
+                              "value": "Glide: INVALID_SIGNATURE"
                             },
                             "id": 4889,
                             "name": "Literal",

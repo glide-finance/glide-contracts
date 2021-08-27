@@ -31,10 +31,10 @@ contract GlideFactory is IGlideFactory {
     }
 
     function createPair(address tokenA, address tokenB) external override returns (address pair) {
-        require(tokenA != tokenB, 'GlideSwap: IDENTICAL_ADDRESSES');
+        require(tokenA != tokenB, 'Glide: IDENTICAL_ADDRESSES');
         (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
-        require(token0 != address(0), 'GlideSwap: ZERO_ADDRESS');
-        require(getPair[token0][token1] == address(0), 'GlideSwap: PAIR_EXISTS'); // single check is sufficient
+        require(token0 != address(0), 'Glide: ZERO_ADDRESS');
+        require(getPair[token0][token1] == address(0), 'Glide: PAIR_EXISTS'); // single check is sufficient
         bytes memory bytecode = type(GlidePair).creationCode;
         bytes32 salt = keccak256(abi.encodePacked(token0, token1));
         assembly {
@@ -48,29 +48,29 @@ contract GlideFactory is IGlideFactory {
     }
 
     function setFeeTo(address _feeTo) external override {
-        require(msg.sender == feeToSetter, 'GlideSwap: FORBIDDEN');
+        require(msg.sender == feeToSetter, 'Glide: FORBIDDEN');
         feeTo = _feeTo;
         emit SetFeeAddress(msg.sender, _feeTo);
     }
 
     function setFeeToSetter(address _feeToSetter) external override {
-        require(msg.sender == feeToSetter, 'GlideSwap: FORBIDDEN');
+        require(msg.sender == feeToSetter, 'Glide: FORBIDDEN');
         feeToSetter = _feeToSetter;
         emit SetAdminAddress(msg.sender, _feeToSetter);
     }
 
     function setFeeToRate(uint256 _rateDivArg, uint256 _rateMulArg) external override {
-        require(msg.sender == feeToSetter, 'GlideSwap: FORBIDDEN');
-        require(_rateDivArg > 0, "GlideSwap: FEE_TO_RATE_DIV_OVERFLOW");
+        require(msg.sender == feeToSetter, 'Glide: FORBIDDEN');
+        require(_rateDivArg > 0, "Glide: FEE_TO_RATE_DIV_OVERFLOW");
         feeToRateDivArg = _rateDivArg;
         feeToRateMulArg = _rateMulArg;
     }
 
     // returns sorted token addresses, used to handle return values from pairs sorted in this order
     function sortTokens(address tokenA, address tokenB) public pure override returns (address token0, address token1) {
-        require(tokenA != tokenB, 'MdexSwapFactory: IDENTICAL_ADDRESSES');
+        require(tokenA != tokenB, 'GlideFactory: IDENTICAL_ADDRESSES');
         (token0, token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
-        require(token0 != address(0), 'MdexSwapFactory: ZERO_ADDRESS');
+        require(token0 != address(0), 'GlideFactory: ZERO_ADDRESS');
     }
 
     // calculates the CREATE2 address for a pair without making any external calls
@@ -94,15 +94,15 @@ contract GlideFactory is IGlideFactory {
 
     // given some amount of an asset and pair reserves, returns an equivalent amount of the other asset
     function quote(uint amountA, uint reserveA, uint reserveB) public pure override returns (uint amountB) {
-        require(amountA > 0, 'GlideSwapLibrary: INSUFFICIENT_AMOUNT');
-        require(reserveA > 0 && reserveB > 0, 'GlideSwapLibrary: INSUFFICIENT_LIQUIDITY');
+        require(amountA > 0, 'GlideFactory: INSUFFICIENT_AMOUNT');
+        require(reserveA > 0 && reserveB > 0, 'GlideFactory: INSUFFICIENT_LIQUIDITY');
         amountB = amountA.mul(reserveB) / reserveA;
     }
 
     // given an input amount of an asset and pair reserves, returns the maximum output amount of the other asset
     function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) public view override returns (uint amountOut) {
-        require(amountIn > 0, 'GlideSwapLibrary: INSUFFICIENT_INPUT_AMOUNT');
-        require(reserveIn > 0 && reserveOut > 0, 'GlideSwapLibrary: INSUFFICIENT_LIQUIDITY');
+        require(amountIn > 0, 'GlideFactory: INSUFFICIENT_INPUT_AMOUNT');
+        require(reserveIn > 0 && reserveOut > 0, 'GlideFactory: INSUFFICIENT_LIQUIDITY');
         uint amountInWithFee = amountIn.mul(997);
         uint numerator = amountInWithFee.mul(reserveOut);
         uint denominator = reserveIn.mul(1000).add(amountInWithFee);
@@ -111,8 +111,8 @@ contract GlideFactory is IGlideFactory {
 
     // given an output amount of an asset and pair reserves, returns a required input amount of the other asset
     function getAmountIn(uint amountOut, uint reserveIn, uint reserveOut) public view override returns (uint amountIn) {
-        require(amountOut > 0, 'GlideSwapLibrary: INSUFFICIENT_OUTPUT_AMOUNT');
-        require(reserveIn > 0 && reserveOut > 0, 'GlideSwapLibrary: INSUFFICIENT_LIQUIDITY');
+        require(amountOut > 0, 'GlideFactory: INSUFFICIENT_OUTPUT_AMOUNT');
+        require(reserveIn > 0 && reserveOut > 0, 'GlideFactory: INSUFFICIENT_LIQUIDITY');
         uint numerator = reserveIn.mul(amountOut).mul(1000);
         uint denominator = reserveOut.sub(amountOut).mul(997);
         amountIn = (numerator / denominator).add(1);
@@ -120,7 +120,7 @@ contract GlideFactory is IGlideFactory {
 
     // performs chained getAmountOut calculations on any number of pairs
     function getAmountsOut(uint amountIn, address[] memory path) public view override returns (uint[] memory amounts) {
-        require(path.length >= 2, 'GlideSwapLibrary: INVALID_PATH');
+        require(path.length >= 2, 'GlideFactory: INVALID_PATH');
         amounts = new uint[](path.length);
         amounts[0] = amountIn;
         for (uint i; i < path.length - 1; i++) {
@@ -131,7 +131,7 @@ contract GlideFactory is IGlideFactory {
 
     // performs chained getAmountIn calculations on any number of pairs
     function getAmountsIn(uint amountOut, address[] memory path) public view override returns (uint[] memory amounts) {
-        require(path.length >= 2, 'GlideSwapLibrary: INVALID_PATH');
+        require(path.length >= 2, 'GlideFactory: INVALID_PATH');
         amounts = new uint[](path.length);
         amounts[amounts.length - 1] = amountOut;
         for (uint i = path.length - 1; i > 0; i--) {

@@ -7,8 +7,8 @@ import './libraries/SafeMath.sol';
 contract GlideERC20 is IGlideERC20 {
     using SafeMath for uint;
 
-    string public override constant name = 'GlideSwap LPs';
-    string public override constant symbol = 'GlideSwap-LP';
+    string public override constant name = 'Glide LPs';
+    string public override constant symbol = 'Glide-LP';
     uint8 public override constant decimals = 18;
     uint  public override totalSupply;
     mapping(address => uint) public override balanceOf;
@@ -80,7 +80,7 @@ contract GlideERC20 is IGlideERC20 {
     }
 
     function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external override {
-        require(deadline >= block.timestamp, 'GlideSwap: EXPIRED');
+        require(deadline >= block.timestamp, 'Glide: EXPIRED');
         bytes32 digest = keccak256(
             abi.encodePacked(
                 '\x19\x01',
@@ -89,7 +89,7 @@ contract GlideERC20 is IGlideERC20 {
             )
         );
         address recoveredAddress = ecrecover(digest, v, r, s);
-        require(recoveredAddress != address(0) && recoveredAddress == owner, 'GlideSwap: INVALID_SIGNATURE');
+        require(recoveredAddress != address(0) && recoveredAddress == owner, 'Glide: INVALID_SIGNATURE');
         _approve(owner, spender, value);
     }
 }
