@@ -6,9 +6,9 @@ const TestTokenOne = artifacts.require("TestTokenOne");
 const TestTokenTwo = artifacts.require("TestTokenTwo");
 const GlideToken = artifacts.require("GlideToken");
 const SugarToken = artifacts.require("Sugar");
-const GlideRouter = artifacts.require("GlideRouter");
-const GlideFactory = artifacts.require("GlideFactory");
-const GlidePair = artifacts.require("GlidePair");
+const GlideSwapRouter = artifacts.require("GlideSwapRouter");
+const GlideSwapFactory = artifacts.require("GlideSwapFactory");
+const GlideSwapPair = artifacts.require("GlideSwapPair");
 const SwapRewardsChef = artifacts.require("SwapRewardsChef");
 const MasterChef = artifacts.require("MasterChef");
 
@@ -17,14 +17,14 @@ contract("MasterChef test", accounts => {
     var testTokenTwoInstance;
     var glideTokenInstance;
     var sugarTokenInstance;
-    var glideRouterInstance;
+    var glideSwapRouterInstance;
     var swapRewardsChefInstance;
     var masterChefInstance;
 
     //set contract instances
     before(async () => {
-        glideFactoryInstance = await GlideFactory.deployed();
-        assert.ok(glideFactoryInstance);
+        glideSwapFactoryInstance = await GlideSwapFactory.deployed();
+        assert.ok(glideSwapFactoryInstance);
 
         testTokenOneInstance = await TestTokenOne.deployed();
         assert.ok(testTokenOneInstance);
@@ -38,8 +38,8 @@ contract("MasterChef test", accounts => {
         sugarTokenInstance = await SugarToken.deployed();
         assert.ok(sugarTokenInstance);
 
-        glideRouterInstance = await GlideRouter.deployed();
-        assert.ok(glideRouterInstance);
+        glideSwapRouterInstance = await GlideSwapRouter.deployed();
+        assert.ok(glideSwapRouterInstance);
 
         swapRewardsChefInstance = await SwapRewardsChef.deployed();
         assert.ok(swapRewardsChefInstance);
@@ -47,7 +47,7 @@ contract("MasterChef test", accounts => {
         masterChefInstance = await MasterChef.deployed();
         assert.ok(masterChefInstance);
 
-        await GlidePair.deployed();
+        await GlideSwapPair.deployed();
 
         //Liquidity amount (prices range) - testTokenOne is 3 testTokenTwo;
         const valueForLiquidityTokenOne = ethers.utils.parseEther('15');
@@ -55,7 +55,7 @@ contract("MasterChef test", accounts => {
         const tstOneToTstTwoPrice = new BN(3);
 
         // create pair
-        await glideFactoryInstance.createPair(testTokenOneInstance.address, testTokenTwoInstance.address);
+        await glideSwapFactoryInstance.createPair(testTokenOneInstance.address, testTokenTwoInstance.address);
 
         const approveValue = ethers.utils.parseEther('300');
         const valueForSent = ethers.utils.parseEther('100');
@@ -73,9 +73,9 @@ contract("MasterChef test", accounts => {
         await testTokenTwoInstance.transferFrom(accounts[0], accounts[3], valueForSent);
 
         //add liquidity for accounts[1]
-        await testTokenOneInstance.approve(glideRouterInstance.address, valueForLiquidityTokenOne, {from: accounts[1]});
-        await testTokenTwoInstance.approve(glideRouterInstance.address, valueForLiquidityTokenTwo, {from: accounts[1]});
-        await glideRouterInstance.addLiquidity(testTokenOneInstance.address, 
+        await testTokenOneInstance.approve(glideSwapRouterInstance.address, valueForLiquidityTokenOne, {from: accounts[1]});
+        await testTokenTwoInstance.approve(glideSwapRouterInstance.address, valueForLiquidityTokenTwo, {from: accounts[1]});
+        await glideSwapRouterInstance.addLiquidity(testTokenOneInstance.address, 
             testTokenTwoInstance.address,
             valueForLiquidityTokenOne.toString(),
             valueForLiquidityTokenTwo.toString(),
@@ -86,9 +86,9 @@ contract("MasterChef test", accounts => {
             {from:accounts[1]});
         
         //add liquidity for accounts[2]
-        await testTokenOneInstance.approve(glideRouterInstance.address, valueForLiquidityTokenOne, {from: accounts[2]});
-        await testTokenTwoInstance.approve(glideRouterInstance.address, valueForLiquidityTokenTwo, {from: accounts[2]});
-        await glideRouterInstance.addLiquidity(testTokenOneInstance.address, 
+        await testTokenOneInstance.approve(glideSwapRouterInstance.address, valueForLiquidityTokenOne, {from: accounts[2]});
+        await testTokenTwoInstance.approve(glideSwapRouterInstance.address, valueForLiquidityTokenTwo, {from: accounts[2]});
+        await glideSwapRouterInstance.addLiquidity(testTokenOneInstance.address, 
             testTokenTwoInstance.address,
             valueForLiquidityTokenOne.toString(),
             valueForLiquidityTokenTwo.toString(),
@@ -101,8 +101,8 @@ contract("MasterChef test", accounts => {
         //add liquidity ETH
         const valueForAddLiquidityETHTokenOne = ethers.utils.parseEther('1');
         const valueForAddLiquidityETHTwETH = ethers.utils.parseEther('4');
-        await testTokenOneInstance.approve(glideRouterInstance.address, valueForAddLiquidityETHTokenOne, {from: accounts[1]});
-        await glideRouterInstance.addLiquidityETH(testTokenOneInstance.address, 
+        await testTokenOneInstance.approve(glideSwapRouterInstance.address, valueForAddLiquidityETHTokenOne, {from: accounts[1]});
+        await glideSwapRouterInstance.addLiquidityETH(testTokenOneInstance.address, 
             valueForAddLiquidityETHTokenOne.toString(),
             valueForAddLiquidityETHTokenOne.toString(),
             valueForAddLiquidityETHTwETH.toString(),
@@ -112,10 +112,10 @@ contract("MasterChef test", accounts => {
     
         //swap amount
         const swapAmount = ethers.utils.parseEther('1');
-        await testTokenOneInstance.approve(glideRouterInstance.address, swapAmount, {from: accounts[2]});
+        await testTokenOneInstance.approve(glideSwapRouterInstance.address, swapAmount, {from: accounts[2]});
         const onePercentSwapMiningAmount = new BN(swapAmount.toString()).div(new BN(100)).mul(new BN(5));
         const swapAmountOutMin = new BN(swapAmount.toString()).div(tstOneToTstTwoPrice).sub(onePercentSwapMiningAmount);
-        await glideRouterInstance.swapExactTokensForTokens(swapAmount, 
+        await glideSwapRouterInstance.swapExactTokensForTokens(swapAmount, 
             swapAmountOutMin,
             [testTokenOneInstance.address, testTokenTwoInstance.address],
             accounts[2],
@@ -123,9 +123,9 @@ contract("MasterChef test", accounts => {
             {from: accounts[2]});
 
         //add liquidity
-        await testTokenOneInstance.approve(glideRouterInstance.address, valueForLiquidityTokenOne, {from: accounts[1]});
-        await testTokenTwoInstance.approve(glideRouterInstance.address, valueForLiquidityTokenTwo, {from: accounts[1]});
-        await glideRouterInstance.addLiquidity(testTokenOneInstance.address, 
+        await testTokenOneInstance.approve(glideSwapRouterInstance.address, valueForLiquidityTokenOne, {from: accounts[1]});
+        await testTokenTwoInstance.approve(glideSwapRouterInstance.address, valueForLiquidityTokenTwo, {from: accounts[1]});
+        await glideSwapRouterInstance.addLiquidity(testTokenOneInstance.address, 
             testTokenTwoInstance.address,
             valueForLiquidityTokenOne.toString(),
             valueForLiquidityTokenTwo.toString(),
@@ -139,7 +139,7 @@ contract("MasterChef test", accounts => {
     
     it("...should add pair to MasterChef", async () => {
         // get pair address from factory
-        const pairAddress = await glideFactoryInstance.getPair(testTokenOneInstance.address, testTokenTwoInstance.address);
+        const pairAddress = await glideSwapFactoryInstance.getPair(testTokenOneInstance.address, testTokenTwoInstance.address);
 
         // add pair to masterChef contract
         await masterChefInstance.add(1000, pairAddress, true);
@@ -153,8 +153,8 @@ contract("MasterChef test", accounts => {
 
     it("...should deposit liquidity pools token without mint", async () => {
         // get pair address
-        const pairAddress = await glideFactoryInstance.getPair(testTokenOneInstance.address, testTokenTwoInstance.address);
-        const concretePairInstance = await GlidePair.at(pairAddress);
+        const pairAddress = await glideSwapFactoryInstance.getPair(testTokenOneInstance.address, testTokenTwoInstance.address);
+        const concretePairInstance = await GlideSwapPair.at(pairAddress);
 
         // get liquidity token amounts for pairAddress for accounts[1] and masterChef contract before deposit
         const liquidityTokenAmountAccounts1Before = await concretePairInstance.balanceOf.call(accounts[1]);
@@ -179,8 +179,8 @@ contract("MasterChef test", accounts => {
 
     it("...should deposit liquidity pools token with mint", async () => {
         // get pair address
-        const pairAddress = await glideFactoryInstance.getPair(testTokenOneInstance.address, testTokenTwoInstance.address);
-        const concretePairInstance = await GlidePair.at(pairAddress);
+        const pairAddress = await glideSwapFactoryInstance.getPair(testTokenOneInstance.address, testTokenTwoInstance.address);
+        const concretePairInstance = await GlideSwapPair.at(pairAddress);
 
         // get liquidity token amounts for pairAddress for accounts[2] before deposit
         const liquidityTokenAmountAccounts2Before = await concretePairInstance.balanceOf.call(accounts[2]);

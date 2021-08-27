@@ -6,9 +6,9 @@ const GlideVault = artifacts.require("GlideVault");
 const TestTokenOne = artifacts.require("TestTokenOne");
 const TestTokenTwo = artifacts.require("TestTokenTwo");
 const GlideToken = artifacts.require("GlideToken");
-const GlideRouter = artifacts.require("GlideRouter");
-const GlideFactory = artifacts.require("GlideFactory");
-const GlidePair = artifacts.require("GlidePair");
+const GlideSwapRouter = artifacts.require("GlideSwapRouter");
+const GlideSwapFactory = artifacts.require("GlideSwapFactory");
+const GlideSwapPair = artifacts.require("GlideSwapPair");
 const IERC20 = artifacts.require("IERC20");
 const SwapRewardsChef = artifacts.require("SwapRewardsChef");
 const MasterChef = artifacts.require("MasterChef");
@@ -19,14 +19,14 @@ contract("GlideVault test", accounts => {
     var testTokenTwoInstance;
     var glideTokenInstance;
     var wETHInstance;
-    var glideRouterInstance;
+    var glideSwapRouterInstance;
     var swapRewardsChefInstance;
     var masterChefInstance;
 
     //set contract instances
     before(async () => {
-        glideFactoryInstance = await GlideFactory.deployed();
-        assert.ok(glideFactoryInstance);
+        glideSwapFactoryInstance = await GlideSwapFactory.deployed();
+        assert.ok(glideSwapFactoryInstance);
 
         glideVaultInstance = await GlideVault.deployed();
         assert.ok(glideVaultInstance);
@@ -40,8 +40,8 @@ contract("GlideVault test", accounts => {
         glideTokenInstance = await GlideToken.deployed();
         assert.ok(glideTokenInstance);
 
-        glideRouterInstance = await GlideRouter.deployed();
-        assert.ok(glideRouterInstance);
+        glideSwapRouterInstance = await GlideSwapRouter.deployed();
+        assert.ok(glideSwapRouterInstance);
 
         swapRewardsChefInstance = await SwapRewardsChef.deployed();
         assert.ok(swapRewardsChefInstance);
@@ -49,15 +49,15 @@ contract("GlideVault test", accounts => {
         masterChefInstance = await MasterChef.deployed();
         assert.ok(masterChefInstance);
         
-        wETHAddress = await glideRouterInstance.WETH();
+        wETHAddress = await glideSwapRouterInstance.WETH();
         wETHInstance = await IERC20.at(wETHAddress);
 
         // get pair address from factory
-        const pairAddress = await glideFactoryInstance.getPair(testTokenOneInstance.address, testTokenTwoInstance.address);
+        const pairAddress = await glideSwapFactoryInstance.getPair(testTokenOneInstance.address, testTokenTwoInstance.address);
         // add pair to masterChef contract
         await masterChefInstance.add(1000, pairAddress, true);
 
-        await GlidePair.deployed();
+        await GlideSwapPair.deployed();
     });
 
     it("...should transfer ownership for Glide token and mint tokens", async () => {

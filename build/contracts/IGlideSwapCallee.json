@@ -1,5 +1,5 @@
 {
-  "contractName": "IGlideCallee",
+  "contractName": "IGlideSwapCallee",
   "abi": [
     {
       "inputs": [
@@ -30,18 +30,18 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount0\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount1\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"glideCall\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/IGlideCallee.sol\":\"IGlideCallee\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/IGlideCallee.sol\":{\"keccak256\":\"0x872ce8295180f2c401f7ecd1ba0cfdefb0df7c486d357ab9b37bc4ee2c81df9d\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://3803ad2e49c8544e24e97fe773c80df0aeeb9f1d39bcadf7b5d803ba6beb6dbf\",\"dweb:/ipfs/QmY7QPGKwq7C1uC46CuY3SVZnuwnrQdfqNtJNA7wrdFq3V\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount0\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount1\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"glideCall\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/IGlideSwapCallee.sol\":\"IGlideSwapCallee\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/IGlideSwapCallee.sol\":{\"keccak256\":\"0x872ce8295180f2c401f7ecd1ba0cfdefb0df7c486d357ab9b37bc4ee2c81df9d\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://3803ad2e49c8544e24e97fe773c80df0aeeb9f1d39bcadf7b5d803ba6beb6dbf\",\"dweb:/ipfs/QmY7QPGKwq7C1uC46CuY3SVZnuwnrQdfqNtJNA7wrdFq3V\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity >=0.5.0;\r\n\r\ninterface IGlideCallee {\r\n    function glideCall(address sender, uint amount0, uint amount1, bytes calldata data) external;\r\n}",
-  "sourcePath": "D:\\Posao - Stefan\\Stefan - razno\\Blockchain\\ElavateFinance\\auto-swap\\contracts\\interfaces\\IGlideCallee.sol",
+  "source": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity >=0.5.0;\r\n\r\ninterface IGlideSwapCallee {\r\n    function glideCall(address sender, uint amount0, uint amount1, bytes calldata data) external;\r\n}",
+  "sourcePath": "D:\\Posao - Stefan\\Stefan - razno\\Blockchain\\ElavateFinance\\auto-swap\\contracts\\interfaces\\IGlideSwapCallee.sol",
   "ast": {
-    "absolutePath": "project:/contracts/interfaces/IGlideCallee.sol",
+    "absolutePath": "project:/contracts/interfaces/IGlideSwapCallee.sol",
     "exportedSymbols": {
-      "IGlideCallee": [
+      "IGlideSwapCallee": [
         10476
       ]
     },
@@ -71,7 +71,7 @@
         "linearizedBaseContracts": [
           10476
         ],
-        "name": "IGlideCallee",
+        "name": "IGlideSwapCallee",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
@@ -226,9 +226,9 @@
   },
   "legacyAST": {
     "attributes": {
-      "absolutePath": "project:/contracts/interfaces/IGlideCallee.sol",
+      "absolutePath": "project:/contracts/interfaces/IGlideSwapCallee.sol",
       "exportedSymbols": {
-        "IGlideCallee": [
+        "IGlideSwapCallee": [
           10476
         ]
       },
@@ -263,7 +263,7 @@
           "linearizedBaseContracts": [
             10476
           ],
-          "name": "IGlideCallee",
+          "name": "IGlideSwapCallee",
           "scope": 10477
         },
         "children": [
