@@ -7,7 +7,7 @@ const GlidePair = artifacts.require("GlidePair");
 
 const GlideFactory = artifacts.require("GlideFactory");
 
-const feeToSetter = "0x6819F353B503f7DA93c52Be7e97c2797c9b4eEc0"; //"0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
+const feeToSetter = "0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad"; //"0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
 
 const GlideRouter = artifacts.require("GlideRouter");
 const wELA = "0x517E9e5d46C1EA8aB6f78677d6114Ef47F71f6c4"; //wrapped ELA token
@@ -16,24 +16,24 @@ const GlideToken = artifacts.require("GlideToken");
 
 const SwapRewardsChef = artifacts.require("SwapRewardsChef");
 
-const feeHolder = "0x6819F353B503f7DA93c52Be7e97c2797c9b4eEc0";
-const schedulerAddress = "0x6819F353B503f7DA93c52Be7e97c2797c9b4eEc0";
+const feeHolder = "0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
+const schedulerAddress = "0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
 const FeeDistributor = artifacts.require("FeeDistributor");
 
 const SugarToken = artifacts.require("Sugar");
 
-const devAddr = "0x74eFdD3A0d70dDCf41315bf41faeE3077B327D40"; //accounts[7] on truffle
-const treasuryAddr = "0x2e1e059a26eF000fE9eFF08Ac00E99556b76B74c"; //accounts[8] on truffle
-const glideTransferOwner = "0x6819F353B503f7DA93c52Be7e97c2797c9b4eEc0";
+const devAddr = "0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad"; //accounts[7] on truffle
+const treasuryAddr = "0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad"; //accounts[8] on truffle
+const glideTransferOwner = "0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
 const glidePerBlock = ethers.utils.parseEther('3');
 const startBlock = 7892020;
 const MasterChef = artifacts.require("MasterChef");
 
-const glideVaultAdmin = "0x6819F353B503f7DA93c52Be7e97c2797c9b4eEc0";
-const treasuryAddrGlideVault = "0x1b3669Dcac97D79f32f1136f29EA46F6e27A4AD2"; //accounts[9] on truffle
+const glideVaultAdmin = "0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
+const treasuryAddrGlideVault = "0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad"; //accounts[9] on truffle
 const GlideVault = artifacts.require("GlideVault");
 
-const timeLockAdmin = "0x6819F353B503f7DA93c52Be7e97c2797c9b4eEc0";
+const timeLockAdmin = "0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
 const timeLockDelay = 2 * 24 * 60 * 60; //2 days
 const TimeLock = artifacts.require("TimeLock");
 
