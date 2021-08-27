@@ -3,13 +3,13 @@ const {ethers} = require("ethers");
 const TestTokenOne = artifacts.require("TestTokenOne");
 const TestTokenTwo = artifacts.require("TestTokenTwo");
 
-const GlideSwapPair = artifacts.require("GlideSwapPair");
+const GlidePair = artifacts.require("GlidePair");
 
-const GlideSwapFactory = artifacts.require("GlideSwapFactory");
+const GlideFactory = artifacts.require("GlideFactory");
 
 const feeToSetter = "0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad"; //"0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
 
-const GlideSwapRouter = artifacts.require("GlideSwapRouter");
+const GlideRouter = artifacts.require("GlideRouter");
 const wELA = "0x517E9e5d46C1EA8aB6f78677d6114Ef47F71f6c4"; //wrapped ELA token
 
 const GlideToken = artifacts.require("GlideToken");
@@ -44,20 +44,20 @@ module.exports = async function(deployer) {
     // deploy TestTokenTwo contract and get address
     await deployer.deploy(TestTokenTwo);
 
-    // deploy GlideSwapPair contract
-    await deployer.deploy(GlideSwapPair);
+    // deploy GlidePair contract
+    await deployer.deploy(GlidePair);
 
-    // deploy GlideSwapFactory contract
-    await deployer.deploy(GlideSwapFactory, feeToSetter);
+    // deploy GlideFactory contract
+    await deployer.deploy(GlideFactory, feeToSetter);
     //access information about deployed contract instance
-    const glideSwapFactoryInstance = await GlideSwapFactory.deployed();
-    const glideSwapAddress = glideSwapFactoryInstance.address;
+    const glideFactoryInstance = await GlideFactory.deployed();
+    const glideSwapAddress = glideFactoryInstance.address;
 
-    // deploy GlideSwapRouter contract
-    await deployer.deploy(GlideSwapRouter, glideSwapAddress, wELA);
+    // deploy GlideRouter contract
+    await deployer.deploy(GlideRouter, glideSwapAddress, wELA);
 
     //Only for test purpose, delete this
-    const initCodeHash = await glideSwapFactoryInstance.initCodeHash.call(); 
+    const initCodeHash = await glideFactoryInstance.initCodeHash.call(); 
     console.log("initCodeHashValue - " + initCodeHash);
     //Only for test purpose, delete this
 
@@ -78,10 +78,10 @@ module.exports = async function(deployer) {
     const feeDistributorInstance = await FeeDistributor.deployed();
     const feeDistributorAddress = feeDistributorInstance.address;
 
-    // set feeTo on GlideSwapFactory to feeDistributor contract
-    await glideSwapFactoryInstance.setFeeTo(feeDistributorAddress);
+    // set feeTo on GlideFactory to feeDistributor contract
+    await glideFactoryInstance.setFeeTo(feeDistributorAddress);
     // set mint feeTo arguments (feeToRate)
-    await glideSwapFactoryInstance.setFeeToRate(5, 1);
+    await glideFactoryInstance.setFeeToRate(5, 1);
 
     // deploy Sugar token
     await deployer.deploy(SugarToken, glideTokenAddress);

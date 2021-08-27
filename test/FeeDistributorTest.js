@@ -6,9 +6,9 @@ const FeeDistributor = artifacts.require("FeeDistributor");
 const TestTokenOne = artifacts.require("TestTokenOne");
 const TestTokenTwo = artifacts.require("TestTokenTwo");
 const GlideToken = artifacts.require("GlideToken");
-const GlideSwapRouter = artifacts.require("GlideSwapRouter");
-const GlideSwapFactory = artifacts.require("GlideSwapFactory");
-const GlideSwapPair = artifacts.require("GlideSwapPair");
+const GlideRouter = artifacts.require("GlideRouter");
+const GlideFactory = artifacts.require("GlideFactory");
+const GlidePair = artifacts.require("GlidePair");
 const IERC20 = artifacts.require("IERC20");
 const SwapRewardsChef = artifacts.require("SwapRewardsChef");
 const MasterChef = artifacts.require("MasterChef");
@@ -19,7 +19,7 @@ contract("FeeDistributor test", accounts => {
     var testTokenTwoInstance;
     var glideTokenInstance;
     var wETHInstance;
-    var glideSwapRouterInstance;
+    var glideRouterInstance;
     var concretePairInstance;
     var swapRewardsChefInstance;
     var masterChefInstance;
@@ -28,8 +28,8 @@ contract("FeeDistributor test", accounts => {
 
     //set contract instances
     before(async () => {
-        glideSwapFactoryInstance = await GlideSwapFactory.deployed();
-        assert.ok(glideSwapFactoryInstance);
+        glideFactoryInstance = await GlideFactory.deployed();
+        assert.ok(glideFactoryInstance);
 
         feeDistributorInstance = await FeeDistributor.deployed();
         assert.ok(feeDistributorInstance);
@@ -43,8 +43,8 @@ contract("FeeDistributor test", accounts => {
         glideTokenInstance = await GlideToken.deployed();
         assert.ok(glideTokenInstance);
 
-        glideSwapRouterInstance = await GlideSwapRouter.deployed();
-        assert.ok(glideSwapRouterInstance);
+        glideRouterInstance = await GlideRouter.deployed();
+        assert.ok(glideRouterInstance);
 
         swapRewardsChefInstance = await SwapRewardsChef.deployed();
         assert.ok(swapRewardsChefInstance);
@@ -52,10 +52,10 @@ contract("FeeDistributor test", accounts => {
         masterChefInstance = await MasterChef.deployed();
         assert.ok(masterChefInstance);
         
-        wETHAddress = await glideSwapRouterInstance.WETH();
+        wETHAddress = await glideRouterInstance.WETH();
         wETHInstance = await IERC20.at(wETHAddress);
 
-        await GlideSwapPair.deployed();
+        await GlidePair.deployed();
 
         //Liquidity amount (prices range) - testTokenOne is 3 testTokenTwo;
         const valueForLiquidityTokenOne = ethers.utils.parseEther('15');
@@ -63,7 +63,7 @@ contract("FeeDistributor test", accounts => {
         const tstOneToTstTwoPrice = new BN(3);
 
         // create pair
-        await glideSwapFactoryInstance.createPair(testTokenOneInstance.address, testTokenTwoInstance.address);
+        await glideFactoryInstance.createPair(testTokenOneInstance.address, testTokenTwoInstance.address);
 
         const approveValue = ethers.utils.parseEther('300');
         const valueForSent = ethers.utils.parseEther('100');
@@ -82,9 +82,9 @@ contract("FeeDistributor test", accounts => {
         await testTokenTwoInstance.transferFrom(accounts[0], accounts[3], valueForSent);
 
         //add liquidity
-        await testTokenOneInstance.approve(glideSwapRouterInstance.address, valueForLiquidityTokenOne, {from: accounts[1]});
-        await testTokenTwoInstance.approve(glideSwapRouterInstance.address, valueForLiquidityTokenTwo, {from: accounts[1]});
-        await glideSwapRouterInstance.addLiquidity(testTokenOneInstance.address, 
+        await testTokenOneInstance.approve(glideRouterInstance.address, valueForLiquidityTokenOne, {from: accounts[1]});
+        await testTokenTwoInstance.approve(glideRouterInstance.address, valueForLiquidityTokenTwo, {from: accounts[1]});
+        await glideRouterInstance.addLiquidity(testTokenOneInstance.address, 
             testTokenTwoInstance.address,
             valueForLiquidityTokenOne.toString(),
             valueForLiquidityTokenTwo.toString(),
@@ -97,8 +97,8 @@ contract("FeeDistributor test", accounts => {
         //add liquidity ETH
         const valueForAddLiquidityETHTokenOne = ethers.utils.parseEther('1');
         const valueForAddLiquidityETHTwETH = ethers.utils.parseEther('4');
-        await testTokenOneInstance.approve(glideSwapRouterInstance.address, valueForAddLiquidityETHTokenOne, {from: accounts[1]});
-        await glideSwapRouterInstance.addLiquidityETH(testTokenOneInstance.address, 
+        await testTokenOneInstance.approve(glideRouterInstance.address, valueForAddLiquidityETHTokenOne, {from: accounts[1]});
+        await glideRouterInstance.addLiquidityETH(testTokenOneInstance.address, 
             valueForAddLiquidityETHTokenOne.toString(),
             valueForAddLiquidityETHTokenOne.toString(),
             valueForAddLiquidityETHTwETH.toString(),
@@ -108,10 +108,10 @@ contract("FeeDistributor test", accounts => {
     
         //swap amount
         const swapAmount = ethers.utils.parseEther('1');
-        await testTokenOneInstance.approve(glideSwapRouterInstance.address, swapAmount, {from: accounts[2]});
+        await testTokenOneInstance.approve(glideRouterInstance.address, swapAmount, {from: accounts[2]});
         const onePercentSwapMiningAmount = new BN(swapAmount.toString()).div(new BN(100)).mul(new BN(5));
         const swapAmountOutMin = new BN(swapAmount.toString()).div(tstOneToTstTwoPrice).sub(onePercentSwapMiningAmount);
-        await glideSwapRouterInstance.swapExactTokensForTokens(swapAmount, 
+        await glideRouterInstance.swapExactTokensForTokens(swapAmount, 
             swapAmountOutMin,
             [testTokenOneInstance.address, testTokenTwoInstance.address],
             accounts[2],
@@ -119,9 +119,9 @@ contract("FeeDistributor test", accounts => {
             {from: accounts[2]});
 
         //add liquidity
-        await testTokenOneInstance.approve(glideSwapRouterInstance.address, valueForLiquidityTokenOne, {from: accounts[1]});
-        await testTokenTwoInstance.approve(glideSwapRouterInstance.address, valueForLiquidityTokenTwo, {from: accounts[1]});
-        await glideSwapRouterInstance.addLiquidity(testTokenOneInstance.address, 
+        await testTokenOneInstance.approve(glideRouterInstance.address, valueForLiquidityTokenOne, {from: accounts[1]});
+        await testTokenTwoInstance.approve(glideRouterInstance.address, valueForLiquidityTokenTwo, {from: accounts[1]});
+        await glideRouterInstance.addLiquidity(testTokenOneInstance.address, 
             testTokenTwoInstance.address,
             valueForLiquidityTokenOne.toString(),
             valueForLiquidityTokenTwo.toString(),
@@ -146,11 +146,11 @@ contract("FeeDistributor test", accounts => {
     });
 
     it("...should remove liquidity from feeDistributor", async () => {
-        const pairAddress = await glideSwapFactoryInstance.getPair(testTokenOneInstance.address, 
+        const pairAddress = await glideFactoryInstance.getPair(testTokenOneInstance.address, 
             testTokenTwoInstance.address);
         //console.log("pairAddress - " + pairAddress + " testTokenOne - " + testTokenOneInstance.address + " testTokenTwo - " + testTokenTwoInstance.address);
         //init instance for pair
-        concretePairInstance = await GlideSwapPair.at(pairAddress);
+        concretePairInstance = await GlidePair.at(pairAddress);
 
         const balanceBeforeRemoveLiquidity = await concretePairInstance.balanceOf.call(feeDistributorInstance.address);
         //console.log("balanceBeforeRemoveLiquidity-"+balanceBeforeRemoveLiquidity);
@@ -164,7 +164,7 @@ contract("FeeDistributor test", accounts => {
         //console.log("feeDistributorBalanceAfter-TTWO-"+feeDistributorBalanceBeforeTTWO.toString());
 
         //remove liquidity from feeDistributor
-        await feeDistributorInstance.removeLiquidity(glideSwapRouterInstance.address,
+        await feeDistributorInstance.removeLiquidity(glideRouterInstance.address,
             pairAddress);
 
         const balanceAfterRemoveLiquidity = await concretePairInstance.balanceOf.call(feeDistributorInstance.address);
@@ -190,7 +190,7 @@ contract("FeeDistributor test", accounts => {
         //console.log(wETHBalanceBefore.toString());
 
         //sell tokens from feeDistributor
-        await feeDistributorInstance.sellTokens(glideSwapRouterInstance.address,
+        await feeDistributorInstance.sellTokens(glideRouterInstance.address,
         testTokenOneInstance.address,
         wETHAddress,
         [testTokenOneInstance.address, wETHAddress]);
@@ -207,7 +207,7 @@ contract("FeeDistributor test", accounts => {
         //console.log("wETHBalanceBefore-"+wETHBalanceBefore.toString());
 
         //sell tokens from feeDistributor
-        await feeDistributorInstance.sellTokens(glideSwapRouterInstance.address,
+        await feeDistributorInstance.sellTokens(glideRouterInstance.address,
             testTokenTwoInstance.address,
             wETHAddress,
             [testTokenTwoInstance.address, testTokenOneInstance.address, wETHAddress]);
