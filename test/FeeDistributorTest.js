@@ -107,7 +107,7 @@ contract("FeeDistributor test", accounts => {
             {from:accounts[1], value:valueForAddLiquidityETHTwETH.toString()});
     
         //swap amount
-        const swapAmount = ethers.utils.parseEther('1');
+        const swapAmount = ethers.utils.parseEther('0.5');
         await testTokenOneInstance.approve(glideRouterInstance.address, swapAmount, {from: accounts[2]});
         const onePercentSwapMiningAmount = new BN(swapAmount.toString()).div(new BN(100)).mul(new BN(5));
         const swapAmountOutMin = new BN(swapAmount.toString()).div(tstOneToTstTwoPrice).sub(onePercentSwapMiningAmount);
@@ -117,6 +117,15 @@ contract("FeeDistributor test", accounts => {
             accounts[2],
             9000000000, 
             {from: accounts[2]});
+
+        //swap amount
+        await testTokenOneInstance.approve(glideRouterInstance.address, swapAmount, {from: accounts[3]});
+        await glideRouterInstance.swapExactTokensForTokens(swapAmount, 
+            swapAmountOutMin,
+            [testTokenOneInstance.address, testTokenTwoInstance.address],
+            accounts[3],
+            9000000000, 
+            {from: accounts[3]});
 
         //add liquidity
         await testTokenOneInstance.approve(glideRouterInstance.address, valueForLiquidityTokenOne, {from: accounts[1]});
@@ -180,7 +189,7 @@ contract("FeeDistributor test", accounts => {
         
         assert.equal(balanceAfterRemoveLiquidity.toNumber(), 0, "FeeDistributor for remove liquidity on balance is not working correct");
         assert.equal(feeDistributorBalanceBeforeTONE.toNumber() < feeDistributorBalanceAfterTONE.toNumber(), true, "FeeDistributor remove liquidity on testTokenOne is not working correct");
-        assert.equal(feeDistributorBalanceBeforeTTWO.toNumber() < feeDistributorBalanceAfterTTWO.toNumber(), true, "FeeDistributor remove liquidity on testTokenTwo is not working correct");
+        assert.equal(feeDistributorBalanceBeforeTTWO.toNumber() < feeDistributorBalanceAfterTTWO.toNumber(), true, "FeeDistributor remove liquidity on testTokenTwo is not working correct");     
     });
 
   
@@ -198,7 +207,7 @@ contract("FeeDistributor test", accounts => {
         const wETHBalanceAfter = await wETHInstance.balanceOf.call(feeDistributorInstance.address);
         //console.log(wETHBalanceAfter.toString());
 
-        assert.equal(wETHBalanceAfter > wETHBalanceBefore, true, "FeeDistributor sell tokens  (directly testTokenOne - wETH) not working correct");
+        assert.equal(new BN(wETHBalanceAfter).gt(new BN(wETHBalanceBefore)), true, "FeeDistributor sell tokens  (directly testTokenOne - wETH) not working correct");
     });
 
     it("...should sell tokens (testTokenTwo - wETH with testTokenOne connection) from feeDistributor", async () => {
@@ -215,7 +224,7 @@ contract("FeeDistributor test", accounts => {
         const wETHBalanceAfter = await wETHInstance.balanceOf.call(feeDistributorInstance.address);
         //console.log("wETHBalanceAfter-"+wETHBalanceAfter.toString());
 
-        assert.equal(wETHBalanceAfter > wETHBalanceBefore, true, "FeeDistributor sell tokens (testTokenTwo - wETH with testTokenOne path) not working correct");
+        assert.equal(new BN(wETHBalanceAfter).gt(new BN(wETHBalanceBefore)), true, "FeeDistributor sell tokens (testTokenTwo - wETH with testTokenOne path) not working correct");
     });
 
     it("...should stake(deposit) Glide token to swapRewardsChef", async () => {        
@@ -225,14 +234,13 @@ contract("FeeDistributor test", accounts => {
         //console.log("glideTokenBalanceBefore-"+glideTokenBalanceBefore.toString());
 
         // stake (deposit) Glide token
-        swapRewardsChefInstance.deposit(stakeGlideTokenValue, {from: accounts[3]});
+        await swapRewardsChefInstance.deposit(stakeGlideTokenValue, {from: accounts[3]});
 
         // get balance after deposit
         const glideTokenBalanceAfter = await glideTokenInstance.balanceOf.call(swapRewardsChefInstance.address);
         //console.log("glideTokenBalanceAfter-"+glideTokenBalanceAfter.toString());
 
         assert.equal(new BN(glideTokenBalanceBefore.toString()).add(new BN(stakeGlideTokenValue.toString())).toString(), glideTokenBalanceAfter.toString(), "deposit Glide token to swapRewardsChef is not correct");
-        
     });
 
     it("...should distribute fee", async () => {

@@ -30,27 +30,27 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount0\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount1\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"glideCall\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/IGlideCallee.sol\":\"IGlideCallee\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/IGlideCallee.sol\":{\"keccak256\":\"0xcd83c226ea8783368fa392a34c1b9b6d5e1994be519c463bd10f403c619e0f93\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://70fe0412b0a3e5a37a2c0786f915ac453b7e96f27ec5523378e159dae3791f79\",\"dweb:/ipfs/QmeAz7uvTHBx3ZVMWNn2fyTBhmt42uyt6Jjs8YK9J2MQKQ\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount0\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount1\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"glideCall\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Swap/interfaces/IGlideCallee.sol\":\"IGlideCallee\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":1000},\"remappings\":[]},\"sources\":{\"project:/contracts/Swap/interfaces/IGlideCallee.sol\":{\"keccak256\":\"0xcd83c226ea8783368fa392a34c1b9b6d5e1994be519c463bd10f403c619e0f93\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://70fe0412b0a3e5a37a2c0786f915ac453b7e96f27ec5523378e159dae3791f79\",\"dweb:/ipfs/QmeAz7uvTHBx3ZVMWNn2fyTBhmt42uyt6Jjs8YK9J2MQKQ\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity >=0.5.0;\r\n\r\ninterface IGlideCallee {\r\n    function glideCall(address sender, uint amount0, uint amount1, bytes calldata data) external;\r\n}",
-  "sourcePath": "D:\\Posao - Stefan\\Stefan - razno\\Blockchain\\ElavateFinance\\auto-swap\\contracts\\interfaces\\IGlideCallee.sol",
+  "sourcePath": "D:\\Posao - Stefan\\Stefan - razno\\Blockchain\\ElavateFinance\\auto-swap\\contracts\\Swap\\interfaces\\IGlideCallee.sol",
   "ast": {
-    "absolutePath": "project:/contracts/interfaces/IGlideCallee.sol",
+    "absolutePath": "project:/contracts/Swap/interfaces/IGlideCallee.sol",
     "exportedSymbols": {
       "IGlideCallee": [
-        10476
+        11347
       ]
     },
-    "id": 10477,
+    "id": 11348,
     "license": "UNLICENSED",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 10464,
+        "id": 11335,
         "literals": [
           "solidity",
           ">=",
@@ -58,7 +58,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "40:24:23"
+        "src": "40:24:25"
       },
       {
         "abstract": false,
@@ -67,9 +67,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 10476,
+        "id": 11347,
         "linearizedBaseContracts": [
-          10476
+          11347
         ],
         "name": "IGlideCallee",
         "nodeType": "ContractDefinition",
@@ -78,7 +78,7 @@
             "body": null,
             "documentation": null,
             "functionSelector": "8c32f62b",
-            "id": 10475,
+            "id": 11346,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -86,18 +86,18 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 10473,
+              "id": 11344,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10466,
+                  "id": 11337,
                   "mutability": "mutable",
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 10475,
-                  "src": "117:14:23",
+                  "scope": 11346,
+                  "src": "117:14:25",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -105,10 +105,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10465,
+                    "id": 11336,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "117:7:23",
+                    "src": "117:7:25",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -120,13 +120,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 10468,
+                  "id": 11339,
                   "mutability": "mutable",
                   "name": "amount0",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 10475,
-                  "src": "133:12:23",
+                  "scope": 11346,
+                  "src": "133:12:25",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -134,10 +134,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 10467,
+                    "id": 11338,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "133:4:23",
+                    "src": "133:4:25",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -148,13 +148,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 10470,
+                  "id": 11341,
                   "mutability": "mutable",
                   "name": "amount1",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 10475,
-                  "src": "147:12:23",
+                  "scope": 11346,
+                  "src": "147:12:25",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -162,10 +162,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 10469,
+                    "id": 11340,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "147:4:23",
+                    "src": "147:4:25",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -176,13 +176,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 10472,
+                  "id": 11343,
                   "mutability": "mutable",
                   "name": "data",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 10475,
-                  "src": "161:19:23",
+                  "scope": 11346,
+                  "src": "161:19:25",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -190,10 +190,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 10471,
+                    "id": 11342,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "161:5:23",
+                    "src": "161:5:25",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -203,33 +203,33 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "116:65:23"
+              "src": "116:65:25"
             },
             "returnParameters": {
-              "id": 10474,
+              "id": 11345,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "190:0:23"
+              "src": "190:0:25"
             },
-            "scope": 10476,
-            "src": "98:93:23",
+            "scope": 11347,
+            "src": "98:93:25",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 10477,
-        "src": "68:126:23"
+        "scope": 11348,
+        "src": "68:126:25"
       }
     ],
-    "src": "40:154:23"
+    "src": "40:154:25"
   },
   "legacyAST": {
     "attributes": {
-      "absolutePath": "project:/contracts/interfaces/IGlideCallee.sol",
+      "absolutePath": "project:/contracts/Swap/interfaces/IGlideCallee.sol",
       "exportedSymbols": {
         "IGlideCallee": [
-          10476
+          11347
         ]
       },
       "license": "UNLICENSED"
@@ -244,9 +244,9 @@
             ".0"
           ]
         },
-        "id": 10464,
+        "id": 11335,
         "name": "PragmaDirective",
-        "src": "40:24:23"
+        "src": "40:24:25"
       },
       {
         "attributes": {
@@ -261,10 +261,10 @@
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
-            10476
+            11347
           ],
           "name": "IGlideCallee",
-          "scope": 10477
+          "scope": 11348
         },
         "children": [
           {
@@ -280,7 +280,7 @@
               ],
               "name": "glideCall",
               "overrides": null,
-              "scope": 10476,
+              "scope": 11347,
               "stateMutability": "nonpayable",
               "virtual": false,
               "visibility": "external"
@@ -294,7 +294,7 @@
                       "mutability": "mutable",
                       "name": "sender",
                       "overrides": null,
-                      "scope": 10475,
+                      "scope": 11346,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -308,14 +308,14 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 10465,
+                        "id": 11336,
                         "name": "ElementaryTypeName",
-                        "src": "117:7:23"
+                        "src": "117:7:25"
                       }
                     ],
-                    "id": 10466,
+                    "id": 11337,
                     "name": "VariableDeclaration",
-                    "src": "117:14:23"
+                    "src": "117:14:25"
                   },
                   {
                     "attributes": {
@@ -323,7 +323,7 @@
                       "mutability": "mutable",
                       "name": "amount0",
                       "overrides": null,
-                      "scope": 10475,
+                      "scope": 11346,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -336,14 +336,14 @@
                           "name": "uint",
                           "type": "uint256"
                         },
-                        "id": 10467,
+                        "id": 11338,
                         "name": "ElementaryTypeName",
-                        "src": "133:4:23"
+                        "src": "133:4:25"
                       }
                     ],
-                    "id": 10468,
+                    "id": 11339,
                     "name": "VariableDeclaration",
-                    "src": "133:12:23"
+                    "src": "133:12:25"
                   },
                   {
                     "attributes": {
@@ -351,7 +351,7 @@
                       "mutability": "mutable",
                       "name": "amount1",
                       "overrides": null,
-                      "scope": 10475,
+                      "scope": 11346,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -364,14 +364,14 @@
                           "name": "uint",
                           "type": "uint256"
                         },
-                        "id": 10469,
+                        "id": 11340,
                         "name": "ElementaryTypeName",
-                        "src": "147:4:23"
+                        "src": "147:4:25"
                       }
                     ],
-                    "id": 10470,
+                    "id": 11341,
                     "name": "VariableDeclaration",
-                    "src": "147:12:23"
+                    "src": "147:12:25"
                   },
                   {
                     "attributes": {
@@ -379,7 +379,7 @@
                       "mutability": "mutable",
                       "name": "data",
                       "overrides": null,
-                      "scope": 10475,
+                      "scope": 11346,
                       "stateVariable": false,
                       "storageLocation": "calldata",
                       "type": "bytes",
@@ -392,19 +392,19 @@
                           "name": "bytes",
                           "type": "bytes"
                         },
-                        "id": 10471,
+                        "id": 11342,
                         "name": "ElementaryTypeName",
-                        "src": "161:5:23"
+                        "src": "161:5:25"
                       }
                     ],
-                    "id": 10472,
+                    "id": 11343,
                     "name": "VariableDeclaration",
-                    "src": "161:19:23"
+                    "src": "161:19:25"
                   }
                 ],
-                "id": 10473,
+                "id": 11344,
                 "name": "ParameterList",
-                "src": "116:65:23"
+                "src": "116:65:25"
               },
               {
                 "attributes": {
@@ -413,24 +413,24 @@
                   ]
                 },
                 "children": [],
-                "id": 10474,
+                "id": 11345,
                 "name": "ParameterList",
-                "src": "190:0:23"
+                "src": "190:0:25"
               }
             ],
-            "id": 10475,
+            "id": 11346,
             "name": "FunctionDefinition",
-            "src": "98:93:23"
+            "src": "98:93:25"
           }
         ],
-        "id": 10476,
+        "id": 11347,
         "name": "ContractDefinition",
-        "src": "68:126:23"
+        "src": "68:126:25"
       }
     ],
-    "id": 10477,
+    "id": 11348,
     "name": "SourceUnit",
-    "src": "40:154:23"
+    "src": "40:154:25"
   },
   "compiler": {
     "name": "solc",
@@ -438,7 +438,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-08-27T19:07:23.949Z",
+  "updatedAt": "2021-09-01T09:09:00.439Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

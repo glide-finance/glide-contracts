@@ -9,7 +9,6 @@ const SugarToken = artifacts.require("Sugar");
 const GlideRouter = artifacts.require("GlideRouter");
 const GlideFactory = artifacts.require("GlideFactory");
 const GlidePair = artifacts.require("GlidePair");
-const SwapRewardsChef = artifacts.require("SwapRewardsChef");
 const MasterChef = artifacts.require("MasterChef");
 
 contract("MasterChef test", accounts => {
@@ -18,7 +17,6 @@ contract("MasterChef test", accounts => {
     var glideTokenInstance;
     var sugarTokenInstance;
     var glideRouterInstance;
-    var swapRewardsChefInstance;
     var masterChefInstance;
 
     //set contract instances
@@ -40,9 +38,6 @@ contract("MasterChef test", accounts => {
 
         glideRouterInstance = await GlideRouter.deployed();
         assert.ok(glideRouterInstance);
-
-        swapRewardsChefInstance = await SwapRewardsChef.deployed();
-        assert.ok(swapRewardsChefInstance);
 
         masterChefInstance = await MasterChef.deployed();
         assert.ok(masterChefInstance);
