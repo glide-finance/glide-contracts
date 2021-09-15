@@ -1,9 +1,9 @@
 {
   "contractName": "Math",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Swap/libraries/Math.sol\":\"Math\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":1000},\"remappings\":[]},\"sources\":{\"project:/contracts/Swap/libraries/Math.sol\":{\"keccak256\":\"0x4d70872bc280d32b4b5415cb828efaa81ddf6d8687871eabed5b164043ea43c8\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://7cbc933e1c0ef7b9313eb2b32add4e857727aa29f7dd5691c4ac7ffa6eb1dd22\",\"dweb:/ipfs/QmWgJ7oNg7ev5QGTAVwhAxLfuWEjj6s2Hu4X8VDPncouNz\"]}},\"version\":1}",
-  "bytecode": "0x60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212204680e1e7cb16b03fb5afbebeae77daf1dccf8592cad4df40635a3884f7fd124664736f6c634300060c0033",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212204680e1e7cb16b03fb5afbebeae77daf1dccf8592cad4df40635a3884f7fd124664736f6c634300060c0033",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Swap/libraries/Math.sol\":\"Math\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Swap/libraries/Math.sol\":{\"keccak256\":\"0x4d70872bc280d32b4b5415cb828efaa81ddf6d8687871eabed5b164043ea43c8\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://7cbc933e1c0ef7b9313eb2b32add4e857727aa29f7dd5691c4ac7ffa6eb1dd22\",\"dweb:/ipfs/QmWgJ7oNg7ev5QGTAVwhAxLfuWEjj6s2Hu4X8VDPncouNz\"]}},\"version\":1}",
+  "bytecode": "0x60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212205ebe9a98421ec519fb8379f1a95f2eb1b7ab2dccec1da59c99dbd71a2926672c64736f6c634300060c0033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212205ebe9a98421ec519fb8379f1a95f2eb1b7ab2dccec1da59c99dbd71a2926672c64736f6c634300060c0033",
   "immutableReferences": {},
   "sourceMap": "123:540:31:-:0;;;;;;;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "123:540:31:-:0;;;;;;;;",
@@ -2060,7 +2060,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-09-01T09:09:00.027Z",
+  "updatedAt": "2021-09-01T13:36:32.864Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

@@ -9,8 +9,6 @@ contract GlideFactory is IGlideFactory {
 
     address public override feeTo;
     address public override feeToSetter;
-    uint256 public override feeToRateDivArg;
-    uint256 public override feeToRateMulArg;
 
     bytes32 public initCodeHash;
  
@@ -57,13 +55,6 @@ contract GlideFactory is IGlideFactory {
         require(msg.sender == feeToSetter, 'Glide: FORBIDDEN');
         feeToSetter = _feeToSetter;
         emit SetAdminAddress(msg.sender, _feeToSetter);
-    }
-
-    function setFeeToRate(uint256 _rateDivArg, uint256 _rateMulArg) external override {
-        require(msg.sender == feeToSetter, 'Glide: FORBIDDEN');
-        require(_rateDivArg > 0, "Glide: FEE_TO_RATE_DIV_OVERFLOW");
-        feeToRateDivArg = _rateDivArg;
-        feeToRateMulArg = _rateMulArg;
     }
 
     // returns sorted token addresses, used to handle return values from pairs sorted in this order

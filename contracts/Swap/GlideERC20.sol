@@ -74,6 +74,7 @@ contract GlideERC20 is IGlideERC20 {
     function transferFrom(address from, address to, uint value) external override returns (bool) {
         if (allowance[from][msg.sender] != uint(-1)) {
             allowance[from][msg.sender] = allowance[from][msg.sender].sub(value);
+            emit Approval(from, msg.sender, value)
         }
         _transfer(from, to, value);
         return true;

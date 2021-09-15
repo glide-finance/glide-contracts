@@ -1,9 +1,9 @@
 {
   "contractName": "SafeMath",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Swap/libraries/SafeMath.sol\":\"SafeMath\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":1000},\"remappings\":[]},\"sources\":{\"project:/contracts/Swap/libraries/SafeMath.sol\":{\"keccak256\":\"0xfa2679b41e36aa53a8fbd1fb8ead9bd8154ef1dbb2dbbb5f44f1f7702725e586\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://0daea2e5f6df7a2a8178464227fb9aed822211e501e6a0fd7d2cfec28eb29505\",\"dweb:/ipfs/QmZxXbGUL7THDRoL8ohg2bpucWo8S5z1WSQiX4v7htHvLD\"]}},\"version\":1}",
-  "bytecode": "0x60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212200278722a8ca405e161bb8ad470ec2b4247ff2eb5ce2a8266225c854ac13cfb6d64736f6c634300060c0033",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212200278722a8ca405e161bb8ad470ec2b4247ff2eb5ce2a8266225c854ac13cfb6d64736f6c634300060c0033",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Swap/libraries/SafeMath.sol\":\"SafeMath\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Swap/libraries/SafeMath.sol\":{\"keccak256\":\"0xfa2679b41e36aa53a8fbd1fb8ead9bd8154ef1dbb2dbbb5f44f1f7702725e586\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://0daea2e5f6df7a2a8178464227fb9aed822211e501e6a0fd7d2cfec28eb29505\",\"dweb:/ipfs/QmZxXbGUL7THDRoL8ohg2bpucWo8S5z1WSQiX4v7htHvLD\"]}},\"version\":1}",
+  "bytecode": "0x60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122041734256feb29b7b0ef88327317b6c9400504e16710417f0d904f9471fc26b0264736f6c634300060c0033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122041734256feb29b7b0ef88327317b6c9400504e16710417f0d904f9471fc26b0264736f6c634300060c0033",
   "immutableReferences": {},
   "sourceMap": "176:442:33:-:0;;;;;;;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "176:442:33:-:0;;;;;;;;",
@@ -2216,7 +2216,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-09-01T09:09:00.032Z",
+  "updatedAt": "2021-09-01T13:36:32.866Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

@@ -8,7 +8,7 @@ const GlidePair = artifacts.require("GlidePair");
 
 const GlideFactory = artifacts.require("GlideFactory");
 
-const feeToSetter = "0x856353Ab413E10f0608cc71d7092909bc600d44D"; //"0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
+const feeToSetter = "0x93F62D27436980Ea5fbd2CA4B4eE5F22bC03C010"; //"0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
 
 const GlideRouter = artifacts.require("GlideRouter");
 const wELA = "0x517E9e5d46C1EA8aB6f78677d6114Ef47F71f6c4"; //wrapped ELA token
@@ -17,24 +17,24 @@ const GlideToken = artifacts.require("GlideToken");
 
 const SwapRewardsChef = artifacts.require("SwapRewardsChef");
 
-const feeHolder = "0x856353Ab413E10f0608cc71d7092909bc600d44D";
-const schedulerAddress = "0x856353Ab413E10f0608cc71d7092909bc600d44D";
+const feeHolder = "0x93F62D27436980Ea5fbd2CA4B4eE5F22bC03C010";
+const schedulerAddress = "0x93F62D27436980Ea5fbd2CA4B4eE5F22bC03C010";
 const FeeDistributor = artifacts.require("FeeDistributor");
 
 const SugarToken = artifacts.require("Sugar");
 
-const devAddr = "0xF71eF291751566D469aea0d521d3806BB919da02"; //accounts[7] on truffle
-const treasuryAddr = "0x9710C58b4d7F5EB6C1965A5729076342e6537AFb"; //accounts[8] on truffle
-const glideTransferOwner = "0x856353Ab413E10f0608cc71d7092909bc600d44D";
+const devAddr = "0xA33Fc786a45A2a0b71E35ae34708d4Ac97f4a4df"; //accounts[7] on truffle
+const treasuryAddr = "0x87f4F3c9Cd0281F6ad5BBfc6f4cff743cAB8cd02"; //accounts[8] on truffle
+const glideTransferOwner = "0x93F62D27436980Ea5fbd2CA4B4eE5F22bC03C010";
 const glidePerBlock = ethers.utils.parseEther('3');
 const startBlock = 7892020;
 const MasterChef = artifacts.require("MasterChef");
 
-const glideVaultAdmin = "0x856353Ab413E10f0608cc71d7092909bc600d44D";
-const treasuryAddrGlideVault = "0xDF33408909Df8a26D5F2e847dbc18EDEF5BbE929"; //accounts[9] on truffle
+const glideVaultAdmin = "0x93F62D27436980Ea5fbd2CA4B4eE5F22bC03C010";
+const treasuryAddrGlideVault = "0xcbc6A40fdcF6EcA2E70bdF6Fa26Bd41E007e23cd"; //accounts[9] on truffle
 const GlideVault = artifacts.require("GlideVault");
 
-const timeLockAdmin = "0x856353Ab413E10f0608cc71d7092909bc600d44D";
+const timeLockAdmin = "0x93F62D27436980Ea5fbd2CA4B4eE5F22bC03C010";
 const timeLockDelay = 2 * 24 * 60 * 60; //2 days
 const TimeLock = artifacts.require("TimeLock");
 
@@ -81,8 +81,6 @@ module.exports = async function(deployer, network, accounts) {
 
     // set feeTo on GlideFactory to feeDistributor contract
     await glideFactoryInstance.setFeeTo(feeDistributorAddress);
-    // set mint feeTo arguments (feeToRate)
-    await glideFactoryInstance.setFeeToRate(5, 1);
 
     // deploy Sugar token
     await deployer.deploy(SugarToken, glideTokenAddress);

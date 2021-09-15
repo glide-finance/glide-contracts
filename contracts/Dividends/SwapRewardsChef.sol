@@ -25,7 +25,7 @@ contract SwapRewardsChef is Ownable, ReentrancyGuard {
         IERC20 lpToken;                 // Address of LP token contract.
         uint256 allocPoint;             // How many allocation points assigned to this pool.
         uint256 lastRewardBlock;        // Last block number that reward distribution occurs.
-        uint256 accRewardPerShare;       // Accumulated reward per share, times 1e12. See below.
+        uint256 accRewardPerShare;       // Accumulated reward per share, times 1e18. See below.
         uint256 currentDepositAmount;   // Current total deposit amount in this pool
     }
 
@@ -63,11 +63,11 @@ contract SwapRewardsChef is Ownable, ReentrancyGuard {
         rewardToken = _rewardToken;
 
         poolInfo.push(PoolInfo({
-        lpToken : _stakeToken,
-        allocPoint : 100,
-        lastRewardBlock : startBlock,
-        accRewardPerShare : 0,
-        currentDepositAmount : 0
+            lpToken : _stakeToken,
+            allocPoint : 100,
+            lastRewardBlock : startBlock,
+            accRewardPerShare : 0,
+            currentDepositAmount : 0
         }));
 
         wrappedNativeAddress = _wrappedNativeAddress;
@@ -92,10 +92,10 @@ contract SwapRewardsChef is Ownable, ReentrancyGuard {
                 uint256 multiplier = getMultiplier(pool.lastRewardBlock, block.number);
                 uint256 totalRewards = multiplier.mul(rewardsPerBlock).mul(pool.allocPoint).div(totalAllocPoint);
                 totalRewards = Math.min(totalRewards, remainingRewards);
-                accRewardPerShare = accRewardPerShare.add(totalRewards.mul(1e12).div(lpSupply));
+                accRewardPerShare = accRewardPerShare.add(totalRewards.mul(1e18).div(lpSupply));
             }
         }
-        return user.amount.mul(accRewardPerShare).div(1e12).sub(user.rewardDebt);
+        return user.amount.mul(accRewardPerShare).div(1e18).sub(user.rewardDebt);
     }
 
     // Update reward variables of the given pool to be up-to-date.
@@ -120,13 +120,13 @@ contract SwapRewardsChef is Ownable, ReentrancyGuard {
         uint256 totalRewards = multiplier.mul(rewardsPerBlock).mul(pool.allocPoint).div(totalAllocPoint);
         totalRewards = Math.min(totalRewards, remainingRewards);
         remainingRewards = remainingRewards.sub(totalRewards);
-        pool.accRewardPerShare = pool.accRewardPerShare.add(totalRewards.mul(1e12).div(lpSupply));
+        pool.accRewardPerShare = pool.accRewardPerShare.add(totalRewards.mul(1e18).div(lpSupply));
         pool.lastRewardBlock = block.number;
     }
 
     function income(uint256 _amount) external nonReentrant {
         updatePool();
-        rewardToken.safeTransferFrom(address(msg.sender), address(this), _amount);
+        rewardToken.safeTransferFrom(msg.sender, address(this), _amount);
         remainingRewards = remainingRewards.add(_amount);
         updateEmissionRate();
     }
@@ -147,18 +147,18 @@ contract SwapRewardsChef is Ownable, ReentrancyGuard {
         UserInfo storage user = userInfo[msg.sender];
         updatePool();
         if (user.amount > 0) {
-            uint256 pending = user.amount.mul(pool.accRewardPerShare).div(1e12).sub(user.rewardDebt);
+            uint256 pending = user.amount.mul(pool.accRewardPerShare).div(1e18).sub(user.rewardDebt);
             if (pending > 0) {
                 safeRewardTransfer(msg.sender, pending);
                 emit Harvest(msg.sender, pending);
             }
         }
         if (_amount > 0) {
-            pool.lpToken.safeTransferFrom(address(msg.sender), address(this), _amount);
+            pool.lpToken.safeTransferFrom(msg.sender, address(this), _amount);
             user.amount = user.amount.add(_amount);
             pool.currentDepositAmount = pool.currentDepositAmount.add(_amount);
         }
-        user.rewardDebt = user.amount.mul(pool.accRewardPerShare).div(1e12);
+        user.rewardDebt = user.amount.mul(pool.accRewardPerShare).div(1e18);
         emit Deposit(msg.sender, _amount);
     }
 
@@ -168,7 +168,7 @@ contract SwapRewardsChef is Ownable, ReentrancyGuard {
         UserInfo storage user = userInfo[msg.sender];
         require(user.amount >= _amount, "withdraw: not good");
         updatePool();
-        uint256 pending = user.amount.mul(pool.accRewardPerShare).div(1e12).sub(user.rewardDebt);
+        uint256 pending = user.amount.mul(pool.accRewardPerShare).div(1e18).sub(user.rewardDebt);
         if (pending > 0) {
             safeRewardTransfer(msg.sender, pending);
             emit Harvest(msg.sender, pending);
@@ -176,9 +176,9 @@ contract SwapRewardsChef is Ownable, ReentrancyGuard {
         if (_amount > 0) {
             user.amount = user.amount.sub(_amount);
             pool.currentDepositAmount = pool.currentDepositAmount.sub(_amount);
-            pool.lpToken.safeTransfer(address(msg.sender), _amount);
+            pool.lpToken.safeTransfer(msg.sender, _amount);
         }
-        user.rewardDebt = user.amount.mul(pool.accRewardPerShare).div(1e12);
+        user.rewardDebt = user.amount.mul(pool.accRewardPerShare).div(1e18);
         emit Withdraw(msg.sender, _amount);
     }
 
@@ -190,7 +190,7 @@ contract SwapRewardsChef is Ownable, ReentrancyGuard {
         user.amount = 0;
         user.rewardDebt = 0;
         pool.currentDepositAmount = pool.currentDepositAmount.sub(amount);
-        pool.lpToken.safeTransfer(address(msg.sender), amount);
+        pool.lpToken.safeTransfer(msg.sender, amount);
         emit EmergencyWithdraw(msg.sender, amount);
     }
 
@@ -237,10 +237,10 @@ contract SwapRewardsChef is Ownable, ReentrancyGuard {
         UserInfo storage user = userInfo[_user];
         updatePool();
         if (user.amount > 0) {
-            uint256 pending = user.amount.mul(pool.accRewardPerShare).div(1e12).sub(user.rewardDebt);
+            uint256 pending = user.amount.mul(pool.accRewardPerShare).div(1e18).sub(user.rewardDebt);
             if (pending > 0) {
                 safeRewardTransfer(_user, pending);
-                user.rewardDebt = user.amount.mul(pool.accRewardPerShare).div(1e12);
+                user.rewardDebt = user.amount.mul(pool.accRewardPerShare).div(1e18);
                 emit Harvest(_user, pending);
             }
         }

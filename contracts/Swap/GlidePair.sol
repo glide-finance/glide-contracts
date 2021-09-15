@@ -97,9 +97,8 @@ contract GlidePair is GlideERC20{
                 uint rootKLast = Math.sqrt(_kLast);
                 if (rootK > rootKLast) {
                     uint numerator = totalSupply.mul(rootK.sub(rootKLast));
-                    //If we want to set 0.25% of 0.3% to go to feeTo, then div arg will be 5 and mul will be 1
-                    //If we want to set 0.05% of 0.3% to go to feeTo, then div arg will be 1 and mull will be 5 - UniswapV2Pair.sol default value https://github.com/Uniswap/uniswap-v2-core/blob/master/contracts/UniswapV2Pair.sol
-                    uint denominator = (rootK / IGlideFactory(factory).feeToRateDivArg()).mul(IGlideFactory(factory).feeToRateMulArg()).add(rootKLast);
+                    //If we want to set 0.25% of 0.3% to go to feeToDistributor, and 0.05% go to LP's
+                    uint denominator = (rootK / 5).add(rootKLast);
                     uint liquidity = numerator / denominator;
                     if (liquidity > 0) _mint(feeTo, liquidity);
                 }

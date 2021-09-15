@@ -1,15 +1,14 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.6.12;
+pragma solidity ^0.6.12;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/token/ERC20/SafeERC20.sol';
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 import "./GlideToken.sol";
 import "./Sugar.sol";
-
-// import "@nomiclabs/buidler/console.sol";
 
 // MasterChef is the master of Glide. He can make Glide and he is a fair guy.
 //
@@ -18,7 +17,7 @@ import "./Sugar.sol";
 // distributed and the community can show to govern itself.
 //
 // Have fun reading it. Hopefully it's bug-free. God bless.
-contract MasterChef is Ownable {
+contract MasterChef is Ownable, ReentrancyGuard {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
@@ -44,20 +43,20 @@ contract MasterChef is Ownable {
         IERC20 lpToken;           // Address of LP token contract.
         uint256 allocPoint;       // How many allocation points assigned to this pool. GLIDEs to distribute per block.
         uint256 lastRewardBlock;  // Last block number that GLIDEs distribution occurs.
-        uint256 accGlidePerShare; // Accumulated GLIDEs per share, times 1e12. See below.
+        uint256 accGlidePerShare; // Accumulated GLIDEs per share, times 1e18. See below.
     }
 
     // The GLIDE TOKEN!
-    GlideToken public glide;
+    GlideToken public immutable glide;
     // GLIDE TOKEN transfer owner
     address public glideTransferOwner;
 
     // The SUGAR TOKEN!
-    Sugar public sugar;
+    Sugar public immutable sugar;
     // Dev address.
     address public devaddr;
     // Treasury address
-    address public treasuryaddr;
+    address public immutable treasuryaddr;
     // GLIDE tokens created per block.
     uint256 public glidePerBlock;
     // GLIDE max rate (max perBlock setup)
@@ -85,7 +84,13 @@ contract MasterChef is Ownable {
     event UpdateEmissionRate(address indexed user, uint256 glidePerBlock);
     event SetGlideTransferOwner(address indexed user, address indexed glideTransferOwner);
     event TransferGlideOwnership(address indexed user, address indexed newOwner);
-    event Log(uint256 message);
+
+    mapping(IERC20 => bool) public poolExistence;
+
+    modifier nonDuplicated(IERC20 _lpToken) {
+        require(poolExistence[_lpToken] == false, "MasterChef: nonDuplicated: duplicated");
+        _;
+    }
 
     constructor(
         GlideToken _glide,
@@ -151,7 +156,7 @@ contract MasterChef is Ownable {
         } else if (phaseNumber == 1) {
             return glidePerBlock;
         } else {
-            return glidePerBlock.mul(75).div(100).mul(85 ** (phaseNumber - 2)).div(100 ** (phaseNumber - 2));
+            return glidePerBlock.mul(75).div(100).mul(85 ** (phaseNumber.sub(2))).div(100 ** (phaseNumber.sub(2)));
         }
     }
 
@@ -164,8 +169,8 @@ contract MasterChef is Ownable {
         return reward(block.number);
     }
 
-    // Rewards for the blocks
-    function getGlideRewardPerBlock(uint256 _lastRewardBlock, uint256 _blockNumber) public view returns (uint256) {
+    // Rewards total glide reward
+    function getTotalGlideReward(uint256 _lastRewardBlock, uint256 _blockNumber) public view returns (uint256) {
         require(_lastRewardBlock <= _blockNumber, "MasterChef: must little than the current block number");
         require(_lastRewardBlock >= startBlock, "MasterChef: must be same or larger then startBlock");
         uint256 blockReward = 0;
@@ -174,7 +179,7 @@ contract MasterChef is Ownable {
         // If it crosses the cycle
         while (n < m) {
             // Get the last block of the previous cycle
-            uint256 r = (n - 1).mul(reductionPeriod).add(startBlock).add(bonusReductionPeriod);
+            uint256 r = (n.sub(1)).mul(reductionPeriod).add(startBlock).add(bonusReductionPeriod);
             // Get rewards from previous periods
             blockReward = blockReward.add((r.sub(_lastRewardBlock)).mul(reward(r)));
             _lastRewardBlock = r;
@@ -182,19 +187,17 @@ contract MasterChef is Ownable {
             n++;
         }
         blockReward = blockReward.add((_blockNumber.sub(_lastRewardBlock)).mul(reward(_blockNumber)));
-        //emit Log(blockReward);
         return blockReward;
     }
 
     // Rewards for the current block
     function getGlideReward(uint256 _lastRewardBlock) public view returns (uint256) {
-        return getGlideRewardPerBlock(_lastRewardBlock, block.number);
+        return getTotalGlideReward(_lastRewardBlock, block.number);
     }
 
     // Add a new lp to the pool. Can only be called by the owner.
-    // XXX DO NOT add the same LP token more than once. Rewards will be messed up if you do.
-    function add(uint256 _allocPoint, IERC20 _lpToken, bool _withUpdate) public onlyOwner {
-        require(_allocPoint <= MAX_ALLOC_POINT, "!overmax");
+    function add(uint256 _allocPoint, IERC20 _lpToken, bool _withUpdate) public onlyOwner nonDuplicated(_lpToken){
+        require(_allocPoint <= MAX_ALLOC_POINT, "MasterChef: !overmax");
         if (_withUpdate) {
             massUpdatePools();
         }
@@ -211,7 +214,7 @@ contract MasterChef is Ownable {
 
     // Update the given pool's GLIDE allocation point. Can only be called by the owner.
     function set(uint256 _pid, uint256 _allocPoint, bool _withUpdate) public onlyOwner {
-        require(_allocPoint <= MAX_ALLOC_POINT, "!overmax");
+        require(_allocPoint <= MAX_ALLOC_POINT, "MasterChef: !overmax");
         if (_withUpdate) {
             massUpdatePools();
         }
@@ -242,16 +245,16 @@ contract MasterChef is Ownable {
         UserInfo storage user = userInfo[_pid][_user];
         uint256 accGlidePerShare = pool.accGlidePerShare;
         uint256 lpSupply = pool.lpToken.balanceOf(address(this));
-        if (block.number > pool.lastRewardBlock && lpSupply != 0) {
+        if (block.number > pool.lastRewardBlock && lpSupply != 0 && totalAllocPoint > 0) {
             uint256 glidePerBlockCalculated = getGlideReward(pool.lastRewardBlock);
             // add this check how this function not be fall on require on mint
-            if (glide.totalSupply() + glidePerBlockCalculated < glide.getMaxTotalSupply()) {
+            if (glide.totalSupply().add(glidePerBlockCalculated) < glide.getMaxTotalSupply()) {
                 uint256 glideReward = glidePerBlockCalculated.mul(pool.allocPoint).div(totalAllocPoint);
                 uint256 glideRewardSugar = glideReward.mul(650).div(1000); //65% go to sugar
-                accGlidePerShare = accGlidePerShare.add(glideRewardSugar.mul(1e12).div(lpSupply));
+                accGlidePerShare = accGlidePerShare.add(glideRewardSugar.mul(1e18).div(lpSupply));
             }
         }
-        return user.amount.mul(accGlidePerShare).div(1e12).sub(user.rewardDebt);
+        return user.amount.mul(accGlidePerShare).div(1e18).sub(user.rewardDebt);
     }
 
     // Update reward variables for all pools. Be careful of gas spending!
@@ -276,112 +279,121 @@ contract MasterChef is Ownable {
         }
 
         uint256 glidePerBlockCalculated = getGlideReward(pool.lastRewardBlock);
+        uint256 glideReward = glidePerBlockCalculated.mul(pool.allocPoint).div(totalAllocPoint);
+        if (glide.totalSupply().add(glideReward) > glide.getMaxTotalSupply()) {
+            glideReward = (glide.getMaxTotalSupply()).sub(glide.totalSupply());
+        }
         // add this check how this function not be fall on require on mint
-        if (glide.totalSupply() + glidePerBlockCalculated < glide.getMaxTotalSupply()) {
-            uint256 glideReward = glidePerBlockCalculated.mul(pool.allocPoint).div(totalAllocPoint);
+        if (glideReward != 0) {
             uint256 glideRewardSugar = glideReward.mul(650).div(1000); //65% go to sugar 
+            uint256 glideRewardDev = glideReward.mul(125).div(1000); //12.5% go to dev addr
+            uint256 glideRewardTreasury = glideReward.mul(225).div(1000); //22.5% go to treasury addr
 
             glide.mint(address(sugar), glideRewardSugar);
-            glide.mint(devaddr, glideReward.mul(125).div(1000)); //12.5% go to dev addr
-            glide.mint(treasuryaddr, glideReward.mul(225).div(1000)); //22.5% go to treasury
+            glide.mint(devaddr, glideRewardDev); 
+            glide.mint(treasuryaddr, glideRewardTreasury);
             
-            pool.accGlidePerShare = pool.accGlidePerShare.add(glideRewardSugar.mul(1e12).div(lpSupply));
+            pool.accGlidePerShare = pool.accGlidePerShare.add(glideRewardSugar.mul(1e18).div(lpSupply));
             pool.lastRewardBlock = block.number;
         }
     }
 
     // Deposit LP tokens to MasterChef for GLIDE allocation.
-    function deposit(uint256 _pid, uint256 _amount) public {
-
-        require (_pid != 0, 'deposit GLIDE by staking');
+    function deposit(uint256 _pid, uint256 _amount) public nonReentrant {
+        require (_pid != 0, "MasterChef: deposit GLIDE by staking");
 
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
         updatePool(_pid);
         if (user.amount > 0) {
-            uint256 pending = user.amount.mul(pool.accGlidePerShare).div(1e12).sub(user.rewardDebt);
+            uint256 pending = user.amount.mul(pool.accGlidePerShare).div(1e18).sub(user.rewardDebt);
             if(pending > 0) {
                 safeGlideTransfer(msg.sender, pending);
             }
         }
         if (_amount > 0) {
-            pool.lpToken.safeTransferFrom(address(msg.sender), address(this), _amount);
+            pool.lpToken.safeTransferFrom(msg.sender, address(this), _amount);
             user.amount = user.amount.add(_amount);
         }
-        user.rewardDebt = user.amount.mul(pool.accGlidePerShare).div(1e12);
+        user.rewardDebt = user.amount.mul(pool.accGlidePerShare).div(1e18);
         emit Deposit(msg.sender, _pid, _amount);
     }
 
     // Withdraw LP tokens from MasterChef.
-    function withdraw(uint256 _pid, uint256 _amount) public {
-
-        require (_pid != 0, 'withdraw GLIDE by unstaking');
+    function withdraw(uint256 _pid, uint256 _amount) public nonReentrant {
+        require (_pid != 0, "MasterChef: withdraw GLIDE by unstaking");
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
-        require(user.amount >= _amount, "withdraw: not good");
+        require(user.amount >= _amount, "MasterChef: withdraw: not good");
 
         updatePool(_pid);
-        uint256 pending = user.amount.mul(pool.accGlidePerShare).div(1e12).sub(user.rewardDebt);
+        uint256 pending = user.amount.mul(pool.accGlidePerShare).div(1e18).sub(user.rewardDebt);
         if(pending > 0) {
             safeGlideTransfer(msg.sender, pending);
         }
         if(_amount > 0) {
             user.amount = user.amount.sub(_amount);
-            pool.lpToken.safeTransfer(address(msg.sender), _amount);
+            pool.lpToken.safeTransfer(msg.sender, _amount);
         }
-        user.rewardDebt = user.amount.mul(pool.accGlidePerShare).div(1e12);
+        user.rewardDebt = user.amount.mul(pool.accGlidePerShare).div(1e18);
         emit Withdraw(msg.sender, _pid, _amount);
     }
 
     // Stake GLIDE tokens to MasterChef
-    function enterStaking(uint256 _amount) public {
+    function enterStaking(uint256 _amount) public nonReentrant {
         PoolInfo storage pool = poolInfo[0];
         UserInfo storage user = userInfo[0][msg.sender];
         updatePool(0);
         if (user.amount > 0) {
-            uint256 pending = user.amount.mul(pool.accGlidePerShare).div(1e12).sub(user.rewardDebt);
+            uint256 pending = user.amount.mul(pool.accGlidePerShare).div(1e18).sub(user.rewardDebt);
             if(pending > 0) {
                 safeGlideTransfer(msg.sender, pending);
             }
         }
         if(_amount > 0) {
-            pool.lpToken.safeTransferFrom(address(msg.sender), address(this), _amount);
+            pool.lpToken.safeTransferFrom(msg.sender, address(this), _amount);
             user.amount = user.amount.add(_amount);
         }
-        user.rewardDebt = user.amount.mul(pool.accGlidePerShare).div(1e12);
+        user.rewardDebt = user.amount.mul(pool.accGlidePerShare).div(1e18);
 
         sugar.mint(msg.sender, _amount);
         emit Deposit(msg.sender, 0, _amount);
     }
 
     // Withdraw GLIDE tokens from STAKING.
-    function leaveStaking(uint256 _amount) public {
+    function leaveStaking(uint256 _amount) public nonReentrant {
         PoolInfo storage pool = poolInfo[0];
         UserInfo storage user = userInfo[0][msg.sender];
-        require(user.amount >= _amount, "withdraw: not good");
+        require(user.amount >= _amount, "MasterChef: withdraw: not good");
         updatePool(0);
-        uint256 pending = user.amount.mul(pool.accGlidePerShare).div(1e12).sub(user.rewardDebt);
+        uint256 pending = user.amount.mul(pool.accGlidePerShare).div(1e18).sub(user.rewardDebt);
         if(pending > 0) {
             safeGlideTransfer(msg.sender, pending);
         }
         if(_amount > 0) {
             user.amount = user.amount.sub(_amount);
-            pool.lpToken.safeTransfer(address(msg.sender), _amount);
+            pool.lpToken.safeTransfer(msg.sender, _amount);
         }
-        user.rewardDebt = user.amount.mul(pool.accGlidePerShare).div(1e12);
+        user.rewardDebt = user.amount.mul(pool.accGlidePerShare).div(1e18);
 
         sugar.burn(msg.sender, _amount);
         emit Withdraw(msg.sender, 0, _amount);
     }
 
     // Withdraw without caring about rewards. EMERGENCY ONLY.
-    function emergencyWithdraw(uint256 _pid) public {
+    function emergencyWithdraw(uint256 _pid) public nonReentrant {
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
-        pool.lpToken.safeTransfer(address(msg.sender), user.amount);
-        emit EmergencyWithdraw(msg.sender, _pid, user.amount);
+
+        uint256 amount = user.amount;
         user.amount = 0;
         user.rewardDebt = 0;
+        if(_pid == 0) {
+            sugar.burn(msg.sender, amount);
+        }
+
+        pool.lpToken.safeTransfer(msg.sender, amount);
+        emit EmergencyWithdraw(msg.sender, _pid, amount);
     }
 
     // Safe glide transfer function, just in case if rounding error causes pool to not have enough GLIDEs.
@@ -390,8 +402,9 @@ contract MasterChef is Ownable {
     }
 
     // Update dev address by the previous dev.
-    function dev(address _devaddr) public {
-        require(msg.sender == devaddr, "dev: wut?");
+    function setDevAddress(address _devaddr) public {
+        require(_devaddr != address(0), "MasterChef:!nonzero");
+        require(msg.sender == devaddr, "MasterChef: sender is not same as dev addr");
         devaddr = _devaddr;
     }
 
@@ -406,13 +419,20 @@ contract MasterChef is Ownable {
     }
 
     // Update start block
-    function setStartBlock(uint256 _startBlock) public onlyOwner {
-        startBlock = _startBlock;
+    function setStartBlock(uint256 _newStartBlock) external onlyOwner {
+        require(block.number < startBlock, "MasterChef: cannot change start block if farm has already started");
+        require(block.number < _newStartBlock, "MasterChef: cannot set start block in the past");
+        uint256 length = poolInfo.length;
+        for (uint256 pid = 0; pid < length; ++pid) {
+            PoolInfo storage pool = poolInfo[pid];
+            pool.lastRewardBlock = _newStartBlock;
+        }
+        startBlock = _newStartBlock;
     }
 
     // Should never fail as long as massUpdatePools is called during add
     function updateEmissionRate(uint256 _glidePerBlock) external onlyOwner {
-        require(_glidePerBlock <= MAX_EMISSION_RATE, "!overmax");
+        require(_glidePerBlock <= MAX_EMISSION_RATE, "MasterChef: !overmax");
         massUpdatePools();
         glidePerBlock = _glidePerBlock;
         emit UpdateEmissionRate(msg.sender, _glidePerBlock);
@@ -420,7 +440,7 @@ contract MasterChef is Ownable {
 
     // Update Glide transfer owner. Can only be called by existing glideTransferOwner
     function setGlideTransferOwner(address _glideTransferOwner) external {
-        require(msg.sender == glideTransferOwner);
+        require(msg.sender == glideTransferOwner, "MasterChef: sender is not glide transfer owner");
         glideTransferOwner = _glideTransferOwner;
         emit SetGlideTransferOwner(msg.sender, _glideTransferOwner);
     }
@@ -431,7 +451,7 @@ contract MasterChef is Ownable {
      * AND TOKEN MIGRATION MUST HAPPEN
      */
     function transferGlideOwnership(address _newOwner) external {
-        require(msg.sender == glideTransferOwner);
+        require(msg.sender == glideTransferOwner, "MasterChef: sender is not glide transfer owner");
         glide.transferOwnership(_newOwner);
         emit TransferGlideOwnership(msg.sender, _newOwner);
     }

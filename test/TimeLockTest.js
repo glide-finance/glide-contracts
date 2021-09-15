@@ -38,7 +38,8 @@ contract("Timelock test", accounts => {
         const currentBlock = parseInt(await provider.send("eth_blockNumber"));
         assert.strictEqual(currentBlock, initialBlock + 5);
     });
-
+   
+    /* to run this test case, it should be change constant minimum_delay on time lock, and after that, change delay contract variable
     it("...should success transaction execute (change BonusReductionPeriod on masterChef contract) ", async () => {
         // bonus reduction period for set
         const newBonusReductionPeriod = 3144960;
@@ -71,7 +72,9 @@ contract("Timelock test", accounts => {
         // assert between period that want to set and period from contract
         assert.equal(newBonusReductionPeriod, bonusReductionPeriodAfterSet.toNumber(), "Bonus reduction period is not correct set");
     });
+    */
 
+    /* to run this test case, it should be change constant minimum_delay on time lock, and after that, change delay contract variable
     it("...should success transaction execute (change delay on timeLock contract) ", async () => {
         const newDelay = 259200; //3 days
         // create data for queue and execute transaction for setDelay on timeLock contract
@@ -98,6 +101,7 @@ contract("Timelock test", accounts => {
         // assert between delay for set and after set
         assert.equal(newDelay, currentDelay.toNumber(), "Delay on timeLock contract is not correct set");
     });
+    */
 
 
     it("...should revert transaction execute", async () => {

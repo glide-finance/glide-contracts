@@ -1,9 +1,9 @@
 {
   "contractName": "UQ112x112",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Swap/libraries/UQ112x112.sol\":\"UQ112x112\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":1000},\"remappings\":[]},\"sources\":{\"project:/contracts/Swap/libraries/UQ112x112.sol\":{\"keccak256\":\"0xd6a79672c306361bc55568129087c3da0e09f2b92fda0bf20173f52666a34513\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://2f903ae6f539e57feb9e7ce6ac7b7adde369f33fe1c646c519147a3f78a6c46d\",\"dweb:/ipfs/QmYz4XGwfvrzHzCeDhrnJA9aZdQsGRJUP1aVzVLQkzeXYN\"]}},\"version\":1}",
-  "bytecode": "0x60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122028c79c4ba9f4a9553a6e69f2e25292cd9f421e1f384ae7d779d7de51c5633bd764736f6c634300060c0033",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122028c79c4ba9f4a9553a6e69f2e25292cd9f421e1f384ae7d779d7de51c5633bd764736f6c634300060c0033",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Swap/libraries/UQ112x112.sol\":\"UQ112x112\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Swap/libraries/UQ112x112.sol\":{\"keccak256\":\"0xd6a79672c306361bc55568129087c3da0e09f2b92fda0bf20173f52666a34513\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://2f903ae6f539e57feb9e7ce6ac7b7adde369f33fe1c646c519147a3f78a6c46d\",\"dweb:/ipfs/QmYz4XGwfvrzHzCeDhrnJA9aZdQsGRJUP1aVzVLQkzeXYN\"]}},\"version\":1}",
+  "bytecode": "0x60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220f498be2ee5b8b3dcb4f33ddad714d95af7e3ad2f9e8da943ec1554ff77b0208364736f6c634300060c0033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220f498be2ee5b8b3dcb4f33ddad714d95af7e3ad2f9e8da943ec1554ff77b0208364736f6c634300060c0033",
   "immutableReferences": {},
   "sourceMap": "230:406:35:-:0;;;;;;;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "230:406:35:-:0;;;;;;;;",
@@ -1234,7 +1234,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-09-01T09:09:00.495Z",
+  "updatedAt": "2021-09-01T13:36:33.229Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
