@@ -61,7 +61,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
     // GLIDE tokens created per block.
     uint256 public glidePerBlock;
     // GLIDE max rate (max perBlock setup)
-    uint256 public constant MAX_EMISSION_RATE = 1000 ether; // Safety check
+    uint256 public constant MAX_EMISSION_RATE = 5 ether; // Safety check
 
     // Bounus reduction period
     uint256 public constant bonusPeriod = 1572480; //12 * 60 * 24 * 91 (91 is 3 months in days)
