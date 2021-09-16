@@ -12,12 +12,21 @@ const GlidePair = artifacts.require("GlidePair");
 const MasterChef = artifacts.require("MasterChef");
 
 contract("MasterChef test", accounts => {
+    const provider = new ethers.providers.JsonRpcProvider();
+
     var testTokenOneInstance;
     var testTokenTwoInstance;
     var glideTokenInstance;
     var sugarTokenInstance;
     var glideRouterInstance;
     var masterChefInstance;
+
+    // function for mine new blocks
+    async function mineNBlocks(nBlock) {
+        for(var counter = 0; counter < nBlock; counter++) {
+            await provider.send("evm_mine", [] );
+        }
+    }
 
     //set contract instances
     before(async () => {
@@ -235,6 +244,7 @@ contract("MasterChef test", accounts => {
         //console.log("rewardSumWithoutPercent-"+rewardSumWithoutPercent.toString());
     });
 
+    /* Delete this unit because functions setReductionPeriod and setBonusReductionPeriod are deleted after audit
     it("...should check reward per block", async () => {
         // Get default values from contract
         const bonusReductionPeriod = await masterChefInstance.bonusReductionPeriod.call();
@@ -284,9 +294,12 @@ contract("MasterChef test", accounts => {
         await masterChefInstance.setBonusReductionPeriod(bonusReductionPeriod);
         await masterChefInstance.setReductionPeriod(reductionPeriod);
         await masterChefInstance.setStartBlock(startBlock);
-    });
+    }); 
+    */
 
     it("...should withdraw Glide token", async() => {
+        await mineNBlocks(100);
+
         const glideBalanceAccounts2BeforeWithdraw = await glideTokenInstance.balanceOf.call(accounts[2]);
         //console.log("glideBalanceAccounts2BeforeWithdraw-"+glideBalanceAccounts2BeforeWithdraw.toString());
 

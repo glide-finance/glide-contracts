@@ -29,7 +29,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         // We do some fancy math here. Basically, any point in time, the amount of GLIDEs
         // entitled to a user but is pending to be distributed is:
         //
-        //   pending reward = (user.amount * pool.accGlidePerShare) - user.rewardDebt
+        //   pending reward = (user.amount * pool.accGlidePerShare).sub(user.rewardDebt)
         //
         // Whenever a user deposits or withdraws LP tokens to a pool. Here's what happens:
         //   1. The pool's `accGlidePerShare` (and `lastRewardBlock`) gets updated.
@@ -44,6 +44,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         uint256 allocPoint;       // How many allocation points assigned to this pool. GLIDEs to distribute per block.
         uint256 lastRewardBlock;  // Last block number that GLIDEs distribution occurs.
         uint256 accGlidePerShare; // Accumulated GLIDEs per share, times 1e18. See below.
+        uint256 lpSupply;
     }
 
     // The GLIDE TOKEN!
@@ -63,9 +64,9 @@ contract MasterChef is Ownable, ReentrancyGuard {
     uint256 public constant MAX_EMISSION_RATE = 1000 ether; // Safety check
 
     // Bounus reduction period
-    uint256 public bonusReductionPeriod = 1572480; //12 * 60 * 24 * 91 (91 is 3 months in days)
+    uint256 public constant bonusPeriod = 1572480; //12 * 60 * 24 * 91 (91 is 3 months in days)
     // Reduction period
-    uint256 public reductionPeriod = 3144960; //12 * 60 * 24 * 182 (182 is 6 months in days)
+    uint256 public constant reductionPeriod = 3144960; //12 * 60 * 24 * 182 (182 is 6 months in days)
 
     // Info of each pool.
     PoolInfo[] public poolInfo;
@@ -114,7 +115,8 @@ contract MasterChef is Ownable, ReentrancyGuard {
             lpToken: _glide,
             allocPoint: 1000,
             lastRewardBlock: startBlock,
-            accGlidePerShare: 0
+            accGlidePerShare: 0,
+            lpSupply: 0
         }));
 
         totalAllocPoint = 1000;
@@ -134,11 +136,11 @@ contract MasterChef is Ownable, ReentrancyGuard {
             // calculate block number from start block
             uint256 blockNumberFromStart = blockNumber.sub(startBlock); 
             // if blockNumberFromStart less then block for reduction period, then we are in one phase
-            if (blockNumberFromStart <= bonusReductionPeriod) { 
+            if (blockNumberFromStart <= bonusPeriod) { 
                 return 1;
             } else { 
                 // calculate phase and add 1, because, will be start from one, and one phase is bonus phase 
-                return (blockNumberFromStart.sub(bonusReductionPeriod).sub(1)).div(reductionPeriod).add(2);
+                return (blockNumberFromStart.sub(bonusPeriod).sub(1)).div(reductionPeriod).add(2);
             }
         }
         return 0;
@@ -179,7 +181,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         // If it crosses the cycle
         while (n < m) {
             // Get the last block of the previous cycle
-            uint256 r = (n.sub(1)).mul(reductionPeriod).add(startBlock).add(bonusReductionPeriod);
+            uint256 r = (n.sub(1)).mul(reductionPeriod).add(startBlock).add(bonusPeriod);
             // Get rewards from previous periods
             blockReward = blockReward.add((r.sub(_lastRewardBlock)).mul(reward(r)));
             _lastRewardBlock = r;
@@ -197,6 +199,9 @@ contract MasterChef is Ownable, ReentrancyGuard {
 
     // Add a new lp to the pool. Can only be called by the owner.
     function add(uint256 _allocPoint, IERC20 _lpToken, bool _withUpdate) public onlyOwner nonDuplicated(_lpToken){
+        // Make sure the provided token is ERC20
+        _lpToken.balanceOf(address(this));
+
         require(_allocPoint <= MAX_ALLOC_POINT, "MasterChef: !overmax");
         if (_withUpdate) {
             massUpdatePools();
@@ -207,7 +212,8 @@ contract MasterChef is Ownable, ReentrancyGuard {
             lpToken: _lpToken,
             allocPoint: _allocPoint,
             lastRewardBlock: lastRewardBlock,
-            accGlidePerShare: 0
+            accGlidePerShare: 0,
+            lpSupply: 0
         }));
         updateStakingPool();
     }
@@ -244,14 +250,13 @@ contract MasterChef is Ownable, ReentrancyGuard {
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][_user];
         uint256 accGlidePerShare = pool.accGlidePerShare;
-        uint256 lpSupply = pool.lpToken.balanceOf(address(this));
-        if (block.number > pool.lastRewardBlock && lpSupply != 0 && totalAllocPoint > 0) {
+        if (block.number > pool.lastRewardBlock && pool.lpSupply != 0 && totalAllocPoint > 0) {
             uint256 glidePerBlockCalculated = getGlideReward(pool.lastRewardBlock);
             // add this check how this function not be fall on require on mint
             if (glide.totalSupply().add(glidePerBlockCalculated) < glide.getMaxTotalSupply()) {
                 uint256 glideReward = glidePerBlockCalculated.mul(pool.allocPoint).div(totalAllocPoint);
                 uint256 glideRewardSugar = glideReward.mul(650).div(1000); //65% go to sugar
-                accGlidePerShare = accGlidePerShare.add(glideRewardSugar.mul(1e18).div(lpSupply));
+                accGlidePerShare = accGlidePerShare.add(glideRewardSugar.mul(1e18).div(pool.lpSupply));
             }
         }
         return user.amount.mul(accGlidePerShare).div(1e18).sub(user.rewardDebt);
@@ -272,8 +277,8 @@ contract MasterChef is Ownable, ReentrancyGuard {
         if (block.number <= pool.lastRewardBlock) {
             return;
         }
-        uint256 lpSupply = pool.lpToken.balanceOf(address(this));
-        if (lpSupply == 0) {
+        
+        if (pool.lpSupply == 0 || pool.allocPoint == 0) {
             pool.lastRewardBlock = block.number;
             return;
         }
@@ -293,7 +298,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
             glide.mint(devaddr, glideRewardDev); 
             glide.mint(treasuryaddr, glideRewardTreasury);
             
-            pool.accGlidePerShare = pool.accGlidePerShare.add(glideRewardSugar.mul(1e18).div(lpSupply));
+            pool.accGlidePerShare = pool.accGlidePerShare.add(glideRewardSugar.mul(1e18).div(pool.lpSupply));
             pool.lastRewardBlock = block.number;
         }
     }
@@ -312,8 +317,13 @@ contract MasterChef is Ownable, ReentrancyGuard {
             }
         }
         if (_amount > 0) {
+            uint256 balanceBefore = pool.lpToken.balanceOf(address(this));
             pool.lpToken.safeTransferFrom(msg.sender, address(this), _amount);
+            _amount = pool.lpToken.balanceOf(address(this)).sub(balanceBefore);
+            require(_amount > 0, "MasterChef: we dont accept deposits of 0 size");
+
             user.amount = user.amount.add(_amount);
+            pool.lpSupply = pool.lpSupply.add(_amount);
         }
         user.rewardDebt = user.amount.mul(pool.accGlidePerShare).div(1e18);
         emit Deposit(msg.sender, _pid, _amount);
@@ -333,6 +343,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         }
         if(_amount > 0) {
             user.amount = user.amount.sub(_amount);
+            pool.lpSupply = pool.lpSupply.sub(_amount);
             pool.lpToken.safeTransfer(msg.sender, _amount);
         }
         user.rewardDebt = user.amount.mul(pool.accGlidePerShare).div(1e18);
@@ -353,6 +364,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         if(_amount > 0) {
             pool.lpToken.safeTransferFrom(msg.sender, address(this), _amount);
             user.amount = user.amount.add(_amount);
+            pool.lpSupply = pool.lpSupply.add(_amount);
         }
         user.rewardDebt = user.amount.mul(pool.accGlidePerShare).div(1e18);
 
@@ -372,6 +384,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         }
         if(_amount > 0) {
             user.amount = user.amount.sub(_amount);
+            pool.lpSupply = pool.lpSupply.sub(_amount);
             pool.lpToken.safeTransfer(msg.sender, _amount);
         }
         user.rewardDebt = user.amount.mul(pool.accGlidePerShare).div(1e18);
@@ -393,6 +406,14 @@ contract MasterChef is Ownable, ReentrancyGuard {
         }
 
         pool.lpToken.safeTransfer(msg.sender, amount);
+
+        // In the case of an accounting error, we choose to let the user emergency withdraw anyway
+        if (pool.lpSupply >= amount) {
+            pool.lpSupply = pool.lpSupply.sub(amount);
+        } else {
+            pool.lpSupply = 0;
+        }
+
         emit EmergencyWithdraw(msg.sender, _pid, amount);
     }
 
@@ -406,16 +427,6 @@ contract MasterChef is Ownable, ReentrancyGuard {
         require(_devaddr != address(0), "MasterChef:!nonzero");
         require(msg.sender == devaddr, "MasterChef: sender is not same as dev addr");
         devaddr = _devaddr;
-    }
-
-    // Update bonus reduction period
-    function setBonusReductionPeriod(uint256 _bonusReductionPeriod) public onlyOwner {
-        bonusReductionPeriod = _bonusReductionPeriod;
-    }
-
-    // Update reduction period
-    function setReductionPeriod(uint256 _reductionPeriod) public onlyOwner {
-        reductionPeriod = _reductionPeriod;
     }
 
     // Update start block

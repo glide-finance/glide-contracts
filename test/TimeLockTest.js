@@ -106,17 +106,17 @@ contract("Timelock test", accounts => {
 
     it("...should revert transaction execute", async () => {
         // bonus reduction period for set
-        const newBonusReductionPeriod = 6151680;
+        const newStartBlock = 10000000;
 
         // get bonus reduction period before set on timeLock mechanism
-        const bonusReductionPeriodBeforeSet = await masterChefInstance.bonusReductionPeriod.call();
-        assert.equal(newBonusReductionPeriod != bonusReductionPeriodBeforeSet.toNumber(), true, "Bonus reduction period that is current set is same as new");
+        const startBlockBeforeSet = await masterChefInstance.startBlock.call();
+        assert.equal(newStartBlock != startBlockBeforeSet.toNumber(), true, "Bonus reduction period that is current set is same as new");
 
         // create data for queue and execute transaction for setBonusReductionPeriod on masterChef contract
-        const signature = 'setBonusReductionPeriod(uint256)';
+        const signature = 'setStartBlock(uint256)';
         const data = ethers.utils.defaultAbiCoder.encode(
             ['uint256'],
-            [newBonusReductionPeriod]
+            [newStartBlock]
           );
         const blockTimestamp = await timeLockInstance.getBlockTimestamp();
         const nextBlockTime = 345600; //4 days

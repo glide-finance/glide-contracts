@@ -262,7 +262,7 @@ contract("FeeDistributor test", accounts => {
     it("...should harvest from SwapRewardsChef", async () => {
         // get ETH balance before harvest 
         const ETHBalanceBefore = await web3.eth.getBalance(accounts[3]);
-        //console.log("ETHBalanceBefore-" + ETHBalanceBefore);
+        // console.log("ETHBalanceBefore-" + ETHBalanceBefore);
 
         // harvet ETH from swapRewards
         const txnReceipt = await swapRewardsChefInstance.harvestFor(accounts[3], {from: accounts[3]});
@@ -274,8 +274,8 @@ contract("FeeDistributor test", accounts => {
         const accRewardPerShare = poolInfo.accRewardPerShare;
 
         // calculate harvested ETH
-        const harvestedETH = new BN(stakeGlideTokenValue.toString()).mul(new BN(accRewardPerShare.toString())).div(new BN("1000000000000"));
-        //console.log(harvestedETH.toString());
+        const harvestedETH = new BN(stakeGlideTokenValue.toString()).mul(new BN(accRewardPerShare.toString())).div(new BN("1000000000000000000"));
+        // console.log(harvestedETH.toString());
         const ETHBalanceAfter = await web3.eth.getBalance(accounts[3]);
         //console.log("wETHBalanceAfter-" + ETHBalanceAfter);
         // balance before harvest + harvested - gasUsed == balance after harvest

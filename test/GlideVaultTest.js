@@ -52,8 +52,12 @@ contract("GlideVault test", accounts => {
         wETHAddress = await glideRouterInstance.WETH();
         wETHInstance = await IERC20.at(wETHAddress);
 
+        // create pair
+        await glideFactoryInstance.createPair(testTokenOneInstance.address, testTokenTwoInstance.address);
+        
         // get pair address from factory
         const pairAddress = await glideFactoryInstance.getPair(testTokenOneInstance.address, testTokenTwoInstance.address);
+
         // add pair to masterChef contract
         await masterChefInstance.add(1000, pairAddress, true);
 
@@ -124,11 +128,11 @@ contract("GlideVault test", accounts => {
         //console.log("lpSupply-"+lpSupply);
         // calculate accGlidePerShare
         //console.log("poolInfoIndexZero.accGlidePerShare-"+poolInfoIndexZero.accGlidePerShare);
-        const accGlidePerShare = poolInfoIndexZero.accGlidePerShare.add(stakeGlideReward.mul(new BN("1000000000000")).div(lpSupply));
+        const accGlidePerShare = poolInfoIndexZero.accGlidePerShare.add(stakeGlideReward.mul(new BN("1000000000000000000")).div(lpSupply));
         //console.log("accGlidePerShare-"+accGlidePerShare);
         const glideVaultUserInfo = await masterChefInstance.userInfo.call(0, glideVaultInstance.address);
         // calcaute reward
-        const rewardForGlideVault = glideVaultUserInfo.amount.mul(accGlidePerShare).div(new BN("1000000000000"));
+        const rewardForGlideVault = glideVaultUserInfo.amount.mul(accGlidePerShare).div(new BN("1000000000000000000"));
         //console.log("rewardForGlideVault-"+rewardForGlideVault);
 
         // calculate harvest reward (call fee)
