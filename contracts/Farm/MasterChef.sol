@@ -119,8 +119,9 @@ contract MasterChef is Ownable, ReentrancyGuard {
             lpSupply: 0
         }));
 
-        totalAllocPoint = 1000;
+        poolExistence[_glide] = true;
 
+        totalAllocPoint = 1000;
     }
 
     function poolLength() external view returns (uint256) {
@@ -215,6 +216,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
             accGlidePerShare: 0,
             lpSupply: 0
         }));
+        poolExistence[_lpToken] = true;
         updateStakingPool();
     }
 
