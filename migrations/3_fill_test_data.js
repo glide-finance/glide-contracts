@@ -23,6 +23,8 @@ module.exports = async function(deployer, network, accounts) {
 
     const glideFactoryInstance = await GlideFactory.deployed();
 
+    wETHAddress = await glideRouterInstance.WETH();
+
     //Liquidity amount (prices range) - testTokenOne is 3 testTokenTwo;
     const valueForLiquidityTokenOne = ethers.utils.parseEther('15');
     const valueForLiquidityTokenTwo = ethers.utils.parseEther('5');
@@ -105,13 +107,38 @@ module.exports = async function(deployer, network, accounts) {
         accounts[1],
         9000000000,
         {from:accounts[1]});
-    
+
+    //swap amount
+    await testTokenOneInstance.approve(glideRouterInstance.address, swapAmount, {from: accounts[3]});
+    await glideRouterInstance.swapTokensForExactETH(swapAmount,
+        ethers.utils.parseEther('5'),
+        [testTokenOneInstance.address, wETHAddress],
+        accounts[3],
+        9000000000, 
+        {from: accounts[3]});
+
+    //add liquidity ETH
+    await testTokenOneInstance.approve(glideRouterInstance.address, valueForAddLiquidityETHTokenOne, {from: accounts[1]});
+    await glideRouterInstance.addLiquidityETH(testTokenOneInstance.address, 
+        valueForAddLiquidityETHTokenOne.toString(),
+        valueForAddLiquidityETHTokenOne.toString(),
+        0,
+        accounts[1],
+        9000000000,
+        {from:accounts[1], value:valueForAddLiquidityETHTwETH.toString()});
+
     const pairAddress = await glideFactoryInstance.getPair(testTokenOneInstance.address, 
         testTokenTwoInstance.address);
 
-    console.log("PairAddress: "+pairAddress)
+    const pairAddressWETH = await glideFactoryInstance.getPair(testTokenOneInstance.address, 
+        wETHAddress);
+
+    console.log("PairAddress: " + pairAddress);
+
+    console.log("PairAddressWETH: " + pairAddressWETH);
 
     console.log("FeeDistributorInstanceAddress: " + feeDistributorInstance.address);
 
-    console.log("GlideRouterInstance: " + glideRouterInstance.address);*/
+    console.log("GlideRouterInstance: " + glideRouterInstance.address);
+    */
 }

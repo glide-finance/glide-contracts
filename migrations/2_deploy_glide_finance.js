@@ -8,8 +8,6 @@ const GlidePair = artifacts.require("GlidePair");
 
 const GlideFactory = artifacts.require("GlideFactory");
 
-const feeToSetter = "0xD2BfeE6d1eCE02aC097b04f5821a15a13374E215"; //"0x3a45014f39db3ae1c7cba2ff575cedf35e39a9ad";
-
 const GlideRouter = artifacts.require("GlideRouter");
 const wELA = "0x517E9e5d46C1EA8aB6f78677d6114Ef47F71f6c4"; //wrapped ELA token
 
@@ -17,28 +15,34 @@ const GlideToken = artifacts.require("GlideToken");
 
 const SwapRewardsChef = artifacts.require("SwapRewardsChef");
 
-const feeHolder = "0xD2BfeE6d1eCE02aC097b04f5821a15a13374E215";
-const schedulerAddress = "0xD2BfeE6d1eCE02aC097b04f5821a15a13374E215";
 const FeeDistributor = artifacts.require("FeeDistributor");
 
 const SugarToken = artifacts.require("Sugar");
 
-const devAddr = "0xfdF4C3675037e1f7850dD99c0D3CA7D7725A2696"; //accounts[7] on truffle
-const treasuryAddr = "0x607b7b4122053fCea389ffc56C6AEC5863bDF5CB"; //accounts[8] on truffle
-const glideTransferOwner = "0xD2BfeE6d1eCE02aC097b04f5821a15a13374E215";
 const glidePerBlock = ethers.utils.parseEther('3');
 const startBlock = 7892020;
 const MasterChef = artifacts.require("MasterChef");
 
-const glideVaultAdmin = "0xD2BfeE6d1eCE02aC097b04f5821a15a13374E215";
-const treasuryAddrGlideVault = "0xAFB1c1455297e685cb9ab06FD039FAfEf51aEf16"; //accounts[9] on truffle
 const GlideVault = artifacts.require("GlideVault");
 
-const timeLockAdmin = "0xD2BfeE6d1eCE02aC097b04f5821a15a13374E215";
 const timeLockDelay = 2 * 24 * 60 * 60; //2 days
 const TimeLock = artifacts.require("TimeLock");
 
 module.exports = async function(deployer, network, accounts) {
+    const feeToSetter = accounts[0];
+
+    const feeHolder = accounts[0];
+    const schedulerAddress = accounts[0];
+
+    const devAddr = accounts[7]; //accounts[7] on truffle
+    const treasuryAddr = accounts[8]; //accounts[8] on truffle
+    const glideTransferOwner = accounts[0];
+
+    const glideVaultAdmin = accounts[0];
+    const treasuryAddrGlideVault = accounts[9]; //accounts[9] on truffle
+
+    const timeLockAdmin = accounts[0];
+
     // deploy TestTokenOne contract and get address
     await deployer.deploy(TestTokenOne);
 

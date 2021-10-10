@@ -212,20 +212,20 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity =0.6.12;\r\n\r\nimport '@openzeppelin/contracts/token/ERC20/IERC20.sol';\r\n\r\ninterface IWrappedNative is IERC20 {\r\n    function deposit() external payable;\r\n    function withdraw(uint256 wad) external;\r\n}",
-  "sourcePath": "D:\\Posao - Stefan\\Stefan - razno\\Blockchain\\ElavateFinance\\auto-swap\\contracts\\Dividends\\interfaces\\IWrappedNative.sol",
+  "sourcePath": "D:\\Posao-Stefan\\Stefan-razno\\Blockchain\\GlideFinance\\glide-contracts\\contracts\\Dividends\\interfaces\\IWrappedNative.sol",
   "ast": {
     "absolutePath": "project:/contracts/Dividends/interfaces/IWrappedNative.sol",
     "exportedSymbols": {
       "IWrappedNative": [
-        3446
+        3434
       ]
     },
-    "id": 3447,
+    "id": 3435,
     "license": "UNLICENSED",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3434,
+        "id": 3422,
         "literals": [
           "solidity",
           "=",
@@ -238,9 +238,9 @@
       {
         "absolutePath": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
         "file": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-        "id": 3435,
+        "id": 3423,
         "nodeType": "ImportDirective",
-        "scope": 3447,
+        "scope": 3435,
         "sourceUnit": 982,
         "src": "68:56:14",
         "symbolAliases": [],
@@ -253,7 +253,7 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 3436,
+              "id": 3424,
               "name": "IERC20",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 981,
@@ -263,7 +263,7 @@
                 "typeString": "contract IERC20"
               }
             },
-            "id": 3437,
+            "id": 3425,
             "nodeType": "InheritanceSpecifier",
             "src": "156:6:14"
           }
@@ -274,9 +274,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 3446,
+        "id": 3434,
         "linearizedBaseContracts": [
-          3446,
+          3434,
           981
         ],
         "name": "IWrappedNative",
@@ -286,7 +286,7 @@
             "body": null,
             "documentation": null,
             "functionSelector": "d0e30db0",
-            "id": 3440,
+            "id": 3428,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -294,18 +294,18 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 3438,
+              "id": 3426,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "186:2:14"
             },
             "returnParameters": {
-              "id": 3439,
+              "id": 3427,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "205:0:14"
             },
-            "scope": 3446,
+            "scope": 3434,
             "src": "170:36:14",
             "stateMutability": "payable",
             "virtual": false,
@@ -315,7 +315,7 @@
             "body": null,
             "documentation": null,
             "functionSelector": "2e1a7d4d",
-            "id": 3445,
+            "id": 3433,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -323,17 +323,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 3443,
+              "id": 3431,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3442,
+                  "id": 3430,
                   "mutability": "mutable",
                   "name": "wad",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 3445,
+                  "scope": 3433,
                   "src": "230:11:14",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -342,7 +342,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3441,
+                    "id": 3429,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "230:7:14",
@@ -358,19 +358,19 @@
               "src": "229:13:14"
             },
             "returnParameters": {
-              "id": 3444,
+              "id": 3432,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "251:0:14"
             },
-            "scope": 3446,
+            "scope": 3434,
             "src": "212:40:14",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 3447,
+        "scope": 3435,
         "src": "128:127:14"
       }
     ],
@@ -381,7 +381,7 @@
       "absolutePath": "project:/contracts/Dividends/interfaces/IWrappedNative.sol",
       "exportedSymbols": {
         "IWrappedNative": [
-          3446
+          3434
         ]
       },
       "license": "UNLICENSED"
@@ -396,7 +396,7 @@
             ".12"
           ]
         },
-        "id": 3434,
+        "id": 3422,
         "name": "PragmaDirective",
         "src": "40:24:14"
       },
@@ -405,13 +405,13 @@
           "SourceUnit": 982,
           "absolutePath": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
           "file": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
-          "scope": 3447,
+          "scope": 3435,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 3435,
+        "id": 3423,
         "name": "ImportDirective",
         "src": "68:56:14"
       },
@@ -425,11 +425,11 @@
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
-            3446,
+            3434,
             981
           ],
           "name": "IWrappedNative",
-          "scope": 3447
+          "scope": 3435
         },
         "children": [
           {
@@ -444,12 +444,12 @@
                   "referencedDeclaration": 981,
                   "type": "contract IERC20"
                 },
-                "id": 3436,
+                "id": 3424,
                 "name": "UserDefinedTypeName",
                 "src": "156:6:14"
               }
             ],
-            "id": 3437,
+            "id": 3425,
             "name": "InheritanceSpecifier",
             "src": "156:6:14"
           },
@@ -466,7 +466,7 @@
               ],
               "name": "deposit",
               "overrides": null,
-              "scope": 3446,
+              "scope": 3434,
               "stateMutability": "payable",
               "virtual": false,
               "visibility": "external"
@@ -479,7 +479,7 @@
                   ]
                 },
                 "children": [],
-                "id": 3438,
+                "id": 3426,
                 "name": "ParameterList",
                 "src": "186:2:14"
               },
@@ -490,12 +490,12 @@
                   ]
                 },
                 "children": [],
-                "id": 3439,
+                "id": 3427,
                 "name": "ParameterList",
                 "src": "205:0:14"
               }
             ],
-            "id": 3440,
+            "id": 3428,
             "name": "FunctionDefinition",
             "src": "170:36:14"
           },
@@ -512,7 +512,7 @@
               ],
               "name": "withdraw",
               "overrides": null,
-              "scope": 3446,
+              "scope": 3434,
               "stateMutability": "nonpayable",
               "virtual": false,
               "visibility": "external"
@@ -526,7 +526,7 @@
                       "mutability": "mutable",
                       "name": "wad",
                       "overrides": null,
-                      "scope": 3445,
+                      "scope": 3433,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -539,17 +539,17 @@
                           "name": "uint256",
                           "type": "uint256"
                         },
-                        "id": 3441,
+                        "id": 3429,
                         "name": "ElementaryTypeName",
                         "src": "230:7:14"
                       }
                     ],
-                    "id": 3442,
+                    "id": 3430,
                     "name": "VariableDeclaration",
                     "src": "230:11:14"
                   }
                 ],
-                "id": 3443,
+                "id": 3431,
                 "name": "ParameterList",
                 "src": "229:13:14"
               },
@@ -560,22 +560,22 @@
                   ]
                 },
                 "children": [],
-                "id": 3444,
+                "id": 3432,
                 "name": "ParameterList",
                 "src": "251:0:14"
               }
             ],
-            "id": 3445,
+            "id": 3433,
             "name": "FunctionDefinition",
             "src": "212:40:14"
           }
         ],
-        "id": 3446,
+        "id": 3434,
         "name": "ContractDefinition",
         "src": "128:127:14"
       }
     ],
-    "id": 3447,
+    "id": 3435,
     "name": "SourceUnit",
     "src": "40:215:14"
   },
@@ -585,7 +585,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-09-01T13:36:32.951Z",
+  "updatedAt": "2021-10-10T19:25:15.393Z",
   "devdoc": {
     "kind": "dev",
     "methods": {

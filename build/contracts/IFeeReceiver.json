@@ -22,20 +22,20 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity 0.6.12;\r\n\r\ninterface IFeeReceiver {\r\n    function income(uint256 dollarAmount) external;\r\n}",
-  "sourcePath": "D:\\Posao - Stefan\\Stefan - razno\\Blockchain\\ElavateFinance\\auto-swap\\contracts\\Dividends\\interfaces\\IFeeReceiver.sol",
+  "sourcePath": "D:\\Posao-Stefan\\Stefan-razno\\Blockchain\\GlideFinance\\glide-contracts\\contracts\\Dividends\\interfaces\\IFeeReceiver.sol",
   "ast": {
     "absolutePath": "project:/contracts/Dividends/interfaces/IFeeReceiver.sol",
     "exportedSymbols": {
       "IFeeReceiver": [
-        3432
+        3420
       ]
     },
-    "id": 3433,
+    "id": 3421,
     "license": "UNLICENSED",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3426,
+        "id": 3414,
         "literals": [
           "solidity",
           "0.6",
@@ -51,9 +51,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 3432,
+        "id": 3420,
         "linearizedBaseContracts": [
-          3432
+          3420
         ],
         "name": "IFeeReceiver",
         "nodeType": "ContractDefinition",
@@ -62,7 +62,7 @@
             "body": null,
             "documentation": null,
             "functionSelector": "84ed8c56",
-            "id": 3431,
+            "id": 3419,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -70,17 +70,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 3429,
+              "id": 3417,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3428,
+                  "id": 3416,
                   "mutability": "mutable",
                   "name": "dollarAmount",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 3431,
+                  "scope": 3419,
                   "src": "113:20:13",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -89,7 +89,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3427,
+                    "id": 3415,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "113:7:13",
@@ -105,19 +105,19 @@
               "src": "112:22:13"
             },
             "returnParameters": {
-              "id": 3430,
+              "id": 3418,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "143:0:13"
             },
-            "scope": 3432,
+            "scope": 3420,
             "src": "97:47:13",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 3433,
+        "scope": 3421,
         "src": "67:80:13"
       }
     ],
@@ -128,7 +128,7 @@
       "absolutePath": "project:/contracts/Dividends/interfaces/IFeeReceiver.sol",
       "exportedSymbols": {
         "IFeeReceiver": [
-          3432
+          3420
         ]
       },
       "license": "UNLICENSED"
@@ -142,7 +142,7 @@
             ".12"
           ]
         },
-        "id": 3426,
+        "id": 3414,
         "name": "PragmaDirective",
         "src": "40:23:13"
       },
@@ -159,10 +159,10 @@
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
-            3432
+            3420
           ],
           "name": "IFeeReceiver",
-          "scope": 3433
+          "scope": 3421
         },
         "children": [
           {
@@ -178,7 +178,7 @@
               ],
               "name": "income",
               "overrides": null,
-              "scope": 3432,
+              "scope": 3420,
               "stateMutability": "nonpayable",
               "virtual": false,
               "visibility": "external"
@@ -192,7 +192,7 @@
                       "mutability": "mutable",
                       "name": "dollarAmount",
                       "overrides": null,
-                      "scope": 3431,
+                      "scope": 3419,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -205,17 +205,17 @@
                           "name": "uint256",
                           "type": "uint256"
                         },
-                        "id": 3427,
+                        "id": 3415,
                         "name": "ElementaryTypeName",
                         "src": "113:7:13"
                       }
                     ],
-                    "id": 3428,
+                    "id": 3416,
                     "name": "VariableDeclaration",
                     "src": "113:20:13"
                   }
                 ],
-                "id": 3429,
+                "id": 3417,
                 "name": "ParameterList",
                 "src": "112:22:13"
               },
@@ -226,22 +226,22 @@
                   ]
                 },
                 "children": [],
-                "id": 3430,
+                "id": 3418,
                 "name": "ParameterList",
                 "src": "143:0:13"
               }
             ],
-            "id": 3431,
+            "id": 3419,
             "name": "FunctionDefinition",
             "src": "97:47:13"
           }
         ],
-        "id": 3432,
+        "id": 3420,
         "name": "ContractDefinition",
         "src": "67:80:13"
       }
     ],
-    "id": 3433,
+    "id": 3421,
     "name": "SourceUnit",
     "src": "40:107:13"
   },
@@ -251,7 +251,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-09-01T13:36:32.949Z",
+  "updatedAt": "2021-10-10T19:25:15.391Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

@@ -1,22 +1,14 @@
 const {ethers} = require("ethers");
+const { evm } = require("./test-utils");
 
 const BN = require('bn.js');
 
 const Timelock = artifacts.require("Timelock");
 const MasterChef = artifacts.require("MasterChef");
 
-contract("Timelock test", accounts => {
-    const provider = new ethers.providers.JsonRpcProvider();
-
+contract("Timelock contract", accounts => {
     var timeLockInstance;
     var masterChefInstance;
-
-    // function for mine new blocks
-    async function mineNBlocks(nBlock) {
-        for(var counter = 0; counter < nBlock; counter++) {
-            await provider.send("evm_mine", [] );
-        }
-    }
 
     //set contract instances
     before(async () => {
@@ -29,52 +21,41 @@ contract("Timelock test", accounts => {
         // transfer ownership for masterChef contract to timeLock, because it is not possible to call procedures with onlyOwner modifier
         masterChefInstance.transferOwnership(timeLockInstance.address);
     });
-
-    it("...should mine `n` blocks on demand", async () => {
-        const initialBlock = parseInt(await provider.send("eth_blockNumber"));
-        for(var counter = 0; counter < 5; counter++) {
-            await provider.send("evm_mine", [] );
-        }
-        const currentBlock = parseInt(await provider.send("eth_blockNumber"));
-        assert.strictEqual(currentBlock, initialBlock + 5);
-    });
    
-    /* to run this test case, it should be change constant minimum_delay on time lock, and after that, change delay contract variable
-    it("...should success transaction execute (change BonusReductionPeriod on masterChef contract) ", async () => {
-        // bonus reduction period for set
-        const newBonusReductionPeriod = 3144960;
+    it("...should success transaction execute (change setStartBlock on masterChef contract) ", async () => {
+        // start block for set
+        const newStartBlock = 10000000;
 
-        // get bonus reduction period before set on timeLock mechanism
-        const bonusReductionPeriodBeforeSet = await masterChefInstance.bonusReductionPeriod.call();
-        assert.equal(newBonusReductionPeriod != bonusReductionPeriodBeforeSet.toNumber(), true, "Bonus reduction period that is current set is same as new");
+        // get start block efore set on timeLock mechanism
+        const startBlockBeforeSet = await masterChefInstance.startBlock.call();
+        assert.equal(newStartBlock != startBlockBeforeSet.toNumber(), true, "Start block that is current set is same as new");
 
-        // create data for queue and execute transaction for setBonusReductionPeriod on masterChef contract
-        const signature = 'setBonusReductionPeriod(uint256)';
+        // create data for queue and execute transaction for setStartBlock on masterChef contract
+        const signature = 'setStartBlock(uint256)';
         const data = ethers.utils.defaultAbiCoder.encode(
             ['uint256'],
-            [newBonusReductionPeriod]
+            [newStartBlock]
           );
         const blockTimestamp = await timeLockInstance.getBlockTimestamp();
-        const nextBlockTime = 1;
+        const nextBlockTime = 7 * 24 * 60 * 60;
         const eta = (new BN(blockTimestamp.toString())).add(new BN(nextBlockTime)); //next block
 
         // add transaction to queue
         await timeLockInstance.queueTransaction(masterChefInstance.address, 0, signature, data, eta);
 
-        await mineNBlocks(100);
+        await evm.advanceTime(nextBlockTime);
 
         // execute that transaction
         await timeLockInstance.executeTransaction(masterChefInstance.address, 0, signature, data, eta);
 
-        // get bonus reduction period after set on timeLock mechanism
-        const bonusReductionPeriodAfterSet = await masterChefInstance.bonusReductionPeriod.call();
+        // get start block period after set on timeLock mechanism
+        const startBlockAfterSet = await masterChefInstance.startBlock.call();
 
         // assert between period that want to set and period from contract
-        assert.equal(newBonusReductionPeriod, bonusReductionPeriodAfterSet.toNumber(), "Bonus reduction period is not correct set");
+        assert.equal(newStartBlock, startBlockAfterSet.toNumber(), "Start block period is not correct set");
     });
-    */
 
-    /* to run this test case, it should be change constant minimum_delay on time lock, and after that, change delay contract variable
+    // to run this test case, it should be change constant minimum_delay on time lock, and after that, change delay contract variable
     it("...should success transaction execute (change delay on timeLock contract) ", async () => {
         const newDelay = 259200; //3 days
         // create data for queue and execute transaction for setDelay on timeLock contract
@@ -84,13 +65,13 @@ contract("Timelock test", accounts => {
             [newDelay]
           );
         const blockTimestamp = await timeLockInstance.getBlockTimestamp();
-        const nextBlockTime = 1;
+        const nextBlockTime = 7 * 24 * 60 * 60;
         const eta = (new BN(blockTimestamp.toString())).add(new BN(nextBlockTime)); //next block
 
         // add transaction to queue
         await timeLockInstance.queueTransaction(timeLockInstance.address, 0, signature, data, eta);
 
-        await mineNBlocks(100);
+        await evm.advanceTime(nextBlockTime);
 
         // execute that transaction
         await timeLockInstance.executeTransaction(timeLockInstance.address, 0, signature, data, eta);
@@ -101,18 +82,16 @@ contract("Timelock test", accounts => {
         // assert between delay for set and after set
         assert.equal(newDelay, currentDelay.toNumber(), "Delay on timeLock contract is not correct set");
     });
-    */
-
 
     it("...should revert transaction execute", async () => {
-        // bonus reduction period for set
-        const newStartBlock = 10000000;
+        // start block for set
+        const newStartBlock = 15000000;
 
-        // get bonus reduction period before set on timeLock mechanism
+        // get start block before set on timeLock mechanism
         const startBlockBeforeSet = await masterChefInstance.startBlock.call();
-        assert.equal(newStartBlock != startBlockBeforeSet.toNumber(), true, "Bonus reduction period that is current set is same as new");
+        assert.equal(newStartBlock != startBlockBeforeSet.toNumber(), true, "Start block that is current set is same as new");
 
-        // create data for queue and execute transaction for setBonusReductionPeriod on masterChef contract
+        // create data for queue and execute transaction for setStartBlock on masterChef contract
         const signature = 'setStartBlock(uint256)';
         const data = ethers.utils.defaultAbiCoder.encode(
             ['uint256'],
@@ -124,8 +103,6 @@ contract("Timelock test", accounts => {
 
         // add transaction to queue
         await timeLockInstance.queueTransaction(masterChefInstance.address, 0, signature, data, eta);
-
-        await mineNBlocks(100);
 
         try {
             // execute that transaction

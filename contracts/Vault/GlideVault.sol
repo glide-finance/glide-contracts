@@ -34,13 +34,13 @@ contract GlideVault is Ownable, Pausable {
 
     uint256 public constant MAX_PERFORMANCE_FEE = 500; // 5%
     uint256 public constant MAX_CALL_FEE = 100; // 1%
-    uint256 public constant MAX_WITHDRAW_FEE = 100; // 1%
-    uint256 public constant MAX_WITHDRAW_FEE_PERIOD = 72 hours; // 3 days
+    uint256 public constant MAX_WITHDRAW_FEE = 200; // 2%
+    uint256 public constant MAX_WITHDRAW_FEE_PERIOD = 168 hours; // 7 days
 
     uint256 public performanceFee = 200; // 2%
     uint256 public callFee = 25; // 0.25%
-    uint256 public withdrawFee = 10; // 0.1%
-    uint256 public withdrawFeePeriod = 72 hours; // 3 days
+    uint256 public withdrawFee = 100; // 1%
+    uint256 public withdrawFeePeriod = 168 hours; // 7 days
 
     event Deposit(address indexed sender, uint256 amount, uint256 shares, uint256 lastDepositedTime);
     event Withdraw(address indexed sender, uint256 amount, uint256 shares);

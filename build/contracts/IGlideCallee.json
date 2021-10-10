@@ -37,20 +37,20 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity >=0.5.0;\r\n\r\ninterface IGlideCallee {\r\n    function glideCall(address sender, uint amount0, uint amount1, bytes calldata data) external;\r\n}",
-  "sourcePath": "D:\\Posao - Stefan\\Stefan - razno\\Blockchain\\ElavateFinance\\auto-swap\\contracts\\Swap\\interfaces\\IGlideCallee.sol",
+  "sourcePath": "D:\\Posao-Stefan\\Stefan-razno\\Blockchain\\GlideFinance\\glide-contracts\\contracts\\Swap\\interfaces\\IGlideCallee.sol",
   "ast": {
     "absolutePath": "project:/contracts/Swap/interfaces/IGlideCallee.sol",
     "exportedSymbols": {
       "IGlideCallee": [
-        11347
+        10265
       ]
     },
-    "id": 11348,
+    "id": 10266,
     "license": "UNLICENSED",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11335,
+        "id": 10253,
         "literals": [
           "solidity",
           ">=",
@@ -67,9 +67,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 11347,
+        "id": 10265,
         "linearizedBaseContracts": [
-          11347
+          10265
         ],
         "name": "IGlideCallee",
         "nodeType": "ContractDefinition",
@@ -78,7 +78,7 @@
             "body": null,
             "documentation": null,
             "functionSelector": "8c32f62b",
-            "id": 11346,
+            "id": 10264,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -86,17 +86,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 11344,
+              "id": 10262,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11337,
+                  "id": 10255,
                   "mutability": "mutable",
                   "name": "sender",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 11346,
+                  "scope": 10264,
                   "src": "117:14:25",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -105,7 +105,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11336,
+                    "id": 10254,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "117:7:25",
@@ -120,12 +120,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11339,
+                  "id": 10257,
                   "mutability": "mutable",
                   "name": "amount0",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 11346,
+                  "scope": 10264,
                   "src": "133:12:25",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -134,7 +134,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11338,
+                    "id": 10256,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "133:4:25",
@@ -148,12 +148,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11341,
+                  "id": 10259,
                   "mutability": "mutable",
                   "name": "amount1",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 11346,
+                  "scope": 10264,
                   "src": "147:12:25",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -162,7 +162,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11340,
+                    "id": 10258,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "147:4:25",
@@ -176,12 +176,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11343,
+                  "id": 10261,
                   "mutability": "mutable",
                   "name": "data",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 11346,
+                  "scope": 10264,
                   "src": "161:19:25",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -190,7 +190,7 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 11342,
+                    "id": 10260,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
                     "src": "161:5:25",
@@ -206,19 +206,19 @@
               "src": "116:65:25"
             },
             "returnParameters": {
-              "id": 11345,
+              "id": 10263,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "190:0:25"
             },
-            "scope": 11347,
+            "scope": 10265,
             "src": "98:93:25",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 11348,
+        "scope": 10266,
         "src": "68:126:25"
       }
     ],
@@ -229,7 +229,7 @@
       "absolutePath": "project:/contracts/Swap/interfaces/IGlideCallee.sol",
       "exportedSymbols": {
         "IGlideCallee": [
-          11347
+          10265
         ]
       },
       "license": "UNLICENSED"
@@ -244,7 +244,7 @@
             ".0"
           ]
         },
-        "id": 11335,
+        "id": 10253,
         "name": "PragmaDirective",
         "src": "40:24:25"
       },
@@ -261,10 +261,10 @@
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
-            11347
+            10265
           ],
           "name": "IGlideCallee",
-          "scope": 11348
+          "scope": 10266
         },
         "children": [
           {
@@ -280,7 +280,7 @@
               ],
               "name": "glideCall",
               "overrides": null,
-              "scope": 11347,
+              "scope": 10265,
               "stateMutability": "nonpayable",
               "virtual": false,
               "visibility": "external"
@@ -294,7 +294,7 @@
                       "mutability": "mutable",
                       "name": "sender",
                       "overrides": null,
-                      "scope": 11346,
+                      "scope": 10264,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -308,12 +308,12 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 11336,
+                        "id": 10254,
                         "name": "ElementaryTypeName",
                         "src": "117:7:25"
                       }
                     ],
-                    "id": 11337,
+                    "id": 10255,
                     "name": "VariableDeclaration",
                     "src": "117:14:25"
                   },
@@ -323,7 +323,7 @@
                       "mutability": "mutable",
                       "name": "amount0",
                       "overrides": null,
-                      "scope": 11346,
+                      "scope": 10264,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -336,12 +336,12 @@
                           "name": "uint",
                           "type": "uint256"
                         },
-                        "id": 11338,
+                        "id": 10256,
                         "name": "ElementaryTypeName",
                         "src": "133:4:25"
                       }
                     ],
-                    "id": 11339,
+                    "id": 10257,
                     "name": "VariableDeclaration",
                     "src": "133:12:25"
                   },
@@ -351,7 +351,7 @@
                       "mutability": "mutable",
                       "name": "amount1",
                       "overrides": null,
-                      "scope": 11346,
+                      "scope": 10264,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -364,12 +364,12 @@
                           "name": "uint",
                           "type": "uint256"
                         },
-                        "id": 11340,
+                        "id": 10258,
                         "name": "ElementaryTypeName",
                         "src": "147:4:25"
                       }
                     ],
-                    "id": 11341,
+                    "id": 10259,
                     "name": "VariableDeclaration",
                     "src": "147:12:25"
                   },
@@ -379,7 +379,7 @@
                       "mutability": "mutable",
                       "name": "data",
                       "overrides": null,
-                      "scope": 11346,
+                      "scope": 10264,
                       "stateVariable": false,
                       "storageLocation": "calldata",
                       "type": "bytes",
@@ -392,17 +392,17 @@
                           "name": "bytes",
                           "type": "bytes"
                         },
-                        "id": 11342,
+                        "id": 10260,
                         "name": "ElementaryTypeName",
                         "src": "161:5:25"
                       }
                     ],
-                    "id": 11343,
+                    "id": 10261,
                     "name": "VariableDeclaration",
                     "src": "161:19:25"
                   }
                 ],
-                "id": 11344,
+                "id": 10262,
                 "name": "ParameterList",
                 "src": "116:65:25"
               },
@@ -413,22 +413,22 @@
                   ]
                 },
                 "children": [],
-                "id": 11345,
+                "id": 10263,
                 "name": "ParameterList",
                 "src": "190:0:25"
               }
             ],
-            "id": 11346,
+            "id": 10264,
             "name": "FunctionDefinition",
             "src": "98:93:25"
           }
         ],
-        "id": 11347,
+        "id": 10265,
         "name": "ContractDefinition",
         "src": "68:126:25"
       }
     ],
-    "id": 11348,
+    "id": 10266,
     "name": "SourceUnit",
     "src": "40:154:25"
   },
@@ -438,7 +438,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-09-01T13:36:33.186Z",
+  "updatedAt": "2021-10-10T19:25:15.558Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

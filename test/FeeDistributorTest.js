@@ -139,6 +139,25 @@ contract("FeeDistributor test", accounts => {
             accounts[1],
             9000000000,
             {from:accounts[1]});
+
+        //swap amount
+        await testTokenOneInstance.approve(glideRouterInstance.address, swapAmount, {from: accounts[3]});
+        await glideRouterInstance.swapTokensForExactETH(swapAmount,
+            ethers.utils.parseEther('5'),
+            [testTokenOneInstance.address, wETHAddress],
+            accounts[3],
+            9000000000, 
+            {from: accounts[3]});
+
+        //add liquidity ETH
+        await testTokenOneInstance.approve(glideRouterInstance.address, valueForAddLiquidityETHTokenOne, {from: accounts[1]});
+        await glideRouterInstance.addLiquidityETH(testTokenOneInstance.address, 
+            valueForAddLiquidityETHTokenOne.toString(),
+            valueForAddLiquidityETHTokenOne.toString(),
+            0,
+            accounts[1],
+            9000000000,
+            {from:accounts[1], value:valueForAddLiquidityETHTwETH.toString()});
     });
 
     it("...should transfer ownership for Glide token and mint tokens", async () => {
@@ -152,6 +171,44 @@ contract("FeeDistributor test", accounts => {
         await glideTokenInstance.mint(accounts[3], tokensForMint);
         const balanceGlideToken = await glideTokenInstance.balanceOf.call(accounts[3]);
         assert.equal(tokensForMint.toString(), new BN(balanceGlideToken.toString()).toString(), "Mint for Glide token is not correct");
+    });
+
+    
+    it("...should remove liquidity for TTONE - WETH from feeDistributor", async () => {
+        const pairAddress = await glideFactoryInstance.getPair(testTokenOneInstance.address, 
+            wETHAddress);
+        //console.log("pairAddress - " + pairAddress + " testTokenOne - " + testTokenOneInstance.address + " wETH - " + wETHAddress);
+        //init instance for pair
+        concretePairInstance = await GlidePair.at(pairAddress);
+
+        const balanceBeforeRemoveLiquidity = await concretePairInstance.balanceOf.call(feeDistributorInstance.address);
+        //console.log("balanceBeforeRemoveLiquidity-"+balanceBeforeRemoveLiquidity);
+
+        // get testTokenOne balance before removeLiquidity
+        const feeDistributorBalanceBeforeTONE = await testTokenOneInstance.balanceOf.call(feeDistributorInstance.address);
+        //console.log("feeDistributorBalanceBefore-TONE-"+feeDistributorBalanceBeforeTONE.toString());
+
+        // get testTokenTwo balance before removeLiquidity
+        const feeDistributorBalanceBeforeTTWO = await testTokenTwoInstance.balanceOf.call(feeDistributorInstance.address);
+        //console.log("feeDistributorBalanceBefore-TTWO-"+feeDistributorBalanceBeforeTTWO.toString());
+
+        //remove liquidity from feeDistributor
+        await feeDistributorInstance.removeLiquidity(glideRouterInstance.address,
+            pairAddress);
+
+        const balanceAfterRemoveLiquidity = await concretePairInstance.balanceOf.call(feeDistributorInstance.address);
+        //console.log("balanceAfterRemoveLiquidity-" + balanceAfterRemoveLiquidity);
+
+        // get testTokenOne balance after removeLiquidity
+        const feeDistributorBalanceAfterTONE = await testTokenOneInstance.balanceOf.call(feeDistributorInstance.address);
+        //console.log("feeDistributorBalanceAfter-TONE-"+feeDistributorBalanceAfterTONE.toString());
+
+        // get testTokenTwo balance after removeLiquidity
+        const feeDistributorBalanceAfterTTWO = await testTokenTwoInstance.balanceOf.call(feeDistributorInstance.address);
+        //console.log("feeDistributorBalanceAfter-TTWO-"+feeDistributorBalanceAfterTTWO.toString());
+        
+        assert.equal(balanceAfterRemoveLiquidity.toNumber(), 0, "FeeDistributor for remove liquidity on balance is not working correct");
+        assert.equal(feeDistributorBalanceBeforeTONE.toNumber() < feeDistributorBalanceAfterTONE.toNumber(), true, "FeeDistributor remove liquidity on testTokenOne is not working correct");
     });
 
     it("...should remove liquidity from feeDistributor", async () => {
@@ -193,10 +250,15 @@ contract("FeeDistributor test", accounts => {
     });
 
   
+
     it("...should sell tokens (directly testTokenOne - wETH) from feeDistributor", async () => {
+        const pairAddress = await glideFactoryInstance.getPair(testTokenOneInstance.address, 
+            wETHAddress);
+        //console.log("pairAddress - " + pairAddress + " testTokenOne - " + testTokenOneInstance.address + " wETHAddress - " + wETHAddress);
+        
         // get wETH address and wETH balance before sell tokens
         const wETHBalanceBefore = await wETHInstance.balanceOf.call(feeDistributorInstance.address);
-        //console.log(wETHBalanceBefore.toString());
+        //console.log("wETHBalanceBefore-"+wETHBalanceBefore.toString());
 
         //sell tokens from feeDistributor
         await feeDistributorInstance.sellTokens(glideRouterInstance.address,
@@ -205,12 +267,16 @@ contract("FeeDistributor test", accounts => {
         [testTokenOneInstance.address, wETHAddress]);
 
         const wETHBalanceAfter = await wETHInstance.balanceOf.call(feeDistributorInstance.address);
-        //console.log(wETHBalanceAfter.toString());
+        //console.log("wETHBalanceAfter-"+wETHBalanceAfter.toString());
 
         assert.equal(new BN(wETHBalanceAfter).gt(new BN(wETHBalanceBefore)), true, "FeeDistributor sell tokens  (directly testTokenOne - wETH) not working correct");
     });
 
     it("...should sell tokens (testTokenTwo - wETH with testTokenOne connection) from feeDistributor", async () => {
+        const pairAddress = await glideFactoryInstance.getPair(testTokenTwoInstance.address, 
+            wETHAddress);
+        //console.log("pairAddress - " + pairAddress + " testTokenOne - " + testTokenTwoInstance.address + " wETHAddress - " + wETHAddress);
+
         // get wETH address and wETH balance before sell tokens
         const wETHBalanceBefore = await wETHInstance.balanceOf.call(feeDistributorInstance.address);
         //console.log("wETHBalanceBefore-"+wETHBalanceBefore.toString());
