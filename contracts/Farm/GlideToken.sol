@@ -10,7 +10,7 @@ contract GlideToken is ERC20('Glide', 'GLIDE'), Ownable  {
 
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
     function mint(address _to, uint256 _amount) public onlyOwner {
-        require(totalSupply().add(_amount) <= _maxTotalSupply, "ERC20: minting more then MaxTotalSupply");
+        require(totalSupply().add(_amount) <= _maxTotalSupply, "ERC20: minting more than MaxTotalSupply");
 
         _mint(_to, _amount);
     }
