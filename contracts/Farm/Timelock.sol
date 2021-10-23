@@ -1,4 +1,5 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
+
 pragma solidity 0.6.12;
 
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
@@ -107,6 +108,7 @@ contract Timelock is ReentrancyGuard {
             callData = abi.encodePacked(bytes4(keccak256(bytes(signature))), data);
         }
 
+        // solium-disable-next-line security/no-call-value
         (bool success, bytes memory returnData) = target.call{value: value}(callData);
         require(success, "Timelock::executeTransaction: Transaction execution reverted.");
 
@@ -116,6 +118,7 @@ contract Timelock is ReentrancyGuard {
     }
 
     function getBlockTimestamp() public view returns (uint) {
+        // solium-disable-next-line security/no-block-members
         return block.timestamp;
     }
 }
