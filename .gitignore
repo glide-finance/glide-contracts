@@ -105,3 +105,6 @@ dist
 
 # File with mnemonic key
 secrets.json
+
+# Build directory
+build/

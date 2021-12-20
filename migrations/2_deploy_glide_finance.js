@@ -28,7 +28,10 @@ const GlideVault = artifacts.require("GlideVault");
 const timeLockDelay = 2 * 24 * 60 * 60; //2 days
 const TimeLock = artifacts.require("TimeLock");
 
+const PhantzGlideStake = artifacts.require("PhantzGlideStake");
+
 module.exports = async function(deployer, network, accounts) {
+    /*
     const feeToSetter = accounts[0];
 
     const feeHolder = accounts[0];
@@ -105,4 +108,7 @@ module.exports = async function(deployer, network, accounts) {
 
     // deploy TimeLock
     await deployer.deploy(TimeLock, timeLockAdmin, timeLockDelay);
+    */
+    const phantzGlideStakeStartAddress = 10037551;
+    await deployer.deploy(PhantzGlideStake, "0xd39eC832FF1CaaFAb2729c76dDeac967ABcA8F27", phantzGlideStakeStartAddress);
 }
