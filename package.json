@@ -1,9 +1,20 @@
 {
+  "name": "glide-contracts",
+  "description": "Glide Finance Contracts",
+  "version": "1.0.0",
+  "private": true,
+  "repository": "git@github.com:glide-finance/glide-contracts.git",
+  "author": "Glide Finance",
+  "license": "MIT",
+  "scripts": {
+    "compile": "truffle compile",
+    "deploy:dev": "truffle --network development migrate --reset",
+    "deploy:prod": "truffle --network elaeth migrate --reset"
+  },
   "dependencies": {
     "@openzeppelin/contracts": "^3.3.0",
     "@truffle/hdwallet-provider": "^1.5.1",
     "ethers": "^5.4.4",
     "truffle": "^5.4.14"
-  },
-  "license": "MIT"
+  }
 }

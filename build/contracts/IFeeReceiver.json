@@ -15,34 +15,34 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"dollarAmount\",\"type\":\"uint256\"}],\"name\":\"income\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Dividends/interfaces/IFeeReceiver.sol\":\"IFeeReceiver\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Dividends/interfaces/IFeeReceiver.sol\":{\"keccak256\":\"0x40174696bc4a25b13657cf49f80296b30a3833f4cdf9424f5d389799286e1044\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://b4ef8cf1444456bac05346a9eed610a2d3e0f5e4c196db68c15cf5cf17ad6479\",\"dweb:/ipfs/QmWBRLazyAR6h8T6R1szzHEpQZZHoYLkpRFpKqEsJKVsMP\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"dollarAmount\",\"type\":\"uint256\"}],\"name\":\"income\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Dividends/interfaces/IFeeReceiver.sol\":\"IFeeReceiver\"},\"evmVersion\":\"constantinople\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Dividends/interfaces/IFeeReceiver.sol\":{\"keccak256\":\"0xfa9449f5edc9b9e5df3e7d8c54e61afe9c01ef0c3e2a995e79bed6f5529eb2cb\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d06b91be9787ce4bb0fb44160e663fed9f514297d293155c75b098dbcc93e812\",\"dweb:/ipfs/QmTHXNZ6Uzme1WcrUnuuWgrSLyW9AbgSxyN4JUj1tfGKSY\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity 0.6.12;\r\n\r\ninterface IFeeReceiver {\r\n    function income(uint256 dollarAmount) external;\r\n}",
-  "sourcePath": "D:\\Posao-Stefan\\Stefan-razno\\Blockchain\\GlideFinance\\glide-contracts\\contracts\\Dividends\\interfaces\\IFeeReceiver.sol",
+  "source": "// SPDX-License-Identifier: MIT\n\npragma solidity 0.6.12;\n\ninterface IFeeReceiver {\n    function income(uint256 dollarAmount) external;\n}",
+  "sourcePath": "/Users/stefan/Work/Blockchain/GlideFinance/glide-contracts/contracts/Dividends/interfaces/IFeeReceiver.sol",
   "ast": {
     "absolutePath": "project:/contracts/Dividends/interfaces/IFeeReceiver.sol",
     "exportedSymbols": {
       "IFeeReceiver": [
-        3420
+        3854
       ]
     },
-    "id": 3421,
-    "license": "UNLICENSED",
+    "id": 3855,
+    "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3414,
+        "id": 3848,
         "literals": [
           "solidity",
           "0.6",
           ".12"
         ],
         "nodeType": "PragmaDirective",
-        "src": "40:23:13"
+        "src": "33:23:17"
       },
       {
         "abstract": false,
@@ -51,9 +51,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 3420,
+        "id": 3854,
         "linearizedBaseContracts": [
-          3420
+          3854
         ],
         "name": "IFeeReceiver",
         "nodeType": "ContractDefinition",
@@ -62,7 +62,7 @@
             "body": null,
             "documentation": null,
             "functionSelector": "84ed8c56",
-            "id": 3419,
+            "id": 3853,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -70,18 +70,18 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 3417,
+              "id": 3851,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3416,
+                  "id": 3850,
                   "mutability": "mutable",
                   "name": "dollarAmount",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 3419,
-                  "src": "113:20:13",
+                  "scope": 3853,
+                  "src": "103:20:17",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -89,10 +89,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 3415,
+                    "id": 3849,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "113:7:13",
+                    "src": "103:7:17",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -102,36 +102,36 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "112:22:13"
+              "src": "102:22:17"
             },
             "returnParameters": {
-              "id": 3418,
+              "id": 3852,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "143:0:13"
+              "src": "133:0:17"
             },
-            "scope": 3420,
-            "src": "97:47:13",
+            "scope": 3854,
+            "src": "87:47:17",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 3421,
-        "src": "67:80:13"
+        "scope": 3855,
+        "src": "58:78:17"
       }
     ],
-    "src": "40:107:13"
+    "src": "33:103:17"
   },
   "legacyAST": {
     "attributes": {
       "absolutePath": "project:/contracts/Dividends/interfaces/IFeeReceiver.sol",
       "exportedSymbols": {
         "IFeeReceiver": [
-          3420
+          3854
         ]
       },
-      "license": "UNLICENSED"
+      "license": "MIT"
     },
     "children": [
       {
@@ -142,9 +142,9 @@
             ".12"
           ]
         },
-        "id": 3414,
+        "id": 3848,
         "name": "PragmaDirective",
-        "src": "40:23:13"
+        "src": "33:23:17"
       },
       {
         "attributes": {
@@ -159,10 +159,10 @@
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
-            3420
+            3854
           ],
           "name": "IFeeReceiver",
-          "scope": 3421
+          "scope": 3855
         },
         "children": [
           {
@@ -178,7 +178,7 @@
               ],
               "name": "income",
               "overrides": null,
-              "scope": 3420,
+              "scope": 3854,
               "stateMutability": "nonpayable",
               "virtual": false,
               "visibility": "external"
@@ -192,7 +192,7 @@
                       "mutability": "mutable",
                       "name": "dollarAmount",
                       "overrides": null,
-                      "scope": 3419,
+                      "scope": 3853,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -205,19 +205,19 @@
                           "name": "uint256",
                           "type": "uint256"
                         },
-                        "id": 3415,
+                        "id": 3849,
                         "name": "ElementaryTypeName",
-                        "src": "113:7:13"
+                        "src": "103:7:17"
                       }
                     ],
-                    "id": 3416,
+                    "id": 3850,
                     "name": "VariableDeclaration",
-                    "src": "113:20:13"
+                    "src": "103:20:17"
                   }
                 ],
-                "id": 3417,
+                "id": 3851,
                 "name": "ParameterList",
-                "src": "112:22:13"
+                "src": "102:22:17"
               },
               {
                 "attributes": {
@@ -226,24 +226,24 @@
                   ]
                 },
                 "children": [],
-                "id": 3418,
+                "id": 3852,
                 "name": "ParameterList",
-                "src": "143:0:13"
+                "src": "133:0:17"
               }
             ],
-            "id": 3419,
+            "id": 3853,
             "name": "FunctionDefinition",
-            "src": "97:47:13"
+            "src": "87:47:17"
           }
         ],
-        "id": 3420,
+        "id": 3854,
         "name": "ContractDefinition",
-        "src": "67:80:13"
+        "src": "58:78:17"
       }
     ],
-    "id": 3421,
+    "id": 3855,
     "name": "SourceUnit",
-    "src": "40:107:13"
+    "src": "33:103:17"
   },
   "compiler": {
     "name": "solc",
@@ -251,7 +251,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-10-10T19:25:15.391Z",
+  "updatedAt": "2021-12-19T00:48:13.237Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
