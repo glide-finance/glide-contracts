@@ -108,3 +108,5 @@ secrets.json
 
 # Build directory
 build/
+
+commands
