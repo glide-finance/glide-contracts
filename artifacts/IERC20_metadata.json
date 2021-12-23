@@ -230,7 +230,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"GlideVault_flat.sol": "IERC20"
+			"PhantzGlideStake_flat.sol": "IERC20"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -238,18 +238,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"GlideVault_flat.sol": {
-			"keccak256": "0x9c7c083be0e8109d237115881810bf34accd8e8a448ef8ea76e68915d686ec5c",
+		"PhantzGlideStake_flat.sol": {
+			"keccak256": "0x2ac0057fae53b558e03cb36e196fa0b7cc8107cebe13faef84d3a43b75a5f363",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2b15a83b94944c144ad5881feac0e9f513aee042f58f747683251bcf18714a51",
-				"dweb:/ipfs/QmPjzTrPS4yjjQLEa7K9bALXvP8v5XnWzo9yvZ7G1pubt9"
+				"bzz-raw://1ae40b6afc53a4585dfb009956c431a500699d1292db378bd2e865f3236def15",
+				"dweb:/ipfs/QmPaXBJmEQP7T2F3hq6NuQAfcSnvgzYGuhRKti4gNZUZXF"
 			]
 		}
 	},
