@@ -1,0 +1,46 @@
+{
+	"compiler": {
+		"version": "0.6.12+commit.27d51765"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"details": "Collection of functions related to the address type",
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"PhantzGlideStake_flat.sol": "Address"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"PhantzGlideStake_flat.sol": {
+			"keccak256": "0x2ac0057fae53b558e03cb36e196fa0b7cc8107cebe13faef84d3a43b75a5f363",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://1ae40b6afc53a4585dfb009956c431a500699d1292db378bd2e865f3236def15",
+				"dweb:/ipfs/QmPaXBJmEQP7T2F3hq6NuQAfcSnvgzYGuhRKti4gNZUZXF"
+			]
+		}
+	},
+	"version": 1
+}
