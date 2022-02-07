@@ -34,20 +34,20 @@ contract PhantzGlideStake is Ownable, ReentrancyGuard {
     }
 
     function addGlideReward(address _user, uint256 _amount) external onlyOwner {
-        token.safeTransferFrom(msg.sender, address(this), _amount);
-
         glideRewards[_user] = glideRewards[_user].add(_amount);
+
+        token.safeTransferFrom(msg.sender, address(this), _amount);
 
         emit AddReward(_user, block.number, _amount);
     }
 
     function addGlideReward(address[] memory _users, uint256[] memory _amounts) external onlyOwner {
-        require(_users.length != _amounts.length, "Arrays are not equal");
+        require(_users.length == _amounts.length, "Arrays are not equal");
 
         for(uint256 i = 0; i < _users.length; i++) {
-            token.safeTransferFrom(msg.sender, address(this), _amounts[i]);
-
             glideRewards[_users[i]] = glideRewards[_users[i]].add(_amounts[i]);
+
+            token.safeTransferFrom(msg.sender, address(this), _amounts[i]);
 
             emit AddReward(_users[i], block.number, _amounts[i]);
         }
@@ -56,9 +56,11 @@ contract PhantzGlideStake is Ownable, ReentrancyGuard {
     function withdrawGlideReward() external nonReentrant {
         if (glideRewards[msg.sender] > 0) {
             uint256 amount = glideRewards[msg.sender];
-            token.safeTransfer(msg.sender, amount);
-            glideRewards[msg.sender] = 0;
 
+            glideRewards[msg.sender] = 0;
+            
+            token.safeTransfer(msg.sender, amount);
+            
             emit WithdrawReward(msg.sender, block.number, amount);
         }
     }
