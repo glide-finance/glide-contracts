@@ -13,12 +13,13 @@ contract PhantzGlideStake is Ownable, ReentrancyGuard {
 
     uint256 public lastUpdatedBlock;
 
-    mapping(address=>uint256) public glideRewards;
+    mapping(address => uint256) public glideRewards;
 
     IERC20 public immutable token; // Glide token
 
     event AddReward(address indexed user, uint256 block, uint256 amount);
     event WithdrawReward(address indexed user, uint256 block, uint256 amount);
+    event RescueTokens(address indexed user, address indexed token, uint256 amount);
 
     constructor(
         IERC20 _token,
@@ -66,5 +67,11 @@ contract PhantzGlideStake is Ownable, ReentrancyGuard {
             
             emit WithdrawReward(msg.sender, block.number, amount);
         }
+    }
+
+    function rescueToken(address rewardToken, address addressForReceive) external onlyOwner {
+        uint256 balance = IERC20(rewardToken).balanceOf(address(this));
+        IERC20(token).safeTransfer(addressForReceive, balance);
+        emit RescueTokens(msg.sender, rewardToken, balance);
     }
 }
