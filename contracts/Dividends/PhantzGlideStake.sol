@@ -28,6 +28,10 @@ contract PhantzGlideStake is Ownable, ReentrancyGuard {
         lastUpdatedBlock = _startBlock;
     }
 
+    receive() external payable {
+
+    }
+    
     function setLastUpdateBlock(uint256 _lastUpdatedBlock) external onlyOwner {
         lastUpdatedBlock = _lastUpdatedBlock;
     }
