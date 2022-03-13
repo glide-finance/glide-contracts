@@ -7,7 +7,7 @@ contract LiquidStaking is Ownable {
 
     StElaToken private stEla;
 
-    uint256 public bufferedEla;
+    uint256 public stakedEla;
     uint256 public exchangeRate;
     uint256 public currentEpoch;
     uint256 public totalWithdrawRequested;
@@ -37,8 +37,19 @@ contract LiquidStaking is Ownable {
         totalWithdrawRequested = 0;
     }
 
+    function withdrawStakedEla(
+        uint256 _amount,
+        address _receiver
+    ) external onlyOwner {
+        require(_amount <= stakedEla, "LiquidStaking: withdrawStakedEla");
+        stakedEla -= _amount;
+        
+        (bool successTransfer, ) = payable(_receiver).call{value: _amount}("");
+        require(successTransfer, "LiquidStaking: Transfer is not success");
+    }
+
     function deposit(address _stElaReceiver) external payable {
-        bufferedEla += msg.value;
+        stakedEla += msg.value;
         uint256 amountOut = msg.value * exchangeRate;
         stEla.mint(_stElaReceiver, amountOut);
     }
