@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: MIT
+pragma solidity ^0.8.12;
 
-pragma solidity ^0.6.12;
-
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
-import '@openzeppelin/contracts/token/ERC20/SafeERC20.sol';
+import '@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol';
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "./GlideToken.sol";
 import "./Sugar.sol";
@@ -102,7 +101,7 @@ contract MasterChef is Ownable, ReentrancyGuard {
         uint256 _glidePerBlock,
         uint256 _startBlock,
         address _glideTransferOwner
-    ) public {
+    ) {
         glide = _glide;
         sugar = _sugar;
         devaddr = _devaddr;

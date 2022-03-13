@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-
-pragma solidity =0.6.12;
+pragma solidity ^0.8.12;
 
 import './interfaces/IGlideFactory.sol';
 import './GlidePair.sol';
@@ -16,11 +15,10 @@ contract GlideFactory is IGlideFactory {
     mapping(address => mapping(address => address)) public override getPair;
     address[] public override allPairs;
 
-    event PairCreated(address indexed token0, address indexed token1, address pair, uint);
     event SetAdminAddress(address indexed caller, address indexed newAddress);
     event SetFeeAddress(address indexed caller, address indexed newAddress);
 
-    constructor(address _feeToSetter) public {
+    constructor(address _feeToSetter) {
         feeToSetter = _feeToSetter;
         initCodeHash = keccak256(abi.encodePacked(type(GlidePair).creationCode));
     }
@@ -68,12 +66,12 @@ contract GlideFactory is IGlideFactory {
     // calculates the CREATE2 address for a pair without making any external calls
     function pairFor(address tokenA, address tokenB) public view override returns (address pair) {
         (address token0, address token1) = sortTokens(tokenA, tokenB);
-        pair = address(uint(keccak256(abi.encodePacked(
+        pair = address(uint160(bytes20(keccak256(abi.encodePacked(
                 hex'ff',
                 address(this),
                 keccak256(abi.encodePacked(token0, token1)),
                 initCodeHash
-            ))));
+            )))));
     }
 
     // fetches and sorts the reserves for a pair
@@ -92,7 +90,7 @@ contract GlideFactory is IGlideFactory {
     }
 
     // given an input amount of an asset and pair reserves, returns the maximum output amount of the other asset
-    function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) public view override returns (uint amountOut) {
+    function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) public pure override returns (uint amountOut) {
         require(amountIn > 0, 'GlideFactory: INSUFFICIENT_INPUT_AMOUNT');
         require(reserveIn > 0 && reserveOut > 0, 'GlideFactory: INSUFFICIENT_LIQUIDITY');
         uint amountInWithFee = amountIn.mul(9975);
@@ -102,7 +100,7 @@ contract GlideFactory is IGlideFactory {
     }
 
     // given an output amount of an asset and pair reserves, returns a required input amount of the other asset
-    function getAmountIn(uint amountOut, uint reserveIn, uint reserveOut) public view override returns (uint amountIn) {
+    function getAmountIn(uint amountOut, uint reserveIn, uint reserveOut) public pure override returns (uint amountIn) {
         require(amountOut > 0, 'GlideFactory: INSUFFICIENT_OUTPUT_AMOUNT');
         require(reserveIn > 0 && reserveOut > 0, 'GlideFactory: INSUFFICIENT_LIQUIDITY');
         uint numerator = reserveIn.mul(amountOut).mul(10000);

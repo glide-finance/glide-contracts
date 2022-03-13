@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: MIT
+pragma solidity ^0.8.12;
 
-pragma solidity 0.6.12;
-
-import "@openzeppelin/contracts/math/SafeMath.sol";
-import "@openzeppelin/contracts/math/Math.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/Math.sol";
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
-import '@openzeppelin/contracts/token/ERC20/SafeERC20.sol';
+import '@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol';
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "./interfaces/IWrappedNative.sol";
 
@@ -60,7 +59,7 @@ contract SwapRewardsChef is Ownable, ReentrancyGuard {
     event UpdateEmissionSettings(address indexed user, uint256 denomination, uint256 minimum, uint256 maximum, uint256 rewardsPerBlock);
     event RescueTokens(address indexed user, address indexed token, uint256 amount);
 
-    constructor(IERC20 _stakeToken, IERC20 _rewardToken, address _wrappedNativeAddress) public {
+    constructor(IERC20 _stakeToken, IERC20 _rewardToken, address _wrappedNativeAddress) {
         rewardToken = _rewardToken;
 
         poolInfo.push(PoolInfo({

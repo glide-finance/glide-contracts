@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
-
-pragma solidity 0.6.12;
+pragma solidity ^0.8.12;
 
 import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
@@ -23,7 +22,7 @@ contract Sugar is ERC20('Sugar', 'SUGAR'), Ownable {
 
     constructor(
         GlideToken _glide
-    ) public {
+    ) {
         glide = _glide;
     }
 
